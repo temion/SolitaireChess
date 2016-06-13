@@ -42,7 +42,7 @@ public class PanelSolitaireChess extends JPanel
 
 		sImg = this.ctrl.getImgFond();
 		img = getToolkit().getImage( sImg );
-		g2.drawImage( img, 0, 0, null );
+		g2.drawImage( img, 0, 0, this );
 
 		for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
 			for ( int j = 0; j < this.ctrl.getNbColonne(); j++ )

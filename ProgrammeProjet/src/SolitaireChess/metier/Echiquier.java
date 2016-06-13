@@ -31,8 +31,8 @@ public class Echiquier
 
 	private void initNiveau()
 	{
-		String sFichier = String.format( "/Users/thomasdigregorio/Documents/OneDrive/Documents/SolitaireChess" +
-										 "/ProgrammeProjet/niveaux/niveau%02d/defi%02d.data", this.niveau, this.defi );
+		String sFichier =
+				String.format( "niveaux/niveau%02d/defi%02d.data", this.niveau, this.defi );
 
 		try
 		{

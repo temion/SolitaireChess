@@ -31,7 +31,7 @@ public class Controleur
 
 	public String getImgFond()
 	{
-		return "/Users/thomasdigregorio/Documents/OneDrive/Documents/SolitaireChess/ProgrammeProjet/images/fond.png";
+		return "./images/fond.png";
 	}
 
 
@@ -39,8 +39,7 @@ public class Controleur
 	{
 		String symbole = this.echiquier.getSymbole( i, j );
 
-		return "/Users/thomasdigregorio/Documents/OneDrive/Documents/SolitaireChess/ProgrammeProjet/images/" + symbole
-			   + ".png";
+		return "./images/" + symbole + ".png";
 	}
 
 
