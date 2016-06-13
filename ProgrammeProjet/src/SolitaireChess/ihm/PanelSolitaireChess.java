@@ -68,8 +68,8 @@ public class PanelSolitaireChess extends JPanel
 		 */
 		public void mousePressed( MouseEvent e )
 		{
-			sourisX = e.getX() / TAILLE_IMG;
-			sourisY = e.getY() / TAILLE_IMG;
+			sourisX = e.getY() / TAILLE_IMG;
+			sourisY = e.getX() / TAILLE_IMG;
 		}
 
 		/**
@@ -77,7 +77,7 @@ public class PanelSolitaireChess extends JPanel
 		 */
 		public void mouseReleased( MouseEvent e )
 		{
-			ctrl.deplacer( sourisX, sourisY, e.getX() / TAILLE_IMG, e.getY() / TAILLE_IMG );
+			ctrl.deplacer( sourisX, sourisY, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
 		}
 	}
 }

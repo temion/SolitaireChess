@@ -28,14 +28,12 @@ public class Echiquier
 		this.initNiveau();
 	}
 
-	public void deplacer( int x1, int y1, int x2, int y2 )
+	public boolean deplacer( int x1, int y1, int x2, int y2 )
 	{
-		/*for(int i=0; i<echiquier.length; i++)
-			for(Piece p : this.echiquier[i])
-				System.out.println(p);*/
-		System.out.println(x1+":"+y1+":"+x2+":"+y2);
+		if( this.echiquier[x2][y2] != null && (x1 != x2 || y1 != y2) )
+			return this.echiquier[x1][y1].deplacer( x1, y1, x2, y2 );
 
-		this.echiquier[x1][y1].deplacer(x1,y1,x2,y2);
+		return false;
 	}
 
 	private void initNiveau()

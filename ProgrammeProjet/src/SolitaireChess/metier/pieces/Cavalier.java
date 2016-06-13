@@ -17,8 +17,9 @@ public class Cavalier extends Piece
 	}
 
 	@Override
-	public boolean deplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
-		return false;
+		return Math.abs( x-xCible ) == 2 && Math.abs( y-yCible ) == 1 || Math.abs( y-yCible ) == 2
+																	   && Math.abs( x-xCible ) == 1;
 	}
 }

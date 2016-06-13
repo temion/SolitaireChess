@@ -21,7 +21,18 @@ public abstract class Piece
 	}
 
 
-	public abstract boolean deplacer(int x, int y, int xCible, int yCible);
+	public boolean deplacer( int x, int y, int xCible, int yCible )
+	{
+		if( this.peutSeDeplacer( x, y, xCible, yCible ) )
+		{
+			echiquier.getEchiquier()[xCible][yCible] = this;
+			echiquier.getEchiquier()[x][y] = null;
+			return true;
+		}
+		return false;
+	}
+
+	public abstract boolean peutSeDeplacer( int x, int y, int xCible, int yCible );
 
 
 	public String getSymbole()

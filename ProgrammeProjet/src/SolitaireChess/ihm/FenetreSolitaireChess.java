@@ -31,4 +31,6 @@ public class FenetreSolitaireChess extends JFrame
 		setLocationRelativeTo( null );
 		setVisible( true );
 	}
+
+	public void majIHM() { this.plateau.repaint(); }
 }

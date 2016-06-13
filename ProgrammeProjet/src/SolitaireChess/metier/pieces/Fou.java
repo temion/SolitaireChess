@@ -17,8 +17,8 @@ public class Fou extends Piece
 	}
 
 	@Override
-	public boolean deplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
-		return false;
+		return Math.abs( xCible - x ) == Math.abs( yCible - y );
 	}
 }

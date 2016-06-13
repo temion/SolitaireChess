@@ -18,18 +18,9 @@ public class Roi extends Piece
 	}
 
 	@Override
-	public boolean deplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
-		if( echiquier.getEchiquier()[xCible][yCible] != null && Math.abs(
-				x - xCible ) < 2 && Math.abs(
-				y - yCible ) < 2 )
-		{
-			echiquier.getEchiquier()[xCible][yCible] = this;
-			echiquier.getEchiquier()[x][y] = null;
-			return true;
-		}
-
-		return false;
+		return Math.abs( x - xCible ) < 2 && Math.abs( y - yCible ) < 2;
 	}
 
 	public String toString()
