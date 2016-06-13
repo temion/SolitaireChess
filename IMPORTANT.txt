@@ -1,2 +1,0 @@
-Merci de ne pas manipuler ce repo tant que tout ce qui touche au CdC n'a pas été validé par toute la team.
-Si vous avez besoin de vous familiariser avec Git, merci d'utiliser le repo introGit :)
