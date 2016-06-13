@@ -28,6 +28,15 @@ public class Echiquier
 		this.initNiveau();
 	}
 
+	public void deplacer( int x1, int y1, int x2, int y2 )
+	{
+		/*for(int i=0; i<echiquier.length; i++)
+			for(Piece p : this.echiquier[i])
+				System.out.println(p);*/
+		System.out.println(x1+":"+y1+":"+x2+":"+y2);
+
+		this.echiquier[x1][y1].deplacer(x1,y1,x2,y2);
+	}
 
 	private void initNiveau()
 	{
@@ -73,6 +82,10 @@ public class Echiquier
 		return null;
 	}
 
+	public Piece[][] getEchiquier()
+	{
+		return echiquier;
+	}
 
 	public int getDefi()
 	{

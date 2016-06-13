@@ -16,9 +16,8 @@ public class Cavalier extends Piece
 		super( echiquier );
 	}
 
-
 	@Override
-	public boolean deplacer()
+	public boolean deplacer( int x, int y, int xCible, int yCible )
 	{
 		return false;
 	}

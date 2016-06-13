@@ -17,10 +17,23 @@ public class Roi extends Piece
 		super( echiquier );
 	}
 
-
 	@Override
-	public boolean deplacer()
+	public boolean deplacer( int x, int y, int xCible, int yCible )
 	{
+		if( echiquier.getEchiquier()[xCible][yCible] != null && Math.abs(
+				x - xCible ) < 2 && Math.abs(
+				y - yCible ) < 2 )
+		{
+			echiquier.getEchiquier()[xCible][yCible] = this;
+			echiquier.getEchiquier()[x][y] = null;
+			return true;
+		}
+
 		return false;
+	}
+
+	public String toString()
+	{
+		return "JE SUIS LE ROI SALE CON";
 	}
 }

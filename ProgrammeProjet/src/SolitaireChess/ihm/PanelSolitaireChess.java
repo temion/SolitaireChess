@@ -19,6 +19,12 @@ public class PanelSolitaireChess extends JPanel
 	private final int        TAILLE_IMG;
 	private       Controleur ctrl;
 
+	private int sourisX;
+	private int sourisY;
+
+	/**
+	 * @param ctrl
+	 */
 	public PanelSolitaireChess( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
@@ -30,7 +36,9 @@ public class PanelSolitaireChess extends JPanel
 		setFocusable( true );
 	}
 
-
+	/**
+	 * @param g
+	 */
 	public void paintComponent( Graphics g )
 	{
 		super.paintComponent( g );
@@ -53,12 +61,23 @@ public class PanelSolitaireChess extends JPanel
 			}
 	}
 
-
 	private class GererSouris extends MouseAdapter
 	{
-		public void mouseClicked( MouseEvent e )
+		/**
+		 * @param e
+		 */
+		public void mousePressed( MouseEvent e )
 		{
+			sourisX = e.getX() / TAILLE_IMG;
+			sourisY = e.getY() / TAILLE_IMG;
+		}
 
+		/**
+		 * @param e
+		 */
+		public void mouseReleased( MouseEvent e )
+		{
+			ctrl.deplacer( sourisX, sourisY, e.getX() / TAILLE_IMG, e.getY() / TAILLE_IMG );
 		}
 	}
 }

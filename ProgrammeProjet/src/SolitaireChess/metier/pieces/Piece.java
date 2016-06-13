@@ -21,7 +21,7 @@ public abstract class Piece
 	}
 
 
-	public abstract boolean deplacer();
+	public abstract boolean deplacer(int x, int y, int xCible, int yCible);
 
 
 	public String getSymbole()

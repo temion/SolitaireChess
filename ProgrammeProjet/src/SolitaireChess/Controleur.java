@@ -22,6 +22,10 @@ public class Controleur
 		this.fenetre = new FenetreSolitaireChess( this );
 	}
 
+	public void deplacer( int x1, int y1, int x2, int y2 )
+	{
+		this.echiquier.deplacer( x1, y1, x2, y2 );
+	}
 
 	public static void main( String[] arg )
 	{
