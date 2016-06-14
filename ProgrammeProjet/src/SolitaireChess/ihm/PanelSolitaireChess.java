@@ -19,8 +19,12 @@ public class PanelSolitaireChess extends JPanel
 	private final int        TAILLE_IMG;
 	private       Controleur ctrl;
 
-	private int sourisX;
-	private int sourisY;
+	private int sourisXPressed;
+	private int sourisYPressed;
+
+	private int sourisXClicked;
+	private int sourisYClicked;
+
 
 	/**
 	 * @param ctrl
@@ -28,6 +32,10 @@ public class PanelSolitaireChess extends JPanel
 	public PanelSolitaireChess( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
+
+		this.sourisXClicked = - 1;
+		this.sourisYClicked = - 1;
+
 		this.TAILLE_IMG = this.ctrl.getTailleImg();
 		setPreferredSize( new Dimension( 400, 400 ) );
 
@@ -35,6 +43,7 @@ public class PanelSolitaireChess extends JPanel
 		addMouseListener( evtSouris );
 		setFocusable( true );
 	}
+
 
 	/**
 	 * @param g
@@ -61,23 +70,53 @@ public class PanelSolitaireChess extends JPanel
 			}
 	}
 
+
 	private class GererSouris extends MouseAdapter
 	{
+		public void mouseClicked( MouseEvent e )
+		{
+			if ( sourisXClicked >= 0 && sourisYClicked >= 0 )
+			{
+				try
+				{
+					ctrl.deplacer( sourisXClicked, sourisYClicked, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+
+					sourisXClicked = - 1;
+					sourisYClicked = - 1;
+					System.out.println("Choisissez votre pièce");
+				} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
+
+			}
+			else if ( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
+			{
+				sourisXClicked = e.getY() / TAILLE_IMG;
+				sourisYClicked = e.getX() / TAILLE_IMG;
+				System.out.println("Choisissez la pièce à prendre");
+			}
+		}
+
+
 		/**
 		 * @param e
 		 */
 		public void mousePressed( MouseEvent e )
 		{
-			sourisX = e.getY() / TAILLE_IMG;
-			sourisY = e.getX() / TAILLE_IMG;
+
+			sourisXPressed = e.getY() / TAILLE_IMG;
+			sourisYPressed = e.getX() / TAILLE_IMG;
 		}
+
 
 		/**
 		 * @param e
 		 */
 		public void mouseReleased( MouseEvent e )
 		{
-			ctrl.deplacer( sourisX, sourisY, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+			try
+			{
+				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+			} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
+
 		}
 	}
 }

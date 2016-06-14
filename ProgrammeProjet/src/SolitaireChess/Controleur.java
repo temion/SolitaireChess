@@ -22,11 +22,13 @@ public class Controleur
 		this.fenetre = new FenetreSolitaireChess( this );
 	}
 
+
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if(this.echiquier.deplacer( x1, y1, x2, y2 ))
+		if ( this.echiquier.deplacer( x1, y1, x2, y2 ) )
 			this.fenetre.majIHM();
 	}
+
 
 	public static void main( String[] arg )
 	{
@@ -55,4 +57,12 @@ public class Controleur
 
 
 	public int getNbColonne() {return this.echiquier.getNbColonne(); }
+
+
+	public boolean contientPiece( int i, int j )
+	{
+		if ( i > - 1 && i < echiquier.getNbLigne() && j > - 1 && j < echiquier.getNbColonne() )
+			return echiquier.getEchiquier()[i][j] != null;
+		return false;
+	}
 }
