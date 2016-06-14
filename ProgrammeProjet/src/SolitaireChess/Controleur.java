@@ -1,7 +1,7 @@
 package SolitaireChess;
 
 
-import SolitaireChess.ihm.FenetreSolitaireChess;
+import SolitaireChess.ihm.FenetreJeu;
 import SolitaireChess.metier.Echiquier;
 
 /**
@@ -12,14 +12,14 @@ import SolitaireChess.metier.Echiquier;
  */
 public class Controleur
 {
-	private FenetreSolitaireChess fenetre;
+	private FenetreJeu fenetre;
 	private Echiquier             echiquier;
 
 
 	public Controleur()
 	{
 		this.echiquier = new Echiquier( 1, 1 );
-		this.fenetre = new FenetreSolitaireChess( this );
+		this.fenetre = new FenetreJeu( this );
 	}
 
 
