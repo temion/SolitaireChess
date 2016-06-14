@@ -26,6 +26,28 @@ public class Fou extends Piece
 
 	private boolean personneDansLeChamp( int x, int y, int xCible, int yCible )
 	{
-		
+		boolean xPlusGrand = x > xCible;
+		boolean yPlusGrand = y > yCible;
+
+		int i,j;
+		i=x;
+		j=y;
+
+		while(i != xCible && j != yCible)
+		{
+			if(i != x && echiquier.getEchiquier()[i][j] != null)
+				return false;
+
+			if(xPlusGrand)
+				i--;
+			else
+				i++;
+
+			if(yPlusGrand)
+				j--;
+			else
+				j++;
+		}
+		return true;
 	}
 }
