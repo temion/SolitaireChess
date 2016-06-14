@@ -32,7 +32,10 @@ public class Controleur
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
 		if ( this.echiquier.deplacer( x1, y1, x2, y2 ) )
+		{
+			System.out.print( "déplacé" );
 			this.fenetre.majIHM();
+		}
 	}
 
 

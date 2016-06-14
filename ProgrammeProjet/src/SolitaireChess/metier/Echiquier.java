@@ -12,6 +12,7 @@ package SolitaireChess.metier;
 import SolitaireChess.Controleur;
 import SolitaireChess.metier.pieces.*;
 
+import javax.swing.*;
 import java.io.FileReader;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class Echiquier
 	private Piece[][] echiquier;
 	private int       defi;
 	private int       niveau;
+	private int       score;
 	private int       nbPiece;
 	private boolean   aUnRoi;
 
@@ -61,8 +63,12 @@ public class Echiquier
 		{
 			nbPiece--;
 
-			if ( estRoi || aPerdu() ) recommencer();
-			else if ( aGagne() ) incrementerDefi();
+			if( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
+			else if( aGagne() )
+			{
+				JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Gagné mon con" );
+				incrementerDefi();
+			}
 			else return true;
 		}
 
@@ -72,6 +78,7 @@ public class Echiquier
 
 	public void recommencer()
 	{
+		JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Perdu gros con" );
 		initNiveau();
 		ctrl.getFenetre().majIHM();
 	}
@@ -85,11 +92,12 @@ public class Echiquier
 
 	private boolean aPerdu()
 	{
-		if ( nbPiece > 1 )
-			for ( int i = 0; i < ctrl.getNbLigne(); i++ )
-				for ( int j = 0; j < ctrl.getNbColonne(); j++ )
-					if ( echiquier[i][j].peutPrendreUnePiece() ) return false;
+		for( int i = 0; i < ctrl.getNbLigne(); i++ )
+			for( int j = 0; j < ctrl.getNbColonne(); j++ )
+				if( echiquier[i][j] != null && echiquier[i][j].peutPrendreUnePiece() )
+					return false;
 
+		JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Perdu gros con" );
 		return true;
 	}
 
@@ -99,13 +107,14 @@ public class Echiquier
 	 */
 	private void incrementerDefi()
 	{
-		if ( this.defi < 60 )
-			this.defi++;
+		if( defi % 15 == 0 )
+			niveau++;
 
-		if ( this.defi % 15 == 0 )
-			this.niveau++;
+		if( defi < 60 )
+			defi++;
 
-		this.initNiveau();
+		initNiveau();
+		ctrl.getFenetre().majIHM();
 	}
 
 
@@ -120,6 +129,8 @@ public class Echiquier
 		{
 			Scanner sc = new Scanner( new FileReader( sFichier ) );
 
+			nbPiece = 0;
+
 			String ligSc = "";
 
 			for ( int i = 0; i < this.echiquier.length && sc.hasNextLine(); i++ )
@@ -127,10 +138,7 @@ public class Echiquier
 				ligSc = sc.nextLine();
 
 				for ( int j = 0; j < this.echiquier[0].length && j < ligSc.length(); j++ )
-				{
-					nbPiece = 0;
 					ajouterPiece( i, j, ligSc.charAt( j ) );
-				}
 			}
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
@@ -200,5 +208,15 @@ public class Echiquier
 		}
 
 		return s;
+	}
+
+	public int getScore()
+	{
+		return score;
+	}
+
+	public int getNbMouvements()
+	{
+		return 0;
 	}
 }

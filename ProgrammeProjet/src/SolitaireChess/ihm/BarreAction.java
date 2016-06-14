@@ -5,9 +5,9 @@ package SolitaireChess.ihm; /**
  * @date 13/06/2016
  */
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BarreAction extends JPanel implements ActionListener
 {
@@ -78,6 +78,5 @@ public class BarreAction extends JPanel implements ActionListener
 										 themes[0] );
 
 		}
-
 	}
 }

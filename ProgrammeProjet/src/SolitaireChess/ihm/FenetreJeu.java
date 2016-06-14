@@ -5,11 +5,9 @@ package SolitaireChess.ihm; /**
  * @date 13/06/2016
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-
 import SolitaireChess.Controleur;
+
+import javax.swing.*;
 
 public class FenetreJeu extends JFrame
 {
@@ -30,6 +28,8 @@ public class FenetreJeu extends JFrame
 		pack();
 		setLocationRelativeTo( null );
 		setResizable( false );
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+
 		setVisible( true );
 	}
 
@@ -51,5 +51,10 @@ public class FenetreJeu extends JFrame
 
 
 	public void majIHM() { this.jeu.majIHM(); }
+
+	public void recommencer()
+	{
+		ctrl.getEchiquier().recommencer();
+	}
 
 }

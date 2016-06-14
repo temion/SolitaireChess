@@ -57,7 +57,7 @@ public abstract class Piece
 	{
 		for ( int i = 0; i < echiquier.getNbLigne(); i++ )
 			for ( int j = 0; j < echiquier.getNbColonne(); j++ )
-				if ( echiquier.getEchiquier()[x][y].peutSeDeplacer( i, j ) )
+				if( echiquier.getEchiquier()[x][y].peutSeDeplacer( i, j ) && i != x && j != y )
 					return true;
 
 		return false;
