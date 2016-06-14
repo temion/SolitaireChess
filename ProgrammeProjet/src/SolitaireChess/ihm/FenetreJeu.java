@@ -23,6 +23,7 @@ public class FenetreJeu extends JFrame
 		setTitle( "SolitaireChess" );
 		this.ctrl = ctrl;
 
+		this.jeu = new Jeu( this, ctrl );
 		this.accueil = new Accueil( this );
 		add( this.accueil );
 
@@ -36,7 +37,6 @@ public class FenetreJeu extends JFrame
 	public void afficherJeu()
 	{
 		this.remove( accueil );
-		this.jeu = new Jeu( this, ctrl );
 		add( this.jeu );
 		pack();
 	}
@@ -45,7 +45,6 @@ public class FenetreJeu extends JFrame
 	public void afficherAccueil()
 	{
 		this.remove( jeu );
-		this.accueil = new Accueil( this );
 		add( this.accueil );
 		pack();
 	}
