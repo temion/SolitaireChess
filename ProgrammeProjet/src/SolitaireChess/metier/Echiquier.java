@@ -26,8 +26,9 @@ public class Echiquier
 
 	/**
 	 * Construit un échiquier.
+	 *
 	 * @param niveau le niveau de l'échiquier
-	 * @param defi le défi de l'échiquier
+	 * @param defi   le défi de l'échiquier
 	 */
 	public Echiquier( int niveau, int defi, Controleur ctrl )
 	{
@@ -41,6 +42,7 @@ public class Echiquier
 
 	/**
 	 * Permet de déplacer une pièce sur l'échiquier.
+	 *
 	 * @param x1 la position horizontale de la pièce à déplacer
 	 * @param y1 la position verticale de la pièce à déplacer
 	 * @param x2 la position horizontale de la pièce vers laquelle déplacer
@@ -58,7 +60,7 @@ public class Echiquier
 
 	public void incrementerNiveau()
 	{
-		if (  )
+		//if (  )
 	}
 
 
@@ -106,7 +108,9 @@ public class Echiquier
 		return null;
 	}
 
+
 	public Controleur getCtrl() { return this.ctrl; }
+
 
 	public Piece[][] getEchiquier()
 	{

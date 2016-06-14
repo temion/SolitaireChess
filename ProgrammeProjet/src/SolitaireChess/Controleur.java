@@ -13,13 +13,13 @@ import SolitaireChess.metier.Echiquier;
 public class Controleur
 {
 	private FenetreJeu fenetre;
-	private Echiquier             echiquier;
+	private Echiquier  echiquier;
 
 
 	public Controleur()
 	{
 		this.echiquier = new Echiquier( 1, 1, this );
-		this.fenetre = new FenetreSolitaireChess( this );
+		this.fenetre = new FenetreJeu( this );
 	}
 
 
@@ -48,6 +48,7 @@ public class Controleur
 
 		return "./images/" + symbole + ".png";
 	}
+
 
 	public int getTailleImg() { return 100; }
 

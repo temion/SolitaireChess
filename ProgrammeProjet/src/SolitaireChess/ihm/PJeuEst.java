@@ -14,22 +14,23 @@ public class PJeuEst extends JPanel
 	private JButton annuler;
 	private JButton recommencer;
 
+
 	public PJeuEst()
 	{
-		setLayout(new GridLayout(6,1,0,2));
-		this.setBorder(BorderFactory.createEtchedBorder());
+		setLayout( new GridLayout( 6, 1, 0, 2 ) );
+		this.setBorder( BorderFactory.createEtchedBorder() );
 
-		add(new Label("Defi n° "));
-		add(new Label("Niveau : "));
-		
-		add(new Label("Score : "));
+		add( new Label( "Defi n° " ) );
+		add( new Label( "Niveau : " ) );
 
-		annuler = new JButton("Annuler");
-		add(annuler);
+		add( new Label( "Score : " ) );
 
-		recommencer = new JButton("Recommencer");
-		add(recommencer);
+		annuler = new JButton( "Annuler" );
+		add( annuler );
 
-		add(new Label("Mouvements : "));
+		recommencer = new JButton( "Recommencer" );
+		add( recommencer );
+
+		add( new Label( "Mouvements : " ) );
 	}
 }

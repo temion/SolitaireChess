@@ -8,42 +8,48 @@ package SolitaireChess.ihm; /**
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import SolitaireChess.Controleur;
 
 public class FenetreJeu extends JFrame
 {
 	private Controleur ctrl;
-	private Accueil accueil;
-	private Jeu     jeu;
+	private Accueil    accueil;
+	private Jeu        jeu;
 
-	public FenetreJeu(Controleur ctrl)
+
+	public FenetreJeu( Controleur ctrl )
 	{
+		setTitle( "SolitaireChess" );
 		this.ctrl = ctrl;
 
-		setTitle("Solitaire Chess");
-		setLocation(50,50);
-		this.accueil = new Accueil(this);
-		add(this.accueil);
+		this.accueil = new Accueil( this );
+		add( this.accueil );
 
 		pack();
-		setVisible(true);
+		setLocationRelativeTo( null );
+		setResizable( false );
+		setVisible( true );
 	}
+
 
 	public void afficherJeu()
 	{
-		this.remove(accueil);
-		this.jeu = new Jeu(this, ctrl);
-		add(this.jeu);
+		this.remove( accueil );
+		this.jeu = new Jeu( this, ctrl );
+		add( this.jeu );
 		pack();
 	}
 
+
 	public void afficherAccueil()
 	{
-		this.remove(jeu);
-		this.accueil = new Accueil(this);
-		add(this.accueil);
+		this.remove( jeu );
+		this.accueil = new Accueil( this );
+		add( this.accueil );
 		pack();
 	}
+
 
 	public void majIHM() { this.jeu.majIHM(); }
 
