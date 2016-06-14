@@ -1,5 +1,6 @@
 package SolitaireChess.ihm; /**
  * SolitaireChess - Projet Tutoré
+ * Classe ihm de l'écran du jeu
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
@@ -29,14 +30,16 @@ public class Jeu extends JPanel implements ActionListener
 	private JLabel score;
 	private JLabel mouvements;
 
-
-	public Jeu( FenetreJeu fenetre, Controleur ctrl )
+	/**
+	 * Construit l'écran du jeu.
+	 *
+	 * @param ctrl la classe qui fera le lien entre la classe et la partie métier
+	 */
+	public Jeu( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
 
 		setLayout( new BorderLayout() );
-
-		this.fenetre = fenetre;
 
 		barreAction = new BarreAction( fenetre );
 		add( barreAction, "North" );
@@ -50,7 +53,9 @@ public class Jeu extends JPanel implements ActionListener
 
 	}
 
-
+	/**
+	 * Ajoute un panel contenant beaucoup de composants à l'écran du jeu.
+	 */
 	private void ajouterPanelEst()
 	{
 		JPanel pEst = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
@@ -76,14 +81,18 @@ public class Jeu extends JPanel implements ActionListener
 		add( pEst, "East" );
 	}
 
-
+	/**
+	 * Met à jour la représentation ihm de l'échiquier.
+	 */
 	public void majIHM()
 	{
 		this.plateau.repaint();
 		majPanel();
 	}
 
-
+	/**
+	 * Met à jour l'affichage du défi, du niveau et du score.
+	 */
 	private void majPanel()
 	{
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
@@ -91,13 +100,16 @@ public class Jeu extends JPanel implements ActionListener
 		score.setText( "Score : " + ctrl.getEchiquier().getScore() );
 	}
 
-
+	/**
+	 * Gère les appuis sur les boutons du composant.
+	 * @param e un événement lié à l'appui sur l'un des boutons.
+	 */
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
 		if ( e.getSource() == recommencer )
 		{
-			fenetre.recommencer();
+			ctrl.getEchiquier().recommencer();
 		}
 	}
 }

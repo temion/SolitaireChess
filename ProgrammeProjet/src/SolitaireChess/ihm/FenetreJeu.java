@@ -1,5 +1,7 @@
-package SolitaireChess.ihm; /**
+package SolitaireChess.ihm;
+/**
  * SolitaireChess - Projet Tutoré
+ * Classe ihm de la fenêtre du jeu.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
@@ -15,13 +17,16 @@ public class FenetreJeu extends JFrame
 	private Accueil    accueil;
 	private Jeu        jeu;
 
-
+	/**
+	 * Contruit la fenêtre.
+	 * @param ctrl la classe qui fera le lien entre la classe et la partie métier
+	 */
 	public FenetreJeu( Controleur ctrl )
 	{
 		setTitle( "SolitaireChess" );
 		this.ctrl = ctrl;
 
-		this.jeu = new Jeu( this, ctrl );
+		this.jeu = new Jeu( ctrl );
 		this.accueil = new Accueil( this );
 		add( this.accueil );
 
@@ -33,7 +38,9 @@ public class FenetreJeu extends JFrame
 		setVisible( true );
 	}
 
-
+	/**
+	 * Affiche dans la fenêtre l'écran du jeu.
+	 */
 	public void afficherJeu()
 	{
 		this.remove( accueil );
@@ -41,7 +48,9 @@ public class FenetreJeu extends JFrame
 		pack();
 	}
 
-
+	/**
+	 *  Affiche dans la fenêtre l'écran du menu principal.
+	 */
 	public void afficherAccueil()
 	{
 		this.remove( jeu );
@@ -49,10 +58,14 @@ public class FenetreJeu extends JFrame
 		pack();
 	}
 
-
+	/**
+	 * Met à jour la représentation ihm de l'échiquier.
+	 */
 	public void majIHM() { this.jeu.majIHM(); }
 
-
+	/**
+	 * Remet l'échiquier à l'état initial du niveau.
+	 */
 	public void recommencer()
 	{
 		ctrl.getEchiquier().recommencer();
