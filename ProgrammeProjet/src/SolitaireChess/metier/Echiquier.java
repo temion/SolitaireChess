@@ -39,7 +39,7 @@ public class Echiquier
 	private void initNiveau()
 	{
 		String sFichier =
-				String.format( "niveaux/niveau%02d/defi%02d.data", this.niveau, this.defi );
+				String.format( "./niveaux/niveau%02d/defi%02d.data", this.niveau, this.defi );
 
 		try
 		{
