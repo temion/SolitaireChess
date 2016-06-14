@@ -15,25 +15,25 @@ public class Dame extends Piece
 	/**
 	 * Construit une dame.
 	 *
+	 * @param x         la position horizontale de la dame
+	 * @param y         la postition verticale de la dame
 	 * @param echiquier l'échiquier auquel appartient la dame
 	 */
-	public Dame( Echiquier echiquier )
+	public Dame( int x, int y, Echiquier echiquier )
 	{
-		super( echiquier );
+		super( x, y, echiquier );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'on peut déplacer la dame.
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on peut la déplacer, sinon faux
 	 */
 	@Override
-	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
 		return Math.abs( xCible - x ) == Math.abs( yCible - y ) || x == xCible || y == yCible;
 	}

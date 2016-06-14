@@ -15,40 +15,38 @@ public class Tour extends Piece
 	/**
 	 * Construit une tour.
 	 *
+	 * @param x         la position horizontale du pion
+	 * @param y         la position verticale du pion
 	 * @param echiquier l'échiquier auquel appartient la tour
 	 */
-	public Tour( Echiquier echiquier )
+	public Tour( int x, int y, Echiquier echiquier )
 	{
-		super( echiquier );
+		super( x, y, echiquier );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'on peut déplacer la tour
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on peut la déplacer, sinon faux
 	 */
 	@Override
-	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
-		return ( x == xCible || y == yCible ) && personneDansLeChamp( x, y, xCible, yCible );
+		return ( x == xCible || y == yCible ) && personneDansLeChamp( xCible, yCible );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'il n'y a aucune pièce entre la pièce selectionnée et sa destination
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai s'il n'y a pas de piece, sinon faux
 	 */
-	public boolean personneDansLeChamp( int x, int y, int xCible, int yCible )
+	public boolean personneDansLeChamp( int xCible, int yCible )
 	{
 		if ( x == xCible )
 		{

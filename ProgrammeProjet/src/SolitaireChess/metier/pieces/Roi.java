@@ -16,25 +16,25 @@ public class Roi extends Piece
 	/**
 	 * Construit un roi.
 	 *
+	 * @param x         la position horizontale du roi
+	 * @param y         la position verticale du roi
 	 * @param echiquier l'échiquier auquel appartient le roi
 	 */
-	public Roi( Echiquier echiquier )
+	public Roi( int x, int y, Echiquier echiquier )
 	{
-		super( echiquier );
+		super( x, y, echiquier );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'on peut déplacer le roi.
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai on si peut le déplacer, sinon faux
 	 */
 	@Override
-	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
 		return Math.abs( x - xCible ) < 2 && Math.abs( y - yCible ) < 2;
 	}

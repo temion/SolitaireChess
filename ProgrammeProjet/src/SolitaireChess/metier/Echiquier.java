@@ -20,6 +20,8 @@ public class Echiquier
 	private Piece[][] echiquier;
 	private int       defi;
 	private int       niveau;
+	private int       nbPiece;
+	private boolean   aUnRoi;
 
 	private Controleur ctrl;
 
@@ -32,10 +34,11 @@ public class Echiquier
 	 */
 	public Echiquier( int niveau, int defi, Controleur ctrl )
 	{
-		this.echiquier = new Piece[4][4];
 		this.niveau = niveau;
 		this.defi = defi;
 		this.ctrl = ctrl;
+		this.nbPiece = 0;
+		this.aUnRoi = false;
 		this.initNiveau();
 	}
 
@@ -51,16 +54,58 @@ public class Echiquier
 	 */
 	public boolean deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if ( this.echiquier[x2][y2] != null && ( x1 != x2 || y1 != y2 ) )
-			return this.echiquier[x1][y1].deplacer( x1, y1, x2, y2 );
+		boolean estRoi = false;
+		if ( aUnRoi ) estRoi = this.echiquier[x2][y2] instanceof Roi;
+
+		if ( this.echiquier[x1][y1].deplacer( x2, y2 ) )
+		{
+			nbPiece--;
+
+			if ( estRoi || aPerdu() ) recommencer();
+			else if ( aGagne() ) incrementerDefi();
+			else return true;
+		}
 
 		return false;
 	}
 
 
-	public void incrementerNiveau()
+	public void recommencer()
 	{
-		//if (  )
+		initNiveau();
+		ctrl.getFenetre().majIHM();
+	}
+
+
+	private boolean aGagne()
+	{
+		return nbPiece == 1;
+	}
+
+
+	private boolean aPerdu()
+	{
+		if ( nbPiece > 1 )
+			for ( int i = 0; i < ctrl.getNbLigne(); i++ )
+				for ( int j = 0; j < ctrl.getNbColonne(); j++ )
+					if ( echiquier[i][j].peutPrendreUnePiece() ) return false;
+
+		return true;
+	}
+
+
+	/**
+	 * Incrémente le defi  une fois que celui-ci est fini.
+	 */
+	private void incrementerDefi()
+	{
+		if ( this.defi < 60 )
+			this.defi++;
+
+		if ( this.defi % 15 == 0 )
+			this.niveau++;
+
+		this.initNiveau();
 	}
 
 
@@ -68,6 +113,8 @@ public class Echiquier
 	{
 		String sFichier =
 				String.format( "./niveaux/niveau%02d/defi%02d.data", this.niveau, this.defi );
+
+		this.echiquier = new Piece[4][4];
 
 		try
 		{
@@ -81,7 +128,8 @@ public class Echiquier
 
 				for ( int j = 0; j < this.echiquier[0].length && j < ligSc.length(); j++ )
 				{
-					this.ajouterPiece( i, j, ligSc.charAt( j ) );
+					nbPiece = 0;
+					ajouterPiece( i, j, ligSc.charAt( j ) );
 				}
 			}
 			sc.close();
@@ -91,12 +139,18 @@ public class Echiquier
 
 	private void ajouterPiece( int lig, int col, char piece )
 	{
-		if ( piece == 'R' ) this.echiquier[lig][col] = new Roi( this );
-		else if ( piece == 'D' ) this.echiquier[lig][col] = new Dame( this );
-		else if ( piece == 'C' ) this.echiquier[lig][col] = new Cavalier( this );
-		else if ( piece == 'T' ) this.echiquier[lig][col] = new Tour( this );
-		else if ( piece == 'F' ) this.echiquier[lig][col] = new Fou( this );
-		else if ( piece == 'P' ) this.echiquier[lig][col] = new Pion( this );
+		if ( piece == 'R' )
+		{
+			this.echiquier[lig][col] = new Roi( lig, col, this );
+			aUnRoi = true;
+		}
+		else if ( piece == 'D' ) this.echiquier[lig][col] = new Dame( lig, col, this );
+		else if ( piece == 'C' ) this.echiquier[lig][col] = new Cavalier( lig, col, this );
+		else if ( piece == 'T' ) this.echiquier[lig][col] = new Tour( lig, col, this );
+		else if ( piece == 'F' ) this.echiquier[lig][col] = new Fou( lig, col, this );
+		else if ( piece == 'P' ) this.echiquier[lig][col] = new Pion( lig, col, this );
+
+		if ( this.echiquier[lig][col] != null ) this.nbPiece++;
 	}
 
 
@@ -134,4 +188,17 @@ public class Echiquier
 
 
 	public int getNbColonne() { return 4; }
+
+	public String toString()
+	{
+		String s = "";
+		for ( int i = 0; i < ctrl.getNbLigne(); i++ )
+		{
+			for ( int j = 0; j < ctrl.getNbColonne(); j++ )
+				s += echiquier[i][j] + " ";
+			s+= "\n";
+		}
+
+		return s;
+	}
 }

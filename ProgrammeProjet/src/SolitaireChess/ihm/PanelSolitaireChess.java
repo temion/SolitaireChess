@@ -98,9 +98,8 @@ public class PanelSolitaireChess extends JPanel
 					System.out.println( "Choisissez votre pièce" );
 				} catch ( Exception exc )
 				{
-					System.out.println( "Evitez de sortir des limites, poto" );
+					System.out.println( "Evitez de sortir des limites" );
 				}
-
 			}
 			else if ( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
 			{
@@ -135,7 +134,7 @@ public class PanelSolitaireChess extends JPanel
 			{
 				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG,
 							   e.getX() / TAILLE_IMG );
-			} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
+			} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites" );}
 			// Dès qu'on relache la souris, on déplace la pièce sur laquelle on a cliqué vers
 			// la pièce sur laquelle on vient de relacher la souris
 			try

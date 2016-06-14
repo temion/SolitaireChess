@@ -23,16 +23,16 @@ public class Controleur
 	}
 
 
+	public static void main( String[] arg )
+	{
+		new Controleur();
+	}
+
+
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
 		if ( this.echiquier.deplacer( x1, y1, x2, y2 ) )
 			this.fenetre.majIHM();
-	}
-
-
-	public static void main( String[] arg )
-	{
-		new Controleur();
 	}
 
 
@@ -47,6 +47,18 @@ public class Controleur
 		String symbole = this.echiquier.getSymbole( i, j );
 
 		return "./images/" + symbole + ".png";
+	}
+
+
+	public FenetreJeu getFenetre()
+	{
+		return fenetre;
+	}
+
+
+	public Echiquier getEchiquier()
+	{
+		return echiquier;
 	}
 
 

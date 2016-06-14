@@ -15,25 +15,25 @@ public class Cavalier extends Piece
 	/**
 	 * Construit un cavalier.
 	 *
+	 * @param x         la position horizontale du cavalier
+	 * @param y         la position verticale du cavalier
 	 * @param echiquier l'echiquier auquel appartient le cavalier
 	 */
-	public Cavalier( Echiquier echiquier )
+	public Cavalier( int x, int y, Echiquier echiquier )
 	{
-		super( echiquier );
+		super( x, y, echiquier );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'on peut déplacer le cavalier.
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on peut le déplacer, sinon faux
 	 */
 	@Override
-	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
 		return Math.abs( x - xCible ) == 2 && Math.abs( y - yCible ) == 1 ||
 			   Math.abs( y - yCible ) == 2

@@ -15,41 +15,39 @@ public class Fou extends Piece
 	/**
 	 * Construit un fou.
 	 *
+	 * @param x         la position horizontale du fou
+	 * @param y         la position verticale du fou
 	 * @param echiquier l'echiquier auquel appartient le fou
 	 */
-	public Fou( Echiquier echiquier )
+	public Fou( int x, int y, Echiquier echiquier )
 	{
-		super( echiquier );
+		super( x, y, echiquier );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'on peut déplacer le fou.
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return
 	 */
 	@Override
-	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
+	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
 		return Math.abs( xCible - x ) == Math.abs( yCible - y ) &&
-			   personneDansLeChamp( x, y, xCible, yCible );
+			   personneDansLeChamp( xCible, yCible );
 	}
 
 
 	/**
 	 * Permet de vérifier qu'il n'y a aucune pièce entre la pièce selectionnée et sa destination
 	 *
-	 * @param x      la position horizontale de la pièce à déplacer
-	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai s'il n'y a pas de pièce, sinon faux
 	 */
-	private boolean personneDansLeChamp( int x, int y, int xCible, int yCible )
+	private boolean personneDansLeChamp( int xCible, int yCible )
 	{
 		boolean xPlusGrand = x > xCible;
 		boolean yPlusGrand = y > yCible;
