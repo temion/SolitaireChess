@@ -18,6 +18,7 @@ public abstract class Piece
 
 	/**
 	 * Construit une pièce.
+	 *
 	 * @param echiquier l'echiquier auquel appartient la pièce
 	 */
 	public Piece( Echiquier echiquier )
@@ -28,8 +29,9 @@ public abstract class Piece
 
 	/**
 	 * Permet de déplacer une pièce.
-	 * @param x la position horizontale de la pièce à déplacer
-	 * @param y la position verticale de la pièce à déplacer
+	 *
+	 * @param x      la position horizontale de la pièce à déplacer
+	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on a pu déplacer la pièce, sinon faux
@@ -48,8 +50,9 @@ public abstract class Piece
 
 	/**
 	 * Permet de vérifier si on peut déplacer une pièce en fonction de ses règles de déplacement
-	 * @param x la position horizontale de la pièce à déplacer
-	 * @param y la position verticale de la pièce à déplacer
+	 *
+	 * @param x      la position horizontale de la pièce à déplacer
+	 * @param y      la position verticale de la pièce à déplacer
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on peut déplacer la pièce selon ses règles de déplacement, sinon faux
@@ -59,6 +62,7 @@ public abstract class Piece
 
 	/**
 	 * Permet d'obtenir le symbole de la pièce pour la dessiner.
+	 *
 	 * @return le nom de la classe de la pièce qu'on veut dessiner
 	 */
 	public String getSymbole()

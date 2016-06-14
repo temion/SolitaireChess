@@ -27,9 +27,9 @@ public class PanelSolitaireChess extends JPanel
 	private int sourisYClicked;
 
 
-
 	/**
 	 * Construit le plateau de jeu des images.
+	 *
 	 * @param ctrl le contrôleur qui gère la fenêtre
 	 */
 	public PanelSolitaireChess( Controleur ctrl )
@@ -51,6 +51,7 @@ public class PanelSolitaireChess extends JPanel
 
 	/**
 	 * Permet de redessiner totalement le plateau.
+	 *
 	 * @param g l'objet qui permet de dessiner le plateau
 	 */
 	public void paintComponent( Graphics g )
@@ -89,25 +90,30 @@ public class PanelSolitaireChess extends JPanel
 			{
 				try
 				{
-					ctrl.deplacer( sourisXClicked, sourisYClicked, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+					ctrl.deplacer( sourisXClicked, sourisYClicked, e.getY() / TAILLE_IMG,
+								   e.getX() / TAILLE_IMG );
 
 					sourisXClicked = - 1;
 					sourisYClicked = - 1;
-					System.out.println("Choisissez votre pièce");
-				} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
+					System.out.println( "Choisissez votre pièce" );
+				} catch ( Exception exc )
+				{
+					System.out.println( "Evitez de sortir des limites, poto" );
+				}
 
 			}
 			else if ( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
 			{
 				sourisXClicked = e.getY() / TAILLE_IMG;
 				sourisYClicked = e.getX() / TAILLE_IMG;
-				System.out.println("Choisissez la pièce à prendre");
+				System.out.println( "Choisissez la pièce à prendre" );
 			}
 		}
 
 
 		/**
 		 * Si on clique sur la souris et qu'on reste appuyé.
+		 *
 		 * @param e l'évenement lié à la souris
 		 */
 		public void mousePressed( MouseEvent e )
@@ -120,19 +126,22 @@ public class PanelSolitaireChess extends JPanel
 
 		/**
 		 * Si on a cliqué sur la souris et qu'on relache le clic.
+		 *
 		 * @param e l'évenement lié à la souris
 		 */
 		public void mouseReleased( MouseEvent e )
 		{
 			try
 			{
-				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG,
+							   e.getX() / TAILLE_IMG );
 			} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
 			// Dès qu'on relache la souris, on déplace la pièce sur laquelle on a cliqué vers
 			// la pièce sur laquelle on vient de relacher la souris
 			try
 			{
-				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG,
+							   e.getX() / TAILLE_IMG );
 			} catch ( Exception exe ) {}
 		}
 	}

@@ -23,11 +23,16 @@ public class Cavalier extends Piece
 	}
 
 
-	@Override
 	/**
 	 * Permet de vérifier qu'on peut déplacer le cavalier.
+	 *
+	 * @param x      la position horizontale de la pièce à déplacer
+	 * @param y      la position verticale de la pièce à déplacer
+	 * @param xCible la position horizontale vers laquelle déplacer
+	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai si on peut le déplacer, sinon faux
 	 */
+	@Override
 	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
 		return Math.abs( x - xCible ) == 2 && Math.abs( y - yCible ) == 1 ||

@@ -33,7 +33,8 @@ public class FenetreSolitaireChess extends JFrame
 		this.plateau = new PanelSolitaireChess( this.ctrl );
 		add( this.plateau );
 
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );      // Fermeture de la fenêtre avec la croix
+		setDefaultCloseOperation(
+				JFrame.EXIT_ON_CLOSE );      // Fermeture de la fenêtre avec la croix
 		pack();                                                // Taille de la fenêtre définie dynamiquement
 		setResizable( false );                                 // Taille de la fenêtre fixe
 		setLocationRelativeTo( null );                         // Fenêtre centrée

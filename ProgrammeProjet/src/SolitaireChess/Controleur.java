@@ -18,8 +18,8 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.echiquier = new Echiquier( 1, 1 );
-		this.fenetre = new FenetreJeu( this );
+		this.echiquier = new Echiquier( 1, 1, this );
+		this.fenetre = new FenetreSolitaireChess( this );
 	}
 
 
@@ -48,7 +48,6 @@ public class Controleur
 
 		return "./images/" + symbole + ".png";
 	}
-
 
 	public int getTailleImg() { return 100; }
 

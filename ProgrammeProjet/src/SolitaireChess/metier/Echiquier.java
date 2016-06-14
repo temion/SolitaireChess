@@ -3,11 +3,13 @@ package SolitaireChess.metier;
 
 /**
  * SolitaireChess - Projet Tutoré
+ * Classe métier qui gère les échiquiers.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
 
+import SolitaireChess.Controleur;
 import SolitaireChess.metier.pieces.*;
 
 import java.io.FileReader;
@@ -19,22 +21,46 @@ public class Echiquier
 	private int       defi;
 	private int       niveau;
 
+	private Controleur ctrl;
 
-	public Echiquier( int niveau, int defi )
+
+	/**
+	 * Construit un échiquier.
+	 * @param niveau le niveau de l'échiquier
+	 * @param defi le défi de l'échiquier
+	 */
+	public Echiquier( int niveau, int defi, Controleur ctrl )
 	{
 		this.echiquier = new Piece[4][4];
 		this.niveau = niveau;
 		this.defi = defi;
+		this.ctrl = ctrl;
 		this.initNiveau();
 	}
 
+
+	/**
+	 * Permet de déplacer une pièce sur l'échiquier.
+	 * @param x1 la position horizontale de la pièce à déplacer
+	 * @param y1 la position verticale de la pièce à déplacer
+	 * @param x2 la position horizontale de la pièce vers laquelle déplacer
+	 * @param y2 la position verticale de la pièce vers laquelle déplacer
+	 * @return vrai si on peut déplacer la pièce, sinon faux
+	 */
 	public boolean deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if( this.echiquier[x2][y2] != null && (x1 != x2 || y1 != y2) )
+		if ( this.echiquier[x2][y2] != null && ( x1 != x2 || y1 != y2 ) )
 			return this.echiquier[x1][y1].deplacer( x1, y1, x2, y2 );
 
 		return false;
 	}
+
+
+	public void incrementerNiveau()
+	{
+		if (  )
+	}
+
 
 	private void initNiveau()
 	{
@@ -80,10 +106,13 @@ public class Echiquier
 		return null;
 	}
 
+	public Controleur getCtrl() { return this.ctrl; }
+
 	public Piece[][] getEchiquier()
 	{
-		return echiquier;
+		return this.echiquier;
 	}
+
 
 	public int getDefi()
 	{
