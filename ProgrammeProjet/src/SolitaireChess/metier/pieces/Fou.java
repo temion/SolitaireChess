@@ -16,9 +16,16 @@ public class Fou extends Piece
 		super( echiquier );
 	}
 
+
 	@Override
 	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
-		return Math.abs( xCible - x ) == Math.abs( yCible - y );
+		return Math.abs( xCible - x ) == Math.abs( yCible - y ) && personneDansLeChamp( x, y, xCible, yCible );
+	}
+
+
+	private boolean personneDansLeChamp( int x, int y, int xCible, int yCible )
+	{
+		
 	}
 }

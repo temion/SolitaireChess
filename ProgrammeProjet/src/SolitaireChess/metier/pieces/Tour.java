@@ -16,34 +16,33 @@ public class Tour extends Piece
 		super( echiquier );
 	}
 
+
 	@Override
 	public boolean peutSeDeplacer( int x, int y, int xCible, int yCible )
 	{
-		return (x == xCible || y == yCible) && personneDansLeChamp( x, y, xCible, yCible );
+		return ( x == xCible || y == yCible ) && personneDansLeChamp( x, y, xCible, yCible );
 	}
+
 
 	public boolean personneDansLeChamp( int x, int y, int xCible, int yCible )
 	{
-		if( x == xCible )
-		{
-			int xMin = x > xCible ? x : xCible;
-			int xMax = x < xCible ? x : xCible;
-
-			for( int i = xMin + 1; i < xMax; i++ )
-				System.out.println(i + " : " + y);
-				/*if( echiquier.getEchiquier()[i][y] != null )
-					return false;*/
-			System.out.println( "gros zizi" );
-		} else if( y == yCible )
+		if ( x == xCible )
 		{
 			int yMin = y < yCible ? y : yCible;
-			int yMax = y > yCible ? y : yCible;
+			int yMax = y > xCible ? y : yCible;
 
-			for( int i = yMin + 1; i < yMax; i++ )
-				System.out.println(x + " : " + i);
-				/*if( echiquier.getEchiquier()[x][i] != null )
-					return false;*/
-			System.out.println( "coucou" );
+			for ( int i = yMin + 1; i < yMax; i++ )
+				if ( echiquier.getEchiquier()[x][i] != null )
+					return false;
+		}
+		else if ( y == yCible )
+		{
+			int xMin = x < xCible ? x : xCible;
+			int xMax = x > xCible ? x : xCible;
+
+			for ( int i = xMin + 1; i < xMax; i++ )
+				if ( echiquier.getEchiquier()[i][y] != null )
+					return false;
 		}
 		return true;
 	}
