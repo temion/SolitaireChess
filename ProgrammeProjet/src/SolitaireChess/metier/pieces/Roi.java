@@ -1,3 +1,5 @@
+package SolitaireChess.metier.pieces;
+
 /**
  * SolitaireChess - Projet Tutoré
  * Classe métier qui gère les rois.
@@ -5,9 +7,6 @@
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
-
-package SolitaireChess.metier.pieces;
-
 
 import SolitaireChess.metier.Echiquier;
 
@@ -36,6 +35,7 @@ public class Roi extends Piece
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
+		// Déplacement de 1 dans toutes les directions
 		return Math.abs( x - xCible ) < 2 && Math.abs( y - yCible ) < 2;
 	}
 }

@@ -55,11 +55,11 @@ public class BarreAction extends JPanel implements ActionListener
 	{
 		if ( e.getSource() == menuPrincipal )
 		{
-			if(JOptionPane.showConfirmDialog(
+			if ( JOptionPane.showConfirmDialog(
 					this,
 					"Voulez-vous vraiment revenir au menu principal ?",
 					"Question",
-					JOptionPane.YES_NO_OPTION) == 0)
+					JOptionPane.YES_NO_OPTION ) == 0 )
 			{
 				fenetre.afficherAccueil();
 			}

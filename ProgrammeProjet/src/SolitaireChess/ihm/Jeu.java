@@ -50,15 +50,18 @@ public class Jeu extends JPanel implements ActionListener
 
 	}
 
+
 	private void ajouterPanelEst()
 	{
-		JPanel pEst = new JPanel( new GridLayout( 6, 1, 0, 2));
+		JPanel pEst = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
 
 		pEst.setBorder( BorderFactory.createEtchedBorder() );//A LA FIN
 
 		pEst.add( defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
-		pEst.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(), JLabel.CENTER ) );
-		pEst.add( score = new JLabel( "Score : " + ctrl.getEchiquier().getScore(), JLabel.CENTER ) );
+		pEst.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
+									   JLabel.CENTER ) );
+		pEst.add(
+				score = new JLabel( "Score : " + ctrl.getEchiquier().getScore(), JLabel.CENTER ) );
 
 		annuler = new JButton( "Annuler" );
 		pEst.add( annuler );
@@ -68,16 +71,18 @@ public class Jeu extends JPanel implements ActionListener
 		pEst.add( recommencer );
 
 		pEst.add( mouvements = new JLabel( "Mouvements : " + ctrl.getEchiquier().getNbMouvements()
-	) );
+		) );
 
-		add(pEst, "East");
+		add( pEst, "East" );
 	}
+
 
 	public void majIHM()
 	{
 		this.plateau.repaint();
 		majPanel();
 	}
+
 
 	private void majPanel()
 	{
@@ -86,10 +91,11 @@ public class Jeu extends JPanel implements ActionListener
 		score.setText( "Score : " + ctrl.getEchiquier().getScore() );
 	}
 
+
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if(e.getSource() == recommencer)
+		if ( e.getSource() == recommencer )
 		{
 			fenetre.recommencer();
 		}

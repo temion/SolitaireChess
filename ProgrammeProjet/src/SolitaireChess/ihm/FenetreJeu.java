@@ -52,6 +52,7 @@ public class FenetreJeu extends JFrame
 
 	public void majIHM() { this.jeu.majIHM(); }
 
+
 	public void recommencer()
 	{
 		ctrl.getEchiquier().recommencer();

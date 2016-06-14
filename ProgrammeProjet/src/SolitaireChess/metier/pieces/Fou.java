@@ -1,8 +1,5 @@
 package SolitaireChess.metier.pieces;
 
-
-import SolitaireChess.metier.Echiquier;
-
 /**
  * SolitaireChess - Projet Tutoré
  * Classe métier qui gère les fous.
@@ -10,6 +7,9 @@ import SolitaireChess.metier.Echiquier;
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
+
+import SolitaireChess.metier.Echiquier;
+
 public class Fou extends Piece
 {
 	/**
@@ -35,6 +35,7 @@ public class Fou extends Piece
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
+		// Déplacement en diagonal
 		return Math.abs( xCible - x ) == Math.abs( yCible - y ) &&
 			   personneDansLeChamp( xCible, yCible );
 	}

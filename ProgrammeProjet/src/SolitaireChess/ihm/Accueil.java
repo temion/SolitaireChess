@@ -13,7 +13,7 @@ public class Accueil extends JPanel implements ActionListener
 {
 	private FenetreJeu fenetre;
 
-	private JButton   jouer, supprimer;
+	private JButton jouer, supprimer;
 	private JComboBox choixJoueur;
 	private JButton   nvPartie;
 	private JButton   quitter;
@@ -47,7 +47,7 @@ public class Accueil extends JPanel implements ActionListener
 		JPanel pBoutonCharger = new JPanel( new GridLayout( 2, 1, 0, 5 ) );
 
 		choixJoueur = new JComboBox();
-		choixJoueur.addItem("Choisir une partie");
+		choixJoueur.addItem( "Choisir une partie" );
 		pCharger.add( choixJoueur );
 
 		jouer = new JButton( "Jouer" );
@@ -66,24 +66,25 @@ public class Accueil extends JPanel implements ActionListener
 
 	public void actionPerformed( ActionEvent e )
 	{
-		if ( e.getSource() == jouer && choixJoueur.getSelectedItem() != null && ! choixJoueur.getSelectedItem().equals
-				("Choisir une partie"))
+		if ( e.getSource() == jouer && choixJoueur.getSelectedItem() != null &&
+			 ! choixJoueur.getSelectedItem().equals
+					 ( "Choisir une partie" ) )
 		{
 			fenetre.afficherJeu();
 		}
 		if ( e.getSource() == nvPartie )
 		{
 			String nom = JOptionPane.showInputDialog( this, "Nom du joueur : \n" );
-			choixJoueur.addItem(nom);
+			choixJoueur.addItem( nom );
 			fenetre.afficherJeu();
 		}
 		else if ( e.getSource() == quitter )
 		{
-			if(JOptionPane.showConfirmDialog(
+			if ( JOptionPane.showConfirmDialog(
 					this,
 					"Voulez-vous vraiment quitter le jeu ?",
 					"Question",
-					JOptionPane.YES_NO_OPTION) == 0)
+					JOptionPane.YES_NO_OPTION ) == 0 )
 			{
 				System.exit( 0 );
 			}

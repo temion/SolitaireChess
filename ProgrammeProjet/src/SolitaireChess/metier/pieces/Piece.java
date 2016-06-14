@@ -1,3 +1,5 @@
+package SolitaireChess.metier.pieces;
+
 /**
  * SolitaireChess - Projet Tutoré
  * Classe métier qui gère les pièces du jeu.
@@ -5,9 +7,6 @@
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
-
-package SolitaireChess.metier.pieces;
-
 
 import SolitaireChess.metier.Echiquier;
 
@@ -53,11 +52,16 @@ public abstract class Piece
 	}
 
 
+	/**
+	 * Permet de vérifier que la pièce puisse prendre une autre pièce.
+	 *
+	 * @return vrai si elle peut prendre une pièce, sinon faux
+	 */
 	public boolean peutPrendreUnePiece()
 	{
 		for ( int i = 0; i < echiquier.getNbLigne(); i++ )
 			for ( int j = 0; j < echiquier.getNbColonne(); j++ )
-				if( echiquier.getEchiquier()[x][y].peutSeDeplacer( i, j ) && i != x && j != y )
+				if ( echiquier.getEchiquier()[x][y].peutSeDeplacer( i, j ) && i != x && j != y )
 					return true;
 
 		return false;
@@ -88,4 +92,69 @@ public abstract class Piece
 		return str[str.length - 1];
 	}
 
+
+	/**
+	 * Permet d'obtenir l'échiquier de la pièce.
+	 *
+	 * @return l'échiquier de la pièce
+	 */
+	public Echiquier getEchiquier()
+	{
+		return echiquier;
+	}
+
+
+	/**
+	 * Permet de définir l'échiquier de la pièce.
+	 *
+	 * @param echiquier le nouvel échiquier de la pièce
+	 */
+	public void setEchiquier( Echiquier echiquier )
+	{
+		this.echiquier = echiquier;
+	}
+
+
+	/**
+	 * Permet d'obtenir la position horizontale de la pièce sur l'échiquier.
+	 *
+	 * @return la position horizontale de la pièce
+	 */
+	public int getX()
+	{
+		return x;
+	}
+
+
+	/**
+	 * Permet définir la position horizontale de la pièce sur l'échiquier.
+	 *
+	 * @param x la nouvelle position horizontale
+	 */
+	public void setX( int x )
+	{
+		this.x = x;
+	}
+
+
+	/**
+	 * Permet d'obtenir la position verticale de la pièce sur l'échiquier.
+	 *
+	 * @return la position verticale de la pièce
+	 */
+	public int getY()
+	{
+		return y;
+	}
+
+
+	/**
+	 * Permet d'obtenir la position verticale de la pièce sur l'échiquier.
+	 *
+	 * @return la position verticale de la pièce
+	 */
+	public void setY( int y )
+	{
+		this.y = y;
+	}
 }

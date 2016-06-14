@@ -1,8 +1,5 @@
 package SolitaireChess.metier.pieces;
 
-
-import SolitaireChess.metier.Echiquier;
-
 /**
  * SolitaireChess - Projet Tutoré
  * Classe métier qui gère les tours.
@@ -10,6 +7,9 @@ import SolitaireChess.metier.Echiquier;
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
+
+import SolitaireChess.metier.Echiquier;
+
 public class Tour extends Piece
 {
 	/**
@@ -35,6 +35,7 @@ public class Tour extends Piece
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
+		// Déplacement en ligne ou en colonne
 		return ( x == xCible || y == yCible ) && personneDansLeChamp( xCible, yCible );
 	}
 
@@ -46,7 +47,7 @@ public class Tour extends Piece
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai s'il n'y a pas de piece, sinon faux
 	 */
-	public boolean personneDansLeChamp( int xCible, int yCible )
+	private boolean personneDansLeChamp( int xCible, int yCible )
 	{
 		if ( x == xCible )
 		{
