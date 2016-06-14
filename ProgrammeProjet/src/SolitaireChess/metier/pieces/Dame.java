@@ -5,7 +5,7 @@ import SolitaireChess.metier.Echiquier;
 
 /**
  * SolitaireChess - Projet Tutoré
- *
+ * Classe métier qui gère les dames
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
