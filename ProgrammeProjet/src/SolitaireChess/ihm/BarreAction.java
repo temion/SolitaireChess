@@ -1,5 +1,7 @@
-package SolitaireChess.ihm; /**
+package SolitaireChess.ihm;
+/**
  * SolitaireChess - Projet Tutoré
+ * Classe ihm du composant se trouvant en haut de la fenêtre de jeu.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
@@ -20,7 +22,10 @@ public class BarreAction extends JPanel implements ActionListener
 	private JButton regles;
 	private JButton menuPrincipal;
 
-
+	/**
+	 * Construit le composant se trouvant en haut de l'écran du jeu.
+	 * @param fenetre la fenêtre contenant tous les composants ihm
+	 */
 	public BarreAction( FenetreJeu fenetre )
 	{
 		this.fenetre = fenetre;
@@ -50,7 +55,11 @@ public class BarreAction extends JPanel implements ActionListener
 		add( menuPrincipal );
 	}
 
-
+	/**
+	 * Gère les appuis sur les boutons du composant.
+	 * @param e un événement lié à l'appui sur l'un des boutons.
+	 */
+	@Override
 	public void actionPerformed( ActionEvent e )
 	{
 		if ( e.getSource() == menuPrincipal )

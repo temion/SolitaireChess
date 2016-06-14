@@ -1,13 +1,16 @@
-package SolitaireChess.ihm; /**
+package SolitaireChess.ihm;
+/**
  * SolitaireChess - Projet Tutoré
+ * Classe ihm de l'écran d'accueil.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Accueil extends JPanel implements ActionListener
 {
@@ -18,7 +21,11 @@ public class Accueil extends JPanel implements ActionListener
 	private JButton   nvPartie;
 	private JButton   quitter;
 
-
+	/**
+	 * Construit l'écran du menu principal.
+	 *
+	 * @param fenetre la fenêtre contenant tous les composants ihm
+	 */
 	public Accueil( FenetreJeu fenetre )
 	{
 		setLayout( new GridLayout( 3, 1, 0, 20 ) );
@@ -40,7 +47,9 @@ public class Accueil extends JPanel implements ActionListener
 		add( quitter );
 	}
 
-
+	/**
+	 * Ajoute des composants ihm dans l'écran du menu principal.
+	 */
 	private void affichageCharger()
 	{
 		JPanel pCharger       = new JPanel( new BorderLayout( 5, 0 ) );
@@ -63,7 +72,11 @@ public class Accueil extends JPanel implements ActionListener
 		add( pCharger );
 	}
 
-
+	/**
+	 * Gère les appuis sur les boutons du composant.
+	 * @param e un événement lié à l'appui sur l'un des boutons.
+	 */
+	@Override
 	public void actionPerformed( ActionEvent e )
 	{
 		if ( e.getSource() == jouer && choixJoueur.getSelectedItem() != null &&
