@@ -41,6 +41,13 @@ public class FenetreJeu extends JFrame
 		pack();
 	}
 
+	public void afficherNouveauJeu()
+	{
+		this.remove( accueil );
+		add( this.jeu );
+		pack();
+	}
+
 
 	public void afficherAccueil()
 	{
@@ -48,7 +55,6 @@ public class FenetreJeu extends JFrame
 		add( this.accueil );
 		pack();
 	}
-
 
 	public void majIHM() { this.jeu.majIHM(); }
 

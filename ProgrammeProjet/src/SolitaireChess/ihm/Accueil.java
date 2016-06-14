@@ -75,7 +75,7 @@ public class Accueil extends JPanel implements ActionListener
 		{
 			String nom = JOptionPane.showInputDialog( this, "Nom du joueur : \n" );
 			choixJoueur.addItem(nom);
-			fenetre.afficherJeu();
+			fenetre.afficherNouveauJeu();
 		}
 		else if ( e.getSource() == quitter )
 		{

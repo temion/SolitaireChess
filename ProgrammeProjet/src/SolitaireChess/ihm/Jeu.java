@@ -41,7 +41,6 @@ public class Jeu extends JPanel
 
 	}
 
-
 	public void majIHM() { this.plateau.repaint(); }
 
 }
