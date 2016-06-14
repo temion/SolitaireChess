@@ -35,15 +35,9 @@ public class PanelSolitaireChess extends JPanel
 	public PanelSolitaireChess( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
-<<<<<<< Updated upstream
 
 		this.sourisXClicked = - 1;
 		this.sourisYClicked = - 1;
-
-		this.TAILLE_IMG = this.ctrl.getTailleImg();
-		setPreferredSize( new Dimension( 400, 400 ) );
-=======
->>>>>>> Stashed changes
 
 		this.TAILLE_IMG = this.ctrl.getTailleImg();     // Défini la taille des images
 
@@ -84,12 +78,9 @@ public class PanelSolitaireChess extends JPanel
 	}
 
 
-<<<<<<< Updated upstream
-=======
 	/**
 	 * Classe interne qui gère les événements liés à  la souris.
 	 */
->>>>>>> Stashed changes
 	private class GererSouris extends MouseAdapter
 	{
 		public void mouseClicked( MouseEvent e )
@@ -121,15 +112,9 @@ public class PanelSolitaireChess extends JPanel
 		 */
 		public void mousePressed( MouseEvent e )
 		{
-<<<<<<< Updated upstream
-
+			// On capture les coordonnées de la pièce sur laquelle on a cliqué
 			sourisXPressed = e.getY() / TAILLE_IMG;
 			sourisYPressed = e.getX() / TAILLE_IMG;
-=======
-			// On capture les coordonnées de la pièce sur laquelle on a cliqué
-			sourisX = e.getY() / TAILLE_IMG;
-			sourisY = e.getX() / TAILLE_IMG;
->>>>>>> Stashed changes
 		}
 
 
@@ -139,20 +124,16 @@ public class PanelSolitaireChess extends JPanel
 		 */
 		public void mouseReleased( MouseEvent e )
 		{
-<<<<<<< Updated upstream
 			try
 			{
 				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
 			} catch ( Exception exc ) { System.out.println( "Evitez de sortir des limites, poto" );}
-
-=======
 			// Dès qu'on relache la souris, on déplace la pièce sur laquelle on a cliqué vers
 			// la pièce sur laquelle on vient de relacher la souris
 			try
 			{
-				ctrl.deplacer( sourisX, sourisY, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
+				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG );
 			} catch ( Exception exe ) {}
->>>>>>> Stashed changes
 		}
 	}
 }
