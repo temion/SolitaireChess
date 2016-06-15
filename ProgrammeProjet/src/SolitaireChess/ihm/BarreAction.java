@@ -70,7 +70,6 @@ public class BarreAction extends JPanel implements ActionListener
 					"Question",
 					JOptionPane.YES_NO_OPTION ) == 0 )
 			{
-				jeu.setVisible(false);
 				new Accueil(jeu.getCtrl());
 				jeu.dispose();
 			}

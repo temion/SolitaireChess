@@ -29,74 +29,81 @@ public class Jeu extends JFrame implements ActionListener
 	private JLabel score;
 	private JLabel mouvements;
 
+
 	/**
 	 * Construit l'écran du jeu.
 	 *
 	 * @param ctrl la classe qui fera le lien entre la classe et la partie métier
 	 */
-	public Jeu( Controleur ctrl )
+	Jeu( Controleur ctrl )
 	{
+		setTitle( "Jeu" );
+		setLocation( 200, 200 );
+
 		this.ctrl = ctrl;
-		ctrl.setFenetreJeu(this);
+
+		ctrl.setFenetreJeu( this );
 		ctrl.getEchiquier().setDefi();
-
-		setTitle("Jeu");
-		setLocation(200, 200);
-
-		setLayout( new BorderLayout() );
 
 		barreAction = new BarreAction( this );
 		add( barreAction, "North" );
 
-		ajouterPanelEst();
+		initPanelUtilitaire();
 
-		this.plateau = new PanelSolitaireChess( this.ctrl );
-		add( this.plateau );
+		this.plateau = new PanelSolitaireChess( ctrl );
+		add( plateau );
 
-		ajouterPanelEst();
-
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		pack();
-
-		setVisible(true);
+		setLocationRelativeTo( null );
+		setResizable( false );
+		setVisible( true );
 
 	}
+
 
 	/**
 	 * Ajoute un panel contenant beaucoup de composants à l'écran du jeu.
 	 */
-	private void ajouterPanelEst()
+	private void initPanelUtilitaire()
 	{
-		JPanel pEst = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
+		JPanel pUtilitaire = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
 
-		pEst.setBorder( BorderFactory.createEtchedBorder() );//A LA FIN
+		pUtilitaire.setBorder( BorderFactory.createEtchedBorder() );//A LA FIN
 
-		pEst.add( defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
-		pEst.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
-									   JLabel.CENTER ) );
-		pEst.add(
+		pUtilitaire.add(
+				defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
+
+		pUtilitaire.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
+											  JLabel.CENTER ) );
+
+		pUtilitaire.add(
 				score = new JLabel( "Score : " + ctrl.getEchiquier().getScore(), JLabel.CENTER ) );
 
 		annuler = new JButton( "Annuler" );
-		pEst.add( annuler );
+		pUtilitaire.add( annuler );
 
 		recommencer = new JButton( "Recommencer" );
 		recommencer.addActionListener( this );
-		pEst.add( recommencer );
+		pUtilitaire.add( recommencer );
 
-		pEst.add( mouvements = new JLabel( "Mouvements : " + ctrl.getEchiquier().getNbMouvements()
-		) );
+		pUtilitaire.add(
+				mouvements = new JLabel( "Mouvements : " + ctrl.getEchiquier().getNbMouvements()
+				) );
 
-		add( pEst, "East" );
+		add( pUtilitaire, "East" );
 	}
+
 
 	/**
 	 * Met à jour la représentation ihm de l'échiquier.
 	 */
 	public void majIHM()
 	{
-		this.plateau.repaint();
+		plateau.repaint();
 		majPanel();
 	}
+
 
 	/**
 	 * Met à jour l'affichage du défi, du niveau et du score.
@@ -108,18 +115,23 @@ public class Jeu extends JFrame implements ActionListener
 		score.setText( "Score : " + ctrl.getEchiquier().getScore() );
 	}
 
-	public Controleur getCtrl() {
+
+	public Controleur getCtrl()
+	{
 		return ctrl;
 	}
 
+
 	/**
 	 * Gère les appuis sur les boutons du composant.
+	 *
 	 * @param e un événement lié à l'appui sur l'un des boutons.
 	 */
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if (e.getSource() == annuler) {
+		if ( e.getSource() == annuler )
+		{
 
 		}
 

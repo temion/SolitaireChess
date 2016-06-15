@@ -23,8 +23,6 @@ public class Accueil extends JFrame implements ActionListener
 	public Accueil( Controleur ctrl )
 	{
 		setTitle( "SolitaireChess" );
-		setLocation( 200, 200 );
-		setSize( 500, 300 );
 
 		this.ctrl = ctrl;
 
@@ -35,35 +33,37 @@ public class Accueil extends JFrame implements ActionListener
 		initChoix();
 
 		aide = new JButton( "Aide" );
-		aide.setSize(100, 20);
 		aide.addActionListener( this );
 		add( aide );
 
 		quitter = new JButton( "Quitter" );
-		quitter.setSize(100, 20);
 		quitter.addActionListener( this );
 		add( quitter );
 
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		pack();
+		setLocationRelativeTo( null );
+		setResizable( false );
 		setVisible( true );
 	}
 
 
 	private void initChoix()
 	{
-		JPanel choix = new JPanel();
+		JPanel pChoix = new JPanel();
 
 		choixProfil = new JComboBox<String>();
 		choixProfil.addItem( "Sélectionnez un profil" );
 		choixProfil.addItem( "Nouveau profil..." );
 
-		choix.add( choixProfil );
+		pChoix.add( choixProfil );
 
 		valider = new JButton( "Valider" );
 		valider.addActionListener( this );
-		choix.add( valider );
+		pChoix.add( valider );
 
-		choix.setSize( new Dimension( 400, 150 ) );
-		add( choix );
+		pChoix.setSize( new Dimension( 400, 150 ) );
+		add( pChoix );
 	}
 
 
@@ -77,13 +77,14 @@ public class Accueil extends JFrame implements ActionListener
 	{
 		if ( e.getSource() == valider )
 		{
-			if (choixProfil.getSelectedItem().equals("Nouveau profil...")) {
-				System.out.println("Nouveau");
+			if ( choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
+			{
+				System.out.println( "Nouveau" );
 			}
 
 			System.out.println( "Valider" );
-			dispose();
 			new Jeu( ctrl );
+			dispose();
 		}
 
 		if ( e.getSource() == aide )
@@ -93,8 +94,10 @@ public class Accueil extends JFrame implements ActionListener
 
 		if ( e.getSource() == quitter )
 		{
-			if ( JOptionPane.showConfirmDialog( this, "Voulez-vous vraiment quitter ?", "Quitter le jeu",
-												JOptionPane.YES_NO_OPTION ) == 0) {
+			if ( JOptionPane.showConfirmDialog( this, "Voulez-vous vraiment quitter ?",
+												"Quitter le jeu",
+												JOptionPane.YES_NO_OPTION ) == 0 )
+			{
 				System.exit( 0 );
 			}
 		}
