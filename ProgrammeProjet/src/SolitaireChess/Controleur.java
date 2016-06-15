@@ -27,9 +27,9 @@ public class Controleur
 
 	public Controleur()
 	{
+		this.alJoueur = new ArrayList<>();
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
-		this.alJoueur = new ArrayList<Joueur>();
 		this.joueurCourant = null;
 		this.jeu = null;
 	}
@@ -43,22 +43,39 @@ public class Controleur
 
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 &&
-		    y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
+		if ( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 &&
+			 y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
 			// seront toujours
 			// dans les limites
 			// du panel
-			if( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
-			                                                                              x2,
-			                                                                              y2 ) )
+			if ( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
+																						   x2,
+																						   y2 ) )
 				majIHM();
 	}
 
 
 	public void ajouterJoueur( String nomJoueur )
 	{
-		alJoueur.add( new Joueur( nomJoueur, this ) );
-		joueurCourant = alJoueur.get( alJoueur.size() - 1 );
+		if ( ! alJoueur.contains( nomJoueur ) )
+		{
+			alJoueur.add( new Joueur( nomJoueur, this ) );
+			joueurCourant = alJoueur.get( alJoueur.size() - 1 );
+		}
+		else
+		{
+			definirJoueur( nomJoueur );
+		}
+	}
+
+
+	public boolean contientJoueur( String nomJoueur )
+	{
+		for ( Joueur j : alJoueur )
+			if ( nomJoueur.equals( j.getNom() ) )
+				return true;
+
+		return false;
 	}
 
 
@@ -144,23 +161,33 @@ public class Controleur
 
 	public boolean contientPiece( int i, int j )
 	{
-		if( i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne() )
+		if ( i > - 1 && i < echiquier.getNbLigne() && j > - 1 && j < echiquier.getNbColonne() )
 			return echiquier.getEchiquier()[i][j] != null;
 		return false;
 	}
+
 
 	public void afficherInfosJoueur()
 	{
 		Object[] themes = { "theme 1", "theme 2" };
 		JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
-		                                   "Dernier défi : "+joueurCourant.getDernierDefi()
-				                                  [1]+"\n" +
-		                                   "Score : " + joueurCourant.getScore() + "\n" +
-		                                   "Thème :",
-		                             "Joueur",
-		                             JOptionPane.PLAIN_MESSAGE,
-		                             null,
-		                             themes,
-		                             themes[0] );
+										  "Dernier défi : " + joueurCourant.getDernierDefi()
+												  [1] + "\n" +
+										  "Score : " + joueurCourant.getScore() + "\n" +
+										  "Thème :",
+									 "Joueur",
+									 JOptionPane.PLAIN_MESSAGE,
+									 new ImageIcon( "./images/iconeChoisirPseudo.png" ),
+									 themes,
+									 null
+									  );
+	}
+
+
+	public void definirJoueur( String nomJoueur )
+	{
+		for ( Joueur j : alJoueur )
+			if ( nomJoueur.equals( j.getNom() ) )
+				joueurCourant = j;
 	}
 }

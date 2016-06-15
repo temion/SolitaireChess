@@ -54,6 +54,10 @@ public class Accueil extends JFrame implements ActionListener
 
 		choixProfil = new JComboBox<String>();
 		choixProfil.addItem( "Sélectionnez un profil" );
+
+		for (int i=0; i<ctrl.getAlJoueur().size();i++)
+			choixProfil.addItem( ctrl.getAlJoueur().get(i).getNom() );
+
 		choixProfil.addItem( "Nouveau profil..." );
 
 		pChoix.add( choixProfil );
@@ -93,6 +97,12 @@ public class Accueil extends JFrame implements ActionListener
 					new Jeu( ctrl );
 					dispose();
 				}
+			}
+			else if ( ! choixProfil.getSelectedItem().equals( "Sélectionnez un profil" ) )
+			{
+				ctrl.definirJoueur( (String)choixProfil.getSelectedItem() );
+				new Jeu( ctrl );
+				dispose();
 			}
 		}
 
