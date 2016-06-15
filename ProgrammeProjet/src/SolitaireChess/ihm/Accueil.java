@@ -1,106 +1,103 @@
 package SolitaireChess.ihm;
-/**
- * SolitaireChess - Projet Tutoré
- * Classe ihm de l'écran d'accueil.
- *
- * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
- * @date 13/06/2016
- */
+
+
+import SolitaireChess.Controleur;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Accueil extends JPanel implements ActionListener
+public class Accueil extends JFrame implements ActionListener
 {
-	private FenetreJeu fenetre;
 
-	private JButton jouer, supprimer;
-	private JComboBox choixJoueur;
-	private JButton   nvPartie;
-	private JButton   quitter;
+	private Controleur ctrl;
 
-	/**
-	 * Construit l'écran du menu principal.
-	 *
-	 * @param fenetre la fenêtre contenant tous les composants ihm
-	 */
-	public Accueil( FenetreJeu fenetre )
+	private JComboBox<String> choixProfil;
+
+	private JButton valider;
+	private JButton aide;
+	private JButton quitter;
+
+
+	public Accueil( Controleur ctrl )
 	{
-		setLayout( new GridLayout( 3, 1, 0, 20 ) );
-		setPreferredSize( new Dimension( 300, 300 ) );
+		setTitle( "SolitaireChess" );
+		setLocation( 200, 200 );
+		setSize( 500, 300 );
 
-		this.fenetre = fenetre;
+		this.ctrl = ctrl;
 
-		this.affichageCharger();
+		setLayout( new GridLayout( 4, 1 ) );
 
+		add( new JLabel( "SolitaireChess", JLabel.CENTER ) );
 
-		nvPartie = new JButton( "Nouvelle Partie" );
-		nvPartie.setMargin( new Insets( 0, 50, 0, 50 ) );
-		nvPartie.addActionListener( this );
-		add( nvPartie );
+		initChoix();
+
+		aide = new JButton( "Aide" );
+		aide.setSize(100, 20);
+		aide.addActionListener( this );
+		add( aide );
 
 		quitter = new JButton( "Quitter" );
-		quitter.setMargin( new Insets( 0, 50, 0, 50 ) );
+		quitter.setSize(100, 20);
 		quitter.addActionListener( this );
 		add( quitter );
+
+		setVisible( true );
 	}
 
-	/**
-	 * Ajoute des composants ihm dans l'écran du menu principal.
-	 */
-	private void affichageCharger()
+
+	private void initChoix()
 	{
-		JPanel pCharger       = new JPanel( new BorderLayout( 5, 0 ) );
-		JPanel pBoutonCharger = new JPanel( new GridLayout( 2, 1, 0, 5 ) );
+		JPanel choix = new JPanel();
 
-		choixJoueur = new JComboBox();
-		choixJoueur.addItem( "Choisir une partie" );
-		pCharger.add( choixJoueur );
+		choixProfil = new JComboBox<String>();
+		choixProfil.addItem( "Sélectionnez un profil" );
+		choixProfil.addItem( "Nouveau profil..." );
 
-		jouer = new JButton( "Jouer" );
-		jouer.addActionListener( this );
-		pBoutonCharger.add( jouer );
+		choix.add( choixProfil );
 
-		supprimer = new JButton( "Supprimer" );
-		jouer.addActionListener( this );
-		pBoutonCharger.add( supprimer );
+		valider = new JButton( "Valider" );
+		valider.addActionListener( this );
+		choix.add( valider );
 
-		pCharger.add( pBoutonCharger, "East" );
-
-		add( pCharger );
+		choix.setSize( new Dimension( 400, 150 ) );
+		add( choix );
 	}
 
+
 	/**
-	 * Gère les appuis sur les boutons du composant.
-	 * @param e un événement lié à l'appui sur l'un des boutons.
+	 * Invoked when an action occurs.
+	 *
+	 * @param e
 	 */
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if ( e.getSource() == jouer && choixJoueur.getSelectedItem() != null &&
-			 ! choixJoueur.getSelectedItem().equals
-					 ( "Choisir une partie" ) )
+		if ( e.getSource() == valider )
 		{
-			fenetre.afficherJeu();
+			if (choixProfil.getSelectedItem().equals("Nouveau profil...")) {
+				System.out.println("Nouveau");
+			}
+
+			System.out.println( "Valider" );
+			dispose();
+			new Jeu( ctrl );
 		}
-		if ( e.getSource() == nvPartie )
+
+		if ( e.getSource() == aide )
 		{
-			String nom = JOptionPane.showInputDialog( this, "Nom du joueur : \n" );
-			choixJoueur.addItem( nom );
-			fenetre.afficherJeu();
+			System.out.println( "Aide" );
 		}
-		else if ( e.getSource() == quitter )
+
+		if ( e.getSource() == quitter )
 		{
-			if ( JOptionPane.showConfirmDialog(
-					this,
-					"Voulez-vous vraiment quitter le jeu ?",
-					"Question",
-					JOptionPane.YES_NO_OPTION ) == 0 )
-			{
+			if ( JOptionPane.showConfirmDialog( this, "Voulez-vous vraiment quitter ?", "Quitter le jeu",
+												JOptionPane.YES_NO_OPTION ) == 0) {
 				System.exit( 0 );
 			}
 		}
 	}
+
 }

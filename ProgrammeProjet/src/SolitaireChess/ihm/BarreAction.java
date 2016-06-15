@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class BarreAction extends JPanel implements ActionListener
 {
-	private FenetreJeu fenetre;
+	private Jeu jeu;
 
 	private JButton indices;
 	private JButton niveaux;
@@ -24,11 +24,11 @@ public class BarreAction extends JPanel implements ActionListener
 
 	/**
 	 * Construit le composant se trouvant en haut de l'écran du jeu.
-	 * @param fenetre la fenêtre contenant tous les composants ihm
+	 * @param jeu la fenêtre contenant tous les composants ihm
 	 */
-	public BarreAction( FenetreJeu fenetre )
+	public BarreAction( Jeu jeu )
 	{
-		this.fenetre = fenetre;
+		this.jeu = jeu;
 
 		indices = new JButton( "Indices" );
 		indices.addActionListener( this );
@@ -70,7 +70,9 @@ public class BarreAction extends JPanel implements ActionListener
 					"Question",
 					JOptionPane.YES_NO_OPTION ) == 0 )
 			{
-				fenetre.afficherAccueil();
+				jeu.setVisible(false);
+				new Accueil(jeu.getCtrl());
+				jeu.dispose();
 			}
 
 		}

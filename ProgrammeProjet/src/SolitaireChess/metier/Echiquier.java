@@ -11,35 +11,63 @@ package SolitaireChess.metier;
 import SolitaireChess.Controleur;
 import SolitaireChess.metier.pieces.*;
 
-import javax.swing.*;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Echiquier
 {
-	private Piece[][] echiquier;
-	private int       defi;
-	private int       niveau;
-	private int       score;
-	private int       nbPiece;
-	private boolean   aUnRoi;
-
+	private Piece[][]  echiquier;
+	private int        defi;
+	private int        niveau;
+	private int        score;
+	private int        nbPiece;
+	private boolean    aUnRoi;
 	private Controleur ctrl;
+
+	private ArrayList<Echiquier> mouvements;
 
 
 	/**
 	 * Construit un échiquier.
-	 *
-	 * @param niveau le niveau de l'échiquier
-	 * @param defi   le défi de l'échiquier
 	 */
-	public Echiquier( int niveau, int defi, Controleur ctrl )
+	public Echiquier( Controleur ctrl )
 	{
-		this.niveau = niveau;
-		this.defi = defi;
 		this.ctrl = ctrl;
 		this.aUnRoi = false;
+		this.mouvements = new ArrayList<>();
+	}
+
+	public void setDefi()
+	{
+		niveau = ctrl.getJoueurCourant().getDernierDefi()[0];
+		defi = ctrl.getJoueurCourant().getDernierDefi()[1];
 		this.initDefi();
+	}
+
+
+	/**
+	 * Construit un échiquier à partir d'un autre échiquier.
+	 *
+	 * @param autre l'autre échiquier
+	 */
+	public static Echiquier clonerEchiquier( Echiquier autre )
+	{
+		//Utilisé pour éviter de pointer sur les mêmes objets.
+		Echiquier nvEchiquier = new Echiquier( autre.getCtrl() );
+
+		nvEchiquier.defi = autre.defi;
+		nvEchiquier.niveau = autre.niveau;
+		nvEchiquier.score = autre.score;
+		nvEchiquier.aUnRoi = autre.aUnRoi;
+		nvEchiquier.nbPiece = autre.nbPiece;
+		nvEchiquier.echiquier = new Piece[4][4];
+
+		for ( int i = 0; i < nvEchiquier.echiquier.length; i++ )
+			for ( int j = 0; j < nvEchiquier.echiquier[i].length; j++ )
+				nvEchiquier.echiquier[i][j] = autre.echiquier[i][j];
+
+		return nvEchiquier;
 	}
 
 
@@ -55,7 +83,8 @@ public class Echiquier
 	public boolean deplacer( int x1, int y1, int x2, int y2 )
 	{
 		boolean estRoi = false;
-		if ( aUnRoi ) estRoi = echiquier[x2][y2] instanceof Roi;
+		if ( aUnRoi ) estRoi = echiquier[x2][y2] instanceof
+				Roi;
 
 		if ( echiquier[x1][y1].deplacer( x2, y2 ) )
 		{
@@ -64,7 +93,7 @@ public class Echiquier
 			if ( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
 			else if ( aGagne() )
 			{
-				JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Gagné mon con" );
+				System.out.println( "Gagné mon con" );
 				incrementerDefi();
 			}
 			else return true;
@@ -79,9 +108,11 @@ public class Echiquier
 	 */
 	public void recommencer()
 	{
-		JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Perdu gros con" );
+		System.out.println( "Perdu gros con" );
 		initDefi();
-		ctrl.getFenetre().majIHM();
+
+		//setMouvements();
+		ctrl.majIHM();
 	}
 
 
@@ -103,12 +134,12 @@ public class Echiquier
 	 */
 	private boolean aPerdu()
 	{
-		for ( int i = 0; i < ctrl.getNbLigne(); i++ )
-			for ( int j = 0; j < ctrl.getNbColonne(); j++ )
+		for ( int i = 0; i < echiquier.length; i++ )
+			for ( int j = 0; j < echiquier[0].length; j++ )
 				if ( echiquier[i][j] != null && echiquier[i][j].peutPrendreUnePiece() )
 					return false;
 
-		JOptionPane.showConfirmDialog( ctrl.getFenetre(), "Perdu gros con" );
+		System.out.println( "Perdu gros con" );
 		return true;
 	}
 
@@ -125,7 +156,8 @@ public class Echiquier
 			defi++;
 
 		initDefi();
-		ctrl.getFenetre().majIHM();
+		//setMouvements();
+		ctrl.majIHM();
 	}
 
 
@@ -156,6 +188,8 @@ public class Echiquier
 			}
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
+
+		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
 	}
 
 
@@ -200,14 +234,6 @@ public class Echiquier
 
 
 	/**
-	 * Permet d'obtenir le controleur associé à l'échiquier.
-	 *
-	 * @return le controleur associé à l'échiquier
-	 */
-	public Controleur getCtrl() { return ctrl; }
-
-
-	/**
 	 * Permet de retourner l'échiquier.
 	 *
 	 * @return l'échiquier.
@@ -245,7 +271,7 @@ public class Echiquier
 	 *
 	 * @return le nombre de lignes de l'échiquier
 	 */
-	public int getNbLigne() { return 4; }
+	public int getNbLigne() { return echiquier.length; }
 
 
 	/**
@@ -253,11 +279,12 @@ public class Echiquier
 	 *
 	 * @return le nombre de colonnes de l'échiquier
 	 */
-	public int getNbColonne() { return 4; }
+	public int getNbColonne() { return echiquier[0].length; }
 
 
 	/**
 	 * Permet de savoir si un roi est présent sur le niveau en cours.
+	 *
 	 * @return vrai si un roi est sur l'échiquier du niveau actuel, sinon faux
 	 */
 	public boolean isaUnRoi()
@@ -268,6 +295,7 @@ public class Echiquier
 
 	/**
 	 * Permet d'obtenir le nombre de pièces restantes sur l'échiquier.
+	 *
 	 * @return le nombre de pièces restantes sur l'échiquier
 	 */
 	public int getNbPiece()
@@ -278,6 +306,7 @@ public class Echiquier
 
 	/**
 	 * Permet d'obtenir le score.
+	 *
 	 * @return le score
 	 */
 	public int getScore()
@@ -288,6 +317,7 @@ public class Echiquier
 
 	/**
 	 * Permet d'obtenir le nombre de mouvements.
+	 *
 	 * @return le nombre de mouvements
 	 */
 	public int getNbMouvements()
@@ -295,22 +325,5 @@ public class Echiquier
 		return 0;
 	}
 
-
-	/**
-	 * Permet d'afficher l'état de l'échiquier.
-	 *
-	 * @return l'état de l'échiquier
-	 */
-	public String toString()
-	{
-		String s = "";
-		for ( int i = 0; i < ctrl.getNbLigne(); i++ )
-		{
-			for ( int j = 0; j < ctrl.getNbColonne(); j++ )
-				s += echiquier[i][j] + " ";
-			s += "\n";
-		}
-
-		return s;
-	}
+	public Controleur getCtrl() { return ctrl; }
 }

@@ -13,11 +13,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Jeu extends JPanel implements ActionListener
+public class Jeu extends JFrame implements ActionListener
 {
 	private Controleur ctrl;
 
-	private FenetreJeu          fenetre;
 	private PanelSolitaireChess plateau;
 
 	private BarreAction barreAction;
@@ -38,10 +37,15 @@ public class Jeu extends JPanel implements ActionListener
 	public Jeu( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
+		ctrl.setFenetreJeu(this);
+		ctrl.getEchiquier().setDefi();
+
+		setTitle("Jeu");
+		setLocation(200, 200);
 
 		setLayout( new BorderLayout() );
 
-		barreAction = new BarreAction( fenetre );
+		barreAction = new BarreAction( this );
 		add( barreAction, "North" );
 
 		ajouterPanelEst();
@@ -50,6 +54,10 @@ public class Jeu extends JPanel implements ActionListener
 		add( this.plateau );
 
 		ajouterPanelEst();
+
+		pack();
+
+		setVisible(true);
 
 	}
 
@@ -100,6 +108,10 @@ public class Jeu extends JPanel implements ActionListener
 		score.setText( "Score : " + ctrl.getEchiquier().getScore() );
 	}
 
+	public Controleur getCtrl() {
+		return ctrl;
+	}
+
 	/**
 	 * Gère les appuis sur les boutons du composant.
 	 * @param e un événement lié à l'appui sur l'un des boutons.
@@ -107,6 +119,10 @@ public class Jeu extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
+		if (e.getSource() == annuler) {
+
+		}
+
 		if ( e.getSource() == recommencer )
 		{
 			ctrl.getEchiquier().recommencer();

@@ -1,8 +1,12 @@
 package SolitaireChess;
 
 
-import SolitaireChess.ihm.FenetreJeu;
+import SolitaireChess.ihm.Accueil;
+import SolitaireChess.ihm.Jeu;
 import SolitaireChess.metier.Echiquier;
+import SolitaireChess.metier.Joueur;
+
+import java.util.ArrayList;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -12,14 +16,21 @@ import SolitaireChess.metier.Echiquier;
  */
 public class Controleur
 {
-	private FenetreJeu fenetre;
-	private Echiquier  echiquier;
+	private Accueil           accueil;
+	private Echiquier         echiquier;
+	private ArrayList<Joueur> alJoueur;
+	private Joueur            joueurCourant;
+
+	private Jeu jeu;
 
 
 	public Controleur()
 	{
-		this.echiquier = new Echiquier( 1, 1, this );
-		this.fenetre = new FenetreJeu( this );
+		this.echiquier = new Echiquier( this );
+		this.accueil = new Accueil( this );
+		this.alJoueur = new ArrayList<Joueur>();
+		this.joueurCourant = new Joueur( this );
+		this.jeu = null;
 	}
 
 
@@ -34,9 +45,11 @@ public class Controleur
 		if ( this.echiquier.deplacer( x1, y1, x2, y2 ) )
 		{
 			System.out.print( "déplacé" );
-			this.fenetre.majIHM();
+			majIHM();
 		}
 	}
+
+	public void majIHM() { this.jeu.majIHM(); }
 
 
 	public String getImgFond()
@@ -53,9 +66,9 @@ public class Controleur
 	}
 
 
-	public FenetreJeu getFenetre()
+	public Jeu getJeu()
 	{
-		return fenetre;
+		return jeu;
 	}
 
 
@@ -72,6 +85,18 @@ public class Controleur
 
 
 	public int getNbColonne() {return this.echiquier.getNbColonne(); }
+
+
+	public void setJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	}
+
+
+	public Joueur getJoueurCourant()     { return joueurCourant; }
+
+
+	public void setFenetreJeu( Jeu jeu ) { this.jeu = jeu; }
 
 
 	public boolean contientPiece( int i, int j )
