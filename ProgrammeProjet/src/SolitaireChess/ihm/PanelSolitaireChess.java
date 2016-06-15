@@ -19,6 +19,7 @@ import java.awt.event.MouseMotionAdapter;
 public class PanelSolitaireChess extends JPanel
 {
 	private final int        TAILLE_IMG;
+
 	private       Controleur ctrl;
 
 	private int sourisXPressed;
@@ -84,7 +85,6 @@ public class PanelSolitaireChess extends JPanel
 			{
 				if( i == sourisXPressed && j == sourisYPressed )
 				{
-					System.out.println( "dragged" );
 					sImg = this.ctrl.getImg( sourisXPressed, sourisYPressed );
 					img = getToolkit().getImage( sImg );
 					g2.drawImage( img, sourisXMoved - (TAILLE_IMG / 2),

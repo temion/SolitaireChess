@@ -36,6 +36,6 @@ public class Pion extends Piece
 	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
 		// Déplacement en diagonal de 1 uniquement vers le haut
-		return Math.abs( y - yCible ) < 2 && x > xCible && y != yCible;
+		return Math.abs( y - yCible ) < 2 && x - xCible == 1 && y != yCible;
 	}
 }

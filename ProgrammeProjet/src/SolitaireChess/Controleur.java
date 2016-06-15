@@ -42,14 +42,19 @@ public class Controleur
 
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if ( this.echiquier.deplacer( x1, y1, x2, y2 ) )
-		{
-			System.out.print( "déplacé" );
-			majIHM();
-		}
+		if( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 && y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
+			// seront toujours
+			// dans les limites
+			// du panel
+			if( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
+																						  x2, y2 ) )
+				majIHM();
 	}
 
-	public void majIHM() { this.jeu.majIHM(); }
+	public void majIHM()
+	{
+		this.jeu.majIHM();
+	}
 
 
 	public String getImgFond()
@@ -78,13 +83,22 @@ public class Controleur
 	}
 
 
-	public int getTailleImg() { return 100; }
+	public int getTailleImg()
+	{
+		return 100;
+	}
 
 
-	public int getNbLigne()   { return this.echiquier.getNbLigne(); }
+	public int getNbLigne()
+	{
+		return this.echiquier.getNbLigne();
+	}
 
 
-	public int getNbColonne() {return this.echiquier.getNbColonne(); }
+	public int getNbColonne()
+	{
+		return this.echiquier.getNbColonne();
+	}
 
 
 	public void setJeu( Jeu jeu )
@@ -93,15 +107,21 @@ public class Controleur
 	}
 
 
-	public Joueur getJoueurCourant()     { return joueurCourant; }
+	public Joueur getJoueurCourant()
+	{
+		return joueurCourant;
+	}
 
 
-	public void setFenetreJeu( Jeu jeu ) { this.jeu = jeu; }
+	public void setFenetreJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	}
 
 
 	public boolean contientPiece( int i, int j )
 	{
-		if ( i > - 1 && i < echiquier.getNbLigne() && j > - 1 && j < echiquier.getNbColonne() )
+		if( i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne() )
 			return echiquier.getEchiquier()[i][j] != null;
 		return false;
 	}

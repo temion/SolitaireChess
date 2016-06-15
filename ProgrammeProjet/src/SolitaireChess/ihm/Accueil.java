@@ -79,10 +79,9 @@ public class Accueil extends JFrame implements ActionListener
 		{
 			if ( choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
 			{
-				System.out.println( "Nouveau" );
+
 			}
 
-			System.out.println( "Valider" );
 			new Jeu( ctrl );
 			dispose();
 		}

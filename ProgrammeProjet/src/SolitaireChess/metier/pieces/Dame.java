@@ -45,7 +45,7 @@ public class Dame extends Piece
 	 * @param yCible la position verticale vers laquelle déplacer
 	 * @return vrai s'il n'y a pas de piece, sinon faux
 	 */
-	/*private boolean personneDansLeChamp( int xCible, int yCible )
+	private boolean personneDansLeChamp( int xCible, int yCible )
 	{
 		// Déplacement diagonales
 
@@ -71,7 +71,6 @@ public class Dame extends Piece
 			else
 				j++;
 		}
-		return true;
 
 		// Déplacement en lignes et colonnes
 
@@ -80,7 +79,7 @@ public class Dame extends Piece
 			int yMin = y < yCible ? y : yCible;
 			int yMax = y > xCible ? y : yCible;
 
-			for ( int i = yMin + 1; i < yMax; i++ )
+			for ( i = yMin + 1; i < yMax; i++ )
 				if ( echiquier.getEchiquier()[x][i] != null )
 					return false;
 		}
@@ -89,10 +88,10 @@ public class Dame extends Piece
 			int xMin = x < xCible ? x : xCible;
 			int xMax = x > xCible ? x : xCible;
 
-			for ( int i = xMin + 1; i < xMax; i++ )
+			for ( i = xMin + 1; i < xMax; i++ )
 				if ( echiquier.getEchiquier()[i][y] != null )
 					return false;
 		}
 		return true;
-	}*/
+	}
 }

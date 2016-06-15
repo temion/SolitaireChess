@@ -1,13 +1,9 @@
 package SolitaireChess.metier;
 
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
-import SolitaireChess.ihm.Jeu;
-import SolitaireChess.metier.pieces.Piece;
-
 import SolitaireChess.Controleur;
+
+import java.io.Serializable;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -31,7 +27,7 @@ public class Joueur implements Serializable
 	{
 		this.ctrl = ctrl;
 		this.defisAcocmplis = new Boolean[4][15];
-		this.dernierDefi = new int[] { 1, 1};
+		this.dernierDefi = new int[] { 1, 8};
 	}
 
 
