@@ -22,8 +22,10 @@ public class BarreAction extends JPanel implements ActionListener
 	private JButton regles;
 	private JButton menuPrincipal;
 
+
 	/**
 	 * Construit le composant se trouvant en haut de l'écran du jeu.
+	 *
 	 * @param jeu la fenêtre contenant tous les composants ihm
 	 */
 	public BarreAction( Jeu jeu )
@@ -55,8 +57,10 @@ public class BarreAction extends JPanel implements ActionListener
 		add( menuPrincipal );
 	}
 
+
 	/**
 	 * Gère les appuis sur les boutons du composant.
+	 *
 	 * @param e un événement lié à l'appui sur l'un des boutons.
 	 */
 	@Override
@@ -70,7 +74,7 @@ public class BarreAction extends JPanel implements ActionListener
 					"Question",
 					JOptionPane.YES_NO_OPTION ) == 0 )
 			{
-				new Accueil(jeu.getCtrl());
+				new Accueil( jeu.getCtrl() );
 				jeu.dispose();
 			}
 
@@ -79,8 +83,9 @@ public class BarreAction extends JPanel implements ActionListener
 		{
 			Object[] themes = { "theme 1", "theme 2" };
 			JOptionPane.showInputDialog( this, "Joueur : \n" +
-											   "Dernier defi : \n" +
-											   "Score : \n",
+											   "Dernier défi : \n" +
+											   "Score : \n" +
+											   "Thème :",
 										 "Joueur",
 										 JOptionPane.PLAIN_MESSAGE,
 										 null,

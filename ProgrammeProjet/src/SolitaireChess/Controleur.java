@@ -89,6 +89,12 @@ public class Controleur
 	}
 
 
+	public ArrayList<Joueur> getAlJoueur()
+	{
+		return alJoueur;
+	}
+
+
 	public int getNbLigne()
 	{
 		return this.echiquier.getNbLigne();

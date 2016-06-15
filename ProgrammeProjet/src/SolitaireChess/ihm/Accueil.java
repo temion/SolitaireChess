@@ -79,11 +79,20 @@ public class Accueil extends JFrame implements ActionListener
 		{
 			if ( choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
 			{
+				String s = (String)JOptionPane.showInputDialog(
+						this,
+						"Pseudo :",
+						"Entrez un nouveau pseudo",
+						JOptionPane.PLAIN_MESSAGE,
+						new ImageIcon( "./images/iconeChoisirPseudo.png" ),null,null
+						);
 
+				if ( ( s != null ) && ( s.length() > 0 ) )
+				{
+					new Jeu( ctrl );
+					dispose();
+				}
 			}
-
-			new Jeu( ctrl );
-			dispose();
 		}
 
 		if ( e.getSource() == aide )
