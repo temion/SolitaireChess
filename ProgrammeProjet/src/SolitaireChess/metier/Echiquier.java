@@ -20,7 +20,6 @@ public class Echiquier
 	private Piece[][]  echiquier;
 	private int        defi;
 	private int        niveau;
-	private int        score;
 	private int        nbPiece;
 	private boolean    aUnRoi;
 	private Controleur ctrl;
@@ -59,7 +58,6 @@ public class Echiquier
 
 		nvEchiquier.defi = autre.defi;
 		nvEchiquier.niveau = autre.niveau;
-		nvEchiquier.score = autre.score;
 		nvEchiquier.aUnRoi = autre.aUnRoi;
 		nvEchiquier.nbPiece = autre.nbPiece;
 		nvEchiquier.echiquier = new Piece[4][4];
@@ -111,8 +109,6 @@ public class Echiquier
 	{
 		System.out.println( "Perdu gros con" );
 		initDefi();
-
-		//setMouvements();
 		ctrl.majIHM();
 	}
 
@@ -302,17 +298,6 @@ public class Echiquier
 	public int getNbPiece()
 	{
 		return nbPiece;
-	}
-
-
-	/**
-	 * Permet d'obtenir le score.
-	 *
-	 * @return le score
-	 */
-	public int getScore()
-	{
-		return score;
 	}
 
 

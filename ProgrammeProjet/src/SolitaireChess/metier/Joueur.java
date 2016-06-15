@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class Joueur implements Serializable
 {
 	private String nom;
+	private int    score;
 
 	private Boolean[][] defisAcocmplis;
 	private int[]       dernierDefi;
@@ -26,6 +27,8 @@ public class Joueur implements Serializable
 	public Joueur( String nom, Controleur ctrl )
 	{
 		this.nom = nom;
+		this.score = 0;
+
 		this.ctrl = ctrl;
 		this.defisAcocmplis = new Boolean[4][15];
 		this.dernierDefi = new int[]{ 1, 1 };
@@ -38,11 +41,29 @@ public class Joueur implements Serializable
 	}
 
 
-	public int[] getDernierDefi() { return dernierDefi; }
+	public int[] getDernierDefi()
+	{
+		return dernierDefi;
+	}
 
 
 	public void setDernierDefi( int niveau, int defi )
 	{
 		dernierDefi = new int[]{ niveau, defi };
+	}
+
+	public String getNom()
+	{
+		return nom;
+	}
+
+	/**
+	 * Permet d'obtenir le score.
+	 *
+	 * @return le score
+	 */
+	public int getScore()
+	{
+		return score;
 	}
 }

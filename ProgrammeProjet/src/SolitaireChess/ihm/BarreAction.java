@@ -81,17 +81,7 @@ public class BarreAction extends JPanel implements ActionListener
 		}
 		else if ( e.getSource() == joueur )
 		{
-			Object[] themes = { "theme 1", "theme 2" };
-			JOptionPane.showInputDialog( this, "Joueur : \n" +
-											   "Dernier défi : \n" +
-											   "Score : \n" +
-											   "Thème :",
-										 "Joueur",
-										 JOptionPane.PLAIN_MESSAGE,
-										 null,
-										 themes,
-										 themes[0] );
-
+			jeu.getCtrl().afficherInfosJoueur();
 		}
 	}
 }
