@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -23,6 +24,9 @@ public class PanelSolitaireChess extends JPanel
 	private int sourisXPressed;
 	private int sourisYPressed;
 
+	private int sourisXMoved;
+	private int sourisYMoved;
+
 	private int sourisXClicked;
 	private int sourisYClicked;
 
@@ -36,14 +40,20 @@ public class PanelSolitaireChess extends JPanel
 	{
 		this.ctrl = ctrl;
 
-		this.sourisXClicked = - 1;
-		this.sourisYClicked = - 1;
+		this.sourisXClicked = -1;
+		this.sourisYClicked = -1;
+
+		this.sourisXPressed = -1;
+		this.sourisYPressed = -1;
 
 		this.TAILLE_IMG = this.ctrl.getTailleImg();     // Défini la taille des images
 
 		setPreferredSize( new Dimension( 400, 400 ) );  // Défini la taille du plateau
 
-		GererSouris evtSouris = new GererSouris();      // Gère les événement liés à la souris
+		GererSouris    evtSouris    = new GererSouris();      // Gère les événement liés à la souris
+		GererMvtSouris evtMvtSouris = new GererMvtSouris();
+
+		addMouseMotionListener( evtMvtSouris );
 		addMouseListener( evtSouris );                  // sur le plateau
 		setFocusable( true );                           // Le plateau est focussable
 	}
@@ -58,7 +68,7 @@ public class PanelSolitaireChess extends JPanel
 	{
 		super.paintComponent( g );
 
-		Graphics2D g2 = (Graphics2D)g;
+		Graphics2D g2 = (Graphics2D) g;
 
 		String sImg;
 		Image  img;
@@ -69,15 +79,35 @@ public class PanelSolitaireChess extends JPanel
 		g2.drawImage( img, 0, 0, this );
 
 		// On place les graphiquement les pièces sur le plateau
-		for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
-			for ( int j = 0; j < this.ctrl.getNbColonne(); j++ )
+		for( int i = 0; i < this.ctrl.getNbLigne(); i++ )
+			for( int j = 0; j < this.ctrl.getNbColonne(); j++ )
 			{
-				sImg = this.ctrl.getImg( i, j );
-				img = getToolkit().getImage( sImg );
-				g2.drawImage( img, j * TAILLE_IMG, i * TAILLE_IMG, this );
+				if( i == sourisXPressed && j == sourisYPressed )
+				{
+					System.out.println( "dragged" );
+					sImg = this.ctrl.getImg( sourisXPressed, sourisYPressed );
+					img = getToolkit().getImage( sImg );
+					g2.drawImage( img, sourisXMoved - (TAILLE_IMG / 2),
+								  sourisYMoved - (TAILLE_IMG / 2),
+								  this );
+				} else
+				{
+					sImg = this.ctrl.getImg( i, j );
+					img = getToolkit().getImage( sImg );
+					g2.drawImage( img, j * TAILLE_IMG, i * TAILLE_IMG, this );
+				}
 			}
 	}
 
+	private class GererMvtSouris extends MouseMotionAdapter
+	{
+		public void mouseDragged( MouseEvent e )
+		{
+			sourisXMoved = e.getX();
+			sourisYMoved = e.getY();
+			repaint();
+		}
+	}
 
 	/**
 	 * Classe interne qui gère les événements liés à  la souris.
@@ -86,29 +116,27 @@ public class PanelSolitaireChess extends JPanel
 	{
 		public void mouseClicked( MouseEvent e )
 		{
-			if ( sourisXClicked >= 0 && sourisYClicked >= 0 )
+			if( sourisXClicked >= 0 && sourisYClicked >= 0 )
 			{
 				try
 				{
 					ctrl.deplacer( sourisXClicked, sourisYClicked, e.getY() / TAILLE_IMG,
 								   e.getX() / TAILLE_IMG );
 
-					sourisXClicked = - 1;
-					sourisYClicked = - 1;
+					sourisXClicked = -1;
+					sourisYClicked = -1;
 					System.out.println( "Choisissez votre pièce" );
-				} catch ( Exception exc )
+				} catch( Exception exc )
 				{
 					System.out.println( "Evitez de sortir des limites" );
 				}
-			}
-			else if ( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
+			} else if( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
 			{
 				sourisXClicked = e.getY() / TAILLE_IMG;
 				sourisYClicked = e.getX() / TAILLE_IMG;
 				System.out.println( "Choisissez la pièce à prendre" );
 			}
 		}
-
 
 		/**
 		 * Si on clique sur la souris et qu'on reste appuyé.
@@ -136,8 +164,15 @@ public class PanelSolitaireChess extends JPanel
 			{
 				ctrl.deplacer( sourisXPressed, sourisYPressed, e.getY() / TAILLE_IMG,
 							   e.getX() / TAILLE_IMG );
-			} catch ( Exception exe ) { exe.printStackTrace(); }
-		}
 
+				sourisXPressed = -1;
+				sourisYPressed = -1;
+
+				repaint();
+			} catch( Exception exe )
+			{
+				exe.printStackTrace();
+			}
+		}
 	}
 }
