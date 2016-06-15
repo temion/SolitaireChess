@@ -38,6 +38,7 @@ public class Dame extends Piece
 		return Math.abs( xCible - x ) == Math.abs( yCible - y ) || x == xCible || y == yCible;
 	}
 
+
 	/**
 	 * Permet de vérifier qu'il n'y a aucune pièce entre la pièce selectionnée et sa destination
 	 *

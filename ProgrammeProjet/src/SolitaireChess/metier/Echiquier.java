@@ -38,6 +38,7 @@ public class Echiquier
 		this.mouvements = new ArrayList<>();
 	}
 
+
 	public void setDefi()
 	{
 		niveau = ctrl.getJoueurCourant().getDernierDefi()[0];
@@ -324,6 +325,7 @@ public class Echiquier
 	{
 		return 0;
 	}
+
 
 	public Controleur getCtrl() { return ctrl; }
 }

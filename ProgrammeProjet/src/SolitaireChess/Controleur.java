@@ -29,7 +29,7 @@ public class Controleur
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
 		this.alJoueur = new ArrayList<Joueur>();
-		this.joueurCourant = new Joueur( this );
+		this.joueurCourant = null;
 		this.jeu = null;
 	}
 
@@ -42,14 +42,24 @@ public class Controleur
 
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 && y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
+		if ( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 &&
+			 y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
 			// seront toujours
 			// dans les limites
 			// du panel
-			if( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
-																						  x2, y2 ) )
+			if ( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
+																						   x2,
+																						   y2 ) )
 				majIHM();
 	}
+
+
+	public void ajouterJoueur( String nomJoueur )
+	{
+		alJoueur.add( new Joueur( nomJoueur, this ) );
+		joueurCourant = alJoueur.get( alJoueur.size() - 1 );
+	}
+
 
 	public void majIHM()
 	{
@@ -97,13 +107,13 @@ public class Controleur
 
 	public int getNbLigne()
 	{
-		return this.echiquier.getNbLigne();
+		return echiquier.getNbLigne();
 	}
 
 
 	public int getNbColonne()
 	{
-		return this.echiquier.getNbColonne();
+		return echiquier.getNbColonne();
 	}
 
 
@@ -113,10 +123,10 @@ public class Controleur
 	}
 
 
-	public Joueur getJoueurCourant()
-	{
-		return joueurCourant;
-	}
+	public Joueur getJoueurCourant()                { return joueurCourant; }
+
+
+	public void setJoueurCourant( Joueur joueur ) { this.joueurCourant = joueur; }
 
 
 	public void setFenetreJeu( Jeu jeu )
@@ -127,7 +137,7 @@ public class Controleur
 
 	public boolean contientPiece( int i, int j )
 	{
-		if( i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne() )
+		if ( i > - 1 && i < echiquier.getNbLigne() && j > - 1 && j < echiquier.getNbColonne() )
 			return echiquier.getEchiquier()[i][j] != null;
 		return false;
 	}

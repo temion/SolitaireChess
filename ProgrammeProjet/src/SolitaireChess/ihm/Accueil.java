@@ -84,11 +84,12 @@ public class Accueil extends JFrame implements ActionListener
 						"Pseudo :",
 						"Entrez un nouveau pseudo",
 						JOptionPane.PLAIN_MESSAGE,
-						new ImageIcon( "./images/iconeChoisirPseudo.png" ),null,null
-						);
+						new ImageIcon( "./images/iconeChoisirPseudo.png" ), null, null
+															  );
 
-				if ( ( s != null ) && ( s.length() > 0 ) )
+				if ( s != null && s.length() > 0 )
 				{
+					ctrl.ajouterJoueur( s );
 					new Jeu( ctrl );
 					dispose();
 				}

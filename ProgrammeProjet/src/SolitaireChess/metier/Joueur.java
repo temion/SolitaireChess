@@ -23,11 +23,12 @@ public class Joueur implements Serializable
 	private Controleur ctrl;
 
 
-	public Joueur( Controleur ctrl )
+	public Joueur( String nom, Controleur ctrl )
 	{
+		this.nom = nom;
 		this.ctrl = ctrl;
 		this.defisAcocmplis = new Boolean[4][15];
-		this.dernierDefi = new int[] { 1, 8};
+		this.dernierDefi = new int[]{ 1, 1 };
 	}
 
 
@@ -36,7 +37,9 @@ public class Joueur implements Serializable
 		this.nom = nom;
 	}
 
+
 	public int[] getDernierDefi() { return dernierDefi; }
+
 
 	public void setDernierDefi( int niveau, int defi )
 	{
