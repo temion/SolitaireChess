@@ -25,7 +25,7 @@ public class ChoixNiveau extends JFrame
 		this.jeu = jeu;
 
 		setTitle("Choix d'un défi");
-		setSize(500, 500);
+		setSize(800, 350);
 		setLocationRelativeTo(null);
 
 		niveaux = new JTabbedPane(JTabbedPane.TOP);
@@ -49,14 +49,20 @@ public class ChoixNiveau extends JFrame
 
 		add(niveaux);
 
+		niveaux.setEnabledAt(3, false);
+		niveaux.setToolTipTextAt(3, "Terminez au moins 50% du niveau avancé afin d'accéder au niveau expert.");
 
 		setVisible(true);
 	}
 
 	private void creerChoix(JPanel niveau, int difficulte) {
-		niveau.setLayout(new GridLayout(3, 5));
+		niveau.setLayout(new GridLayout(5, 3, 0, 2));
 		for (int i = 1; i < 16; i++) {
-			JButton b = new JButton("Défi n°" + i);
+			JButton b = new JButton("Défi n°" + i, new ImageIcon(String.format("" +
+																			   "./images/apercus/niveau%02d/defi%02d" +
+																			   ".png" +
+																			   "", difficulte, i)));
+			b.setIconTextGap(2);
 			int     finalI = i;
 			b.addActionListener( new ActionListener() {
 				public void actionPerformed(ActionEvent e ) {

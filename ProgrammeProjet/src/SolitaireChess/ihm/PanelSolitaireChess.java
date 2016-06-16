@@ -128,7 +128,7 @@ public class PanelSolitaireChess extends JPanel
 			{
 				ArrayList<Point> alCoordEchec = p.getDeplacementEchec();
 				//ArrayList<Point> alCoordSC = p.getDeplacementPossible();
-				System.out.println( p.getClass().getName() );
+				//System.out.println( p.getClass().getName() );
 				for( Point point : p.getDeplacementEchec() )
 				{
 					g2.setColor( negatifVide( tabThemes[0][1][0] ) );

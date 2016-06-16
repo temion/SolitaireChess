@@ -250,7 +250,7 @@ public class Controleur implements Serializable
 
 	public int getTheme()
 	{
-		System.out.println(joueurCourant.getTheme());
+		// System.out.println(joueurCourant.getTheme());
 		return joueurCourant.getTheme();
 	}
 
