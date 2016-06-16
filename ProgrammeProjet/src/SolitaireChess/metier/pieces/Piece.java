@@ -8,11 +8,16 @@ package SolitaireChess.metier.pieces;
  * @date 13/06/2016
  */
 
+import SolitaireChess.interfaces.IPieceEchec;
 import SolitaireChess.metier.Echiquier;
+
+import java.awt.Point;
 
 import java.io.Serializable;
 
-public abstract class Piece implements Serializable
+import java.util.ArrayList;
+
+public abstract class Piece implements Serializable, IPieceEchec
 {
 	protected Echiquier echiquier;
 	protected int       x;
@@ -177,5 +182,18 @@ public abstract class Piece implements Serializable
 			return new Pion(piece.x, piece.y, piece.echiquier);
 
 		return null;
+	}
+
+
+	public ArrayList<Point> getDeplacementEchec()
+	{
+		ArrayList<Point> alPoint = new ArrayList<Point>();
+
+		for ( int i = 0; i < echiquier.getEchiquier().length; i++ )
+			for ( int j = 0; j < echiquier.getEchiquier()[i].length; j++ )
+				if ( peutSeDeplacer( i, j ) && i!=x && j!=y )
+					alPoint.add( new Point( j, i ) );
+
+		return alPoint;
 	}
 }

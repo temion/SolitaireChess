@@ -2,12 +2,15 @@ package SolitaireChess.ihm;
 
 
 import SolitaireChess.Controleur;
+import SolitaireChess.interfaces.IPieceEchec;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import java.util.ArrayList;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -75,15 +78,49 @@ public class PanelSolitaireChess extends JPanel
 		Image  img;
 
 		// On défini le fond du plateau
-		sImg = this.ctrl.getImgFond();
-		img = getToolkit().getImage( sImg );
-		g2.drawImage( img, 0, 0, this );
+		boolean bCase = true;
 
-		/*if ( sourisXPressed > - 1 && sourisYPressed > - 1 ||
+		for ( int i = 0; i < ctrl.getNbLigne(); i++ )
+			for ( int j = 0; j < ctrl.getNbColonne(); j++ )
+			{
+				if ( bCase )
+					sImg = ctrl.getImgCaseVert();
+				else
+					sImg = ctrl.getImgCaseBlanche();
+
+				img = getToolkit().getImage( sImg );
+				g2.drawImage( img, i * TAILLE_IMG, j * TAILLE_IMG, this );
+
+				if ( j != ctrl.getNbColonne() - 1 )
+					bCase = ! bCase;
+			}
+
+
+		if ( sourisXPressed > - 1 && sourisYPressed > - 1 ||
 			 sourisXClicked > - 1 && sourisYClicked > - 1 )
-			for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
-				for ( int j = 0; j < this.ctrl.getNbColonne(); j++ )
-					if(ctrl.getEchiquier().getEchiquier()[i][j] != null)*/
+		{
+			IPieceEchec p = null;
+
+			if ( sourisXPressed > - 1 )
+				p = ctrl.getEchiquier().getEchiquier()[sourisXPressed][sourisYPressed];
+			else if ( sourisXClicked > - 1 )
+				p = ctrl.getEchiquier().getEchiquier()[sourisXClicked][sourisYClicked];
+
+			if ( p != null )
+			{
+				ArrayList<Point> alCoordEchec = p.getDeplacementEchec();
+				//ArrayList<Point> alCoordSC = p.getDeplacementSC();
+
+				for ( Point point : p.getDeplacementEchec() )
+				{
+					g2.setColor( new Color( 255, 0, 5, 170 ) );
+					g2.fillRect( ( (int)point.getX() * TAILLE_IMG ) + 1,
+								 ( (int)point.getY() * TAILLE_IMG ) + 1,
+								 TAILLE_IMG - 2,
+								 TAILLE_IMG - 2 );
+				}
+			}
+		}
 
 		// On place les graphiquement les pièces sur le plateau
 		for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
