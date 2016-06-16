@@ -75,11 +75,11 @@ public class Jeu extends JFrame implements ActionListener
 				defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
 
 		pUtilitaire.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
-		                                      JLabel.CENTER ) );
+											  JLabel.CENTER ) );
 
 		pUtilitaire.add(
 				score = new JLabel( "Score : " + ctrl.getJoueurCourant().getScore(),
-				                    JLabel.CENTER ) );
+									JLabel.CENTER ) );
 
 		annuler = new JButton( "Annuler" );
 		annuler.addActionListener( this );
@@ -115,7 +115,20 @@ public class Jeu extends JFrame implements ActionListener
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
 		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
 		score.setText( "Score : " + ctrl.getJoueurCourant().getScore() );
-		mouvements.setText("Mouvements : " + ctrl.getJoueurCourant().getNbMouvements());
+		mouvements.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
+	}
+
+
+	public void afficherMessage( String message )
+	{
+		JOptionPane.showMessageDialog( this, message, "Bon à savoir !", JOptionPane.PLAIN_MESSAGE );
+	}
+
+
+	public void afficherMessageErreur( String messageErreur )
+	{
+		JOptionPane.showMessageDialog( this, messageErreur, "Bon à savoir !", JOptionPane
+				.ERROR_MESSAGE );
 	}
 
 
@@ -133,13 +146,13 @@ public class Jeu extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if( e.getSource() == annuler )
+		if ( e.getSource() == annuler )
 		{
 			ctrl.annuler();
 			majIHM();
 		}
 
-		if( e.getSource() == recommencer )
+		if ( e.getSource() == recommencer )
 		{
 			ctrl.getEchiquier().recommencer();
 		}

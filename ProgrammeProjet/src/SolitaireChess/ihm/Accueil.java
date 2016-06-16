@@ -2,6 +2,7 @@ package SolitaireChess.ihm;
 
 
 import SolitaireChess.Controleur;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,7 +71,6 @@ public class Accueil extends JFrame implements ActionListener
 		add( pChoix );
 	}
 
-
 	/**
 	 * Invoked when an action occurs.
 	 *
@@ -94,7 +94,7 @@ public class Accueil extends JFrame implements ActionListener
 				if ( s != null && s.length() > 0 )
 				{
 					ctrl.ajouterJoueur( s );
-					ctrl.enregistrer();
+					//ctrl.enregistrer();
 					new Jeu( ctrl );
 					dispose();
 				}
@@ -103,7 +103,7 @@ public class Accueil extends JFrame implements ActionListener
 			{
 				ctrl.definirJoueur( (String)choixProfil.getSelectedItem() );
 				new Jeu( ctrl );
-				dispose();
+				setVisible(false);
 			}
 		}
 

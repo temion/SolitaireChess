@@ -221,13 +221,13 @@ public class Controleur implements Serializable
 
 	public void afficherMessage( String message )
 	{
-		JOptionPane.showMessageDialog( jeu, message, "Bon à savoir !", JOptionPane.PLAIN_MESSAGE );
+		jeu.afficherMessage( message );
 	}
 
 
 	public void afficherMessageErreur( String messageErreur )
 	{
-		JOptionPane.showMessageDialog( jeu, messageErreur, "Erreur", JOptionPane.ERROR_MESSAGE );
+		jeu.afficherMessageErreur( messageErreur );
 	}
 
 

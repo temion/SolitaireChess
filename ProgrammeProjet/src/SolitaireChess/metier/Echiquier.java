@@ -168,7 +168,6 @@ public class Echiquier implements Serializable
 			defi++;
 
 		initDefi();
-		//setMouvements();
 		ctrl.majIHM();
 	}
 
