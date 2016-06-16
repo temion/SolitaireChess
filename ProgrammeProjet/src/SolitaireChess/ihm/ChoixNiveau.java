@@ -3,6 +3,8 @@ package SolitaireChess.ihm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Thibaut on 16/06/2016.
@@ -29,16 +31,16 @@ public class ChoixNiveau extends JFrame
 		niveaux = new JTabbedPane(JTabbedPane.TOP);
 
 		niveau1 = new JPanel();
-		creerChoix(niveau1);
+		creerChoix(niveau1, 1);
 
 		niveau2 = new JPanel();
-		creerChoix(niveau2);
+		creerChoix(niveau2, 2);
 
 		niveau3 = new JPanel();
-		creerChoix(niveau3);
+		creerChoix(niveau3, 3);
 
 		niveau4 = new JPanel();
-		creerChoix(niveau4);
+		creerChoix(niveau4, 4);
 
 		niveaux.addTab("Débutant", niveau1);
 		niveaux.addTab("Intermédiaire", niveau2);
@@ -51,10 +53,22 @@ public class ChoixNiveau extends JFrame
 		setVisible(true);
 	}
 
-	private void creerChoix(JPanel niveau) {
+	private void creerChoix(JPanel niveau, int difficulte) {
 		niveau.setLayout(new GridLayout(3, 5));
 		for (int i = 1; i < 16; i++) {
-			niveau.add(new JButton("Défi n°" + i));
+			JButton b = new JButton("Défi n°" + i);
+			int     finalI = i;
+			b.addActionListener( new ActionListener() {
+				public void actionPerformed(ActionEvent e ) {
+					if (e.getSource() == b) {
+						int numDefi = finalI + (difficulte - 1) * 15; // Les .data sont numérotés de 1 à 60, d'où la
+						// formule
+						jeu.getCtrl().getEchiquier().setEchiquier( difficulte, numDefi );
+						jeu.getCtrl().majIHM();
+					}
+				}
+			} );
+			niveau.add(b);
 		}
 	}
 }

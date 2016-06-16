@@ -46,6 +46,12 @@ public class Echiquier implements Serializable
 		this.initDefi();
 	}
 
+	public void setEchiquier(int niveau, int defi) {
+		this.niveau = niveau;
+		this.defi = defi;
+		initDefi();
+	}
+
 
 	/**
 	 * Construit un échiquier à partir d'un autre échiquier.
