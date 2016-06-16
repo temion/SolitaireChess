@@ -70,6 +70,11 @@ public class BarreAction extends JToolBar implements ActionListener
 			jeu.getCtrl().getJoueurCourant().incrementerMouvements();
 			jeu.majPanel();
 		}
+
+		if (e.getSource() == niveaux) {
+			new ChoixNiveau(jeu);
+		}
+
 		if ( e.getSource() == menuPrincipal )
 		{
 			if ( JOptionPane.showConfirmDialog(
