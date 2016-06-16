@@ -46,8 +46,8 @@ public abstract class Piece implements Serializable, IPieceEchec
 	 */
 	public boolean deplacer( int xCible, int yCible )
 	{
-		if ( this.echiquier.getEchiquier()[xCible][yCible] != null &&
-			 ( x != xCible || y != yCible ) && this.peutSeDeplacer( xCible, yCible ) )
+		if( this.echiquier.getEchiquier()[xCible][yCible] != null &&
+		    (x != xCible || y != yCible) && this.peutSeDeplacer( xCible, yCible ) )
 		{
 			echiquier.getEchiquier()[xCible][yCible] = this;
 			echiquier.getEchiquier()[x][y] = null;
@@ -66,9 +66,11 @@ public abstract class Piece implements Serializable, IPieceEchec
 	 */
 	public boolean peutPrendreUnePiece()
 	{
-		for ( int i = 0; i < echiquier.getNbLigne(); i++ )
-			for ( int j = 0; j < echiquier.getNbColonne(); j++ )
-				if ( echiquier.getEchiquier()[x][y].peutSeDeplacer( i, j ) && ( i != x || j != y ) )
+		for( int i = 0; i < echiquier.getNbLigne(); i++ )
+			for( int j = 0; j < echiquier.getNbColonne(); j++ )
+				if( echiquier.getEchiquier()[i][j] != null && echiquier.getEchiquier()[x][y]
+						.peutSeDeplacer(
+								i, j ) && (i != x || j != y) )
 					return true;
 
 		return false;
@@ -165,21 +167,26 @@ public abstract class Piece implements Serializable, IPieceEchec
 		this.y = y;
 	}
 
-
+	/**
+	 * Permet de cloner une pièce.
+	 *
+	 * @param piece la pièce à cloner
+	 * @return la pièce clonée.
+	 */
 	public static Piece clonerPiece( Piece piece )
 	{
-		if(piece instanceof Roi)
-			return new Roi(piece.x, piece.y, piece.echiquier);
-		else if(piece instanceof Dame)
-			return new Dame(piece.x, piece.y, piece.echiquier);
-		else if(piece instanceof Fou)
-			return new Fou(piece.x, piece.y, piece.echiquier);
-		else if(piece instanceof Cavalier)
-			return new Cavalier(piece.x, piece.y, piece.echiquier);
-		else if(piece instanceof Tour)
-			return new Tour(piece.x, piece.y, piece.echiquier);
-		else if(piece instanceof Pion)
-			return new Pion(piece.x, piece.y, piece.echiquier);
+		if( piece instanceof Roi )
+			return new Roi( piece.x, piece.y, piece.echiquier );
+		else if( piece instanceof Dame )
+			return new Dame( piece.x, piece.y, piece.echiquier );
+		else if( piece instanceof Fou )
+			return new Fou( piece.x, piece.y, piece.echiquier );
+		else if( piece instanceof Cavalier )
+			return new Cavalier( piece.x, piece.y, piece.echiquier );
+		else if( piece instanceof Tour )
+			return new Tour( piece.x, piece.y, piece.echiquier );
+		else if( piece instanceof Pion )
+			return new Pion( piece.x, piece.y, piece.echiquier );
 
 		return null;
 	}
@@ -187,11 +194,26 @@ public abstract class Piece implements Serializable, IPieceEchec
 
 	public ArrayList<Point> getDeplacementEchec()
 	{
-		ArrayList<Point> alPoint = new ArrayList<Point>();
+		ArrayList<Point> alPoint = new ArrayList<>();
 
-		for ( int i = 0; i < echiquier.getEchiquier().length; i++ )
-			for ( int j = 0; j < echiquier.getEchiquier()[i].length; j++ )
-				if ( peutSeDeplacer( i, j ) && i!=x && j!=y )
+		for( int i = 0; i < echiquier.getEchiquier().length; i++ )
+			for( int j = 0; j < echiquier.getEchiquier()[i].length; j++ )
+				if( peutSeDeplacer( i, j ) && (i != x || j != y) )
+					alPoint.add( new Point( j, i ) );
+
+		return alPoint;
+	}
+
+	@Override
+	public ArrayList<Point> getDeplacementPossible()
+	{
+		ArrayList<Point> alPoint = new ArrayList<>();
+
+		for( int i = 0; i < echiquier.getNbLigne(); i++ )
+			for( int j = 0; j < echiquier.getNbColonne(); j++ )
+				if( echiquier.getEchiquier()[i][j] != null && echiquier.getEchiquier()[x][y]
+						.peutSeDeplacer(
+								i, j ) && (i != x || j != y) )
 					alPoint.add( new Point( j, i ) );
 
 		return alPoint;

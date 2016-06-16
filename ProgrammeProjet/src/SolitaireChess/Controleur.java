@@ -129,7 +129,7 @@ public class Controleur implements Serializable
 	{
 		String symbole = this.echiquier.getSymbole( i, j );
 
-		return "./images/" + symbole + ".png";
+		return "./images/theme02/" + symbole + ".png";
 	}
 
 
@@ -217,6 +217,10 @@ public class Controleur implements Serializable
 								   );
 	}
 
+	public int[] getDernierDefi()
+	{
+		return joueurCourant.getDernierDefi();
+	}
 
 	public void definirJoueur( String nomJoueur )
 	{
@@ -252,7 +256,6 @@ public class Controleur implements Serializable
 	{
 		jeu.afficherMessageErreur( messageErreur );
 	}
-
 
 	public void annuler()
 	{

@@ -1,8 +1,6 @@
 package SolitaireChess.interfaces;
 
 
-import SolitaireChess.metier.pieces.Piece;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -12,4 +10,5 @@ import java.util.ArrayList;
 public interface IPieceEchec
 {
 	public ArrayList<Point> getDeplacementEchec();
+	public ArrayList<Point> getDeplacementPossible();
 }

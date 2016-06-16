@@ -29,7 +29,6 @@ public class Jeu extends JFrame implements ActionListener
 	private JLabel score;
 	private JLabel mouvements;
 
-
 	/**
 	 * Construit l'écran du jeu.
 	 *
@@ -75,11 +74,11 @@ public class Jeu extends JFrame implements ActionListener
 				defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
 
 		pUtilitaire.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
-											  JLabel.CENTER ) );
+		                                      JLabel.CENTER ) );
 
 		pUtilitaire.add(
 				score = new JLabel( "Score : " + ctrl.getJoueurCourant().getScore(),
-									JLabel.CENTER ) );
+				                    JLabel.CENTER ) );
 
 		annuler = new JButton( "Annuler" );
 		annuler.addActionListener( this );
@@ -146,13 +145,13 @@ public class Jeu extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if ( e.getSource() == annuler )
+		if( e.getSource() == annuler )
 		{
 			ctrl.annuler();
 			majIHM();
 		}
 
-		if ( e.getSource() == recommencer )
+		if( e.getSource() == recommencer )
 		{
 			ctrl.getEchiquier().recommencer();
 		}
