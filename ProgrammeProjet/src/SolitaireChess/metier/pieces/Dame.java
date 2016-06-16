@@ -35,7 +35,10 @@ public class Dame extends Piece
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )
 	{
-		return Math.abs( xCible - x ) == Math.abs( yCible - y ) || x == xCible || y == yCible;
+		return Math.abs( xCible - x ) == Math.abs( yCible - y ) || x == xCible || y == yCible &&
+		                                                                          personneDansLeChamp(
+				                                                                          xCible,
+				                                                                          yCible );
 	}
 
 
@@ -57,17 +60,17 @@ public class Dame extends Piece
 		i = x;
 		j = y;
 
-		while ( i != xCible && j != yCible )
+		while( i != xCible && j != yCible )
 		{
-			if ( i != x && echiquier.getEchiquier()[i][j] != null )
+			if( i != x && echiquier.getEchiquier()[i][j] != null )
 				return false;
 
-			if ( xPlusGrand )
+			if( xPlusGrand )
 				i--;
 			else
 				i++;
 
-			if ( yPlusGrand )
+			if( yPlusGrand )
 				j--;
 			else
 				j++;
@@ -75,22 +78,21 @@ public class Dame extends Piece
 
 		// Déplacement en lignes et colonnes
 
-		if ( x == xCible )
+		if( x == xCible )
 		{
 			int yMin = y < yCible ? y : yCible;
 			int yMax = y > xCible ? y : yCible;
 
-			for ( i = yMin + 1; i < yMax; i++ )
-				if ( echiquier.getEchiquier()[x][i] != null )
+			for( i = yMin + 1; i < yMax; i++ )
+				if( echiquier.getEchiquier()[x][i] != null )
 					return false;
-		}
-		else if ( y == yCible )
+		} else if( y == yCible )
 		{
 			int xMin = x < xCible ? x : xCible;
 			int xMax = x > xCible ? x : xCible;
 
-			for ( i = xMin + 1; i < xMax; i++ )
-				if ( echiquier.getEchiquier()[i][y] != null )
+			for( i = xMin + 1; i < xMax; i++ )
+				if( echiquier.getEchiquier()[i][y] != null )
 					return false;
 		}
 		return true;

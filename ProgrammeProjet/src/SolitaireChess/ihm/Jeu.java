@@ -156,4 +156,9 @@ public class Jeu extends JFrame implements ActionListener
 			ctrl.getEchiquier().recommencer();
 		}
 	}
+
+	public PanelSolitaireChess getPlateau()
+	{
+		return plateau;
+	}
 }

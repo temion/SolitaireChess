@@ -122,19 +122,13 @@ public class PanelSolitaireChess extends JPanel
 		{
 			IPieceEchec p = null;
 
-			if( sourisXPressed > -1 )
+			if( sourisXPressed > -1 && sourisXPressed < ctrl.getNbLigne() )
 				p = ctrl.getEchiquier().getEchiquier()[sourisXPressed][sourisYPressed];
-			else if( sourisXClicked > -1 )
+			else if( sourisXClicked > -1 && sourisXClicked < ctrl.getNbLigne() )
 				p = ctrl.getEchiquier().getEchiquier()[sourisXClicked][sourisYClicked];
 
 			if( p != null )
 			{
-<<<<<<< HEAD
-				ArrayList<Point> alCoordEchec = p.getDeplacementEchec();
-				//ArrayList<Point> alCoordSC = p.getDeplacementPossible();
-				//System.out.println( p.getClass().getName() );
-=======
->>>>>>> Choixdesniveaux
 				for( Point point : p.getDeplacementEchec() )
 				{
 					g2.setColor( negatifVide( tabThemes[0][1][0] ) );
@@ -147,17 +141,7 @@ public class PanelSolitaireChess extends JPanel
 				for( Point point : p.getDeplacementPossible() )
 				{
 					//On recolore la case comme au début
-					try
-					{
-						g2.setColor(
-								tabThemes[ctrl.getTheme() - 1][0][ctrl.getDernierDefi()[0] - 1] );
-					} catch( Exception e )
-					{
-						System.out.println( "ind niveau : " + ctrl.getDernierDefi()[0] );
-						System.out.println( "ind theme  : " + ctrl.getTheme() );
-						e.printStackTrace();
-					}
-
+					g2.setColor( tabThemes[ctrl.getTheme() - 1][0][ctrl.getDernierDefi()[0] - 1] );
 					g2.fillRect( ((int) point.getX() * TAILLE_CASE) + TAILLE_BORDURE,
 					             ((int) point.getY() * TAILLE_CASE) + TAILLE_BORDURE,
 					             TAILLE_CASE - (TAILLE_BORDURE * 2),

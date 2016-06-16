@@ -215,7 +215,12 @@ public class Controleur implements Serializable
 
 	public void afficherInfosJoueur()
 	{
-		Object[] themes = { "theme 1", "theme 2" };
+		Object[] themes = new Object[jeu.getPlateau().getNbThemes()];
+		for(int i=1; i<=themes.length; i++)
+		{
+			themes[i-1] = "theme "+i;
+		}
+		
 		Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
 		                                             "Dernier défi : " + joueurCourant.getDernierDefi()
 				                                             [1] + "\n" +
