@@ -17,8 +17,9 @@ public class Joueur implements Serializable
 {
 	private String nom;
 	private int    score;
+	private int mouvements;
 
-	private Boolean[][] defisAcocmplis;
+	private Boolean[][] defisAccomplis;
 	private int[]       dernierDefi;
 
 	private Controleur ctrl;
@@ -28,12 +29,20 @@ public class Joueur implements Serializable
 	{
 		this.nom = nom;
 		this.score = 0;
+		this.mouvements = 0;
 
 		this.ctrl = ctrl;
-		this.defisAcocmplis = new Boolean[4][15];
+		this.defisAccomplis = new Boolean[4][15];
 		this.dernierDefi = new int[]{ 1, 1 };
 	}
 
+	public void incrementerMouvements() {
+		mouvements++;
+	}
+
+	public int getNbMouvements() {
+		return mouvements;
+	}
 
 	public void setNom( String nom )
 	{

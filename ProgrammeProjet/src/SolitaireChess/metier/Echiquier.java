@@ -101,6 +101,7 @@ public class Echiquier implements Serializable
 		{
 			nbPiece--;
 			mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
+			ctrl.getJoueurCourant().incrementerMouvements();
 
 			if ( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
 			else if ( aGagne() )
