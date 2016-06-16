@@ -10,8 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import java.util.ArrayList;
-
 /**
  * SolitaireChess - Projet Tutoré
  * Classe ihm qui représente le plateau de jeu.
@@ -45,9 +43,14 @@ public class PanelSolitaireChess extends JPanel
 	                                                              { { new Color( 0x4BFF9D ),
 	                                                                  new Color( 0x3D79FF ),
 	                                                                  new Color( 0xBC9EFF ),
-			                                                          new Color( 255, 0, 250 ) },
-	                                                                { new Color( 0x0D0418 ) }
-	                                                              } };
+	                                                                  new Color( 255, 0, 250 ) },
+	                                                                { new Color( 0x0D0418 ) } },
+
+	                                                              { { new Color( 0xFFB8EE ),
+	                                                                  new Color( 0xFD87FF ),
+	                                                                  new Color( 0xFC50FF ),
+	                                                                  new Color( 248, 0, 255 ) },
+	                                                                { new Color( 0x000000 ) } } };
 
 	/**
 	 * Construit le plateau de jeu des images.
@@ -99,9 +102,9 @@ public class PanelSolitaireChess extends JPanel
 			for( int j = 0; j < ctrl.getNbColonne(); j++ )
 			{
 				if( bCase )
-					c = tabThemes[ctrl.getTheme()-1][1][0];
+					c = tabThemes[ctrl.getTheme() - 1][1][0];
 				else
-					c = tabThemes[ctrl.getTheme()-1][0][ctrl.getDernierDefi()[0] - 1];
+					c = tabThemes[ctrl.getTheme() - 1][0][ctrl.getDernierDefi()[0] - 1];
 
 				int taille = TAILLE_CASE - (TAILLE_BORDURE * 2);
 
@@ -126,9 +129,12 @@ public class PanelSolitaireChess extends JPanel
 
 			if( p != null )
 			{
+<<<<<<< HEAD
 				ArrayList<Point> alCoordEchec = p.getDeplacementEchec();
 				//ArrayList<Point> alCoordSC = p.getDeplacementPossible();
-				System.out.println( p.getClass().getName() );
+				//System.out.println( p.getClass().getName() );
+=======
+>>>>>>> Choixdesniveaux
 				for( Point point : p.getDeplacementEchec() )
 				{
 					g2.setColor( negatifVide( tabThemes[0][1][0] ) );
@@ -141,7 +147,17 @@ public class PanelSolitaireChess extends JPanel
 				for( Point point : p.getDeplacementPossible() )
 				{
 					//On recolore la case comme au début
-					g2.setColor( tabThemes[0][1][ctrl.getDernierDefi()[0] - 1] );
+					try
+					{
+						g2.setColor(
+								tabThemes[ctrl.getTheme() - 1][0][ctrl.getDernierDefi()[0] - 1] );
+					} catch( Exception e )
+					{
+						System.out.println( "ind niveau : " + ctrl.getDernierDefi()[0] );
+						System.out.println( "ind theme  : " + ctrl.getTheme() );
+						e.printStackTrace();
+					}
+
 					g2.fillRect( ((int) point.getX() * TAILLE_CASE) + TAILLE_BORDURE,
 					             ((int) point.getY() * TAILLE_CASE) + TAILLE_BORDURE,
 					             TAILLE_CASE - (TAILLE_BORDURE * 2),
@@ -188,7 +204,7 @@ public class PanelSolitaireChess extends JPanel
 		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 80 );
 	}
 
-	public Color negatifPlein( Color c)
+	public Color negatifPlein( Color c )
 	{
 		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 110 );
 	}
@@ -269,5 +285,10 @@ public class PanelSolitaireChess extends JPanel
 				ctrl.afficherMessageErreur( "Evitez de sortir des limites" );
 			}
 		}
+	}
+
+	public int getNbThemes()
+	{
+		return tabThemes.length;
 	}
 }

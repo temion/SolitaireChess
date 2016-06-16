@@ -3,6 +3,8 @@ package SolitaireChess.ihm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Thibaut on 16/06/2016.
@@ -23,22 +25,22 @@ public class ChoixNiveau extends JFrame
 		this.jeu = jeu;
 
 		setTitle("Choix d'un défi");
+		setSize(800, 350);
 		setLocationRelativeTo(null);
-		setSize(500, 500);
 
 		niveaux = new JTabbedPane(JTabbedPane.TOP);
 
 		niveau1 = new JPanel();
-		creerChoix(niveau1);
+		creerChoix(niveau1, 1);
 
 		niveau2 = new JPanel();
-		creerChoix(niveau2);
+		creerChoix(niveau2, 2);
 
 		niveau3 = new JPanel();
-		creerChoix(niveau3);
+		creerChoix(niveau3, 3);
 
 		niveau4 = new JPanel();
-		creerChoix(niveau4);
+		creerChoix(niveau4, 4);
 
 		niveaux.addTab("Débutant", niveau1);
 		niveaux.addTab("Intermédiaire", niveau2);
@@ -47,14 +49,33 @@ public class ChoixNiveau extends JFrame
 
 		add(niveaux);
 
+		niveaux.setEnabledAt(3, false);
+		niveaux.setToolTipTextAt(3, "Terminez au moins 50% du niveau avancé afin d'accéder au niveau expert.");
 
 		setVisible(true);
 	}
 
-	private void creerChoix(JPanel niveau) {
-		niveau.setLayout(new GridLayout(3, 5));
+	private void creerChoix(JPanel niveau, int difficulte) {
+		niveau.setLayout(new GridLayout(5, 3, 0, 2));
 		for (int i = 1; i < 16; i++) {
-			niveau.add(new JButton("Défi n°" + i));
+			JButton b = new JButton("Défi n°" + i, new ImageIcon(String.format("" +
+																			   "./images/apercus/niveau%02d/defi%02d" +
+																			   ".png" +
+																			   "", difficulte, i)));
+			b.setIconTextGap(2);
+			int     finalI = i;
+			b.addActionListener( new ActionListener() {
+				public void actionPerformed(ActionEvent e ) {
+					if (e.getSource() == b) {
+						int numDefi = finalI + (difficulte - 1) * 15; // Les .data sont numérotés de 1 à 60, d'où la
+						// formule
+						jeu.getCtrl().getEchiquier().setEchiquier( difficulte, numDefi );
+						jeu.getCtrl().majIHM();
+						dispose();
+					}
+				}
+			} );
+			niveau.add(b);
 		}
 	}
 }
