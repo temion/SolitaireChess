@@ -25,8 +25,8 @@ public class ChoixNiveau extends JFrame
 		this.jeu = jeu;
 
 		setTitle("Choix d'un défi");
-		setLocationRelativeTo(null);
 		setSize(500, 500);
+		setLocationRelativeTo(null);
 
 		niveaux = new JTabbedPane(JTabbedPane.TOP);
 
@@ -65,6 +65,7 @@ public class ChoixNiveau extends JFrame
 						// formule
 						jeu.getCtrl().getEchiquier().setEchiquier( difficulte, numDefi );
 						jeu.getCtrl().majIHM();
+						dispose();
 					}
 				}
 			} );
