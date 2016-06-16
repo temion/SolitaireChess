@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.URL;
 
 public class Accueil extends JFrame implements ActionListener
@@ -182,7 +183,7 @@ public class Accueil extends JFrame implements ActionListener
 			{
 				if ( Desktop.isDesktopSupported() )
 				{
-					Desktop.getDesktop().browse( new URL( "http://www.google.com" ).toURI() );
+					Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
 				}
 			} catch ( Exception exe ) {}
 		}
