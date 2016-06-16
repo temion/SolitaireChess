@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.ArrayList;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -186,12 +185,12 @@ public class PanelSolitaireChess extends JPanel
 
 	public Color negatifVide( Color c )
 	{
-		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 80 );
+		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 100 );
 	}
 
 	public Color negatifPlein( Color c )
 	{
-		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 110 );
+		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 200 );
 	}
 
 	private class GererMvtSouris extends MouseMotionAdapter
@@ -220,7 +219,7 @@ public class PanelSolitaireChess extends JPanel
 
 					sourisXClicked = -1;
 					sourisYClicked = -1;
-					ctrl.afficherMessage( "Choisissez votre pièce" );
+					//ctrl.afficherMessage( "Choisissez votre pièce" );
 				} catch( Exception exc )
 				{
 					ctrl.afficherMessageErreur( "Evitez de sortir des limites" );
@@ -229,7 +228,7 @@ public class PanelSolitaireChess extends JPanel
 			{
 				sourisXClicked = e.getY() / TAILLE_CASE;
 				sourisYClicked = e.getX() / TAILLE_CASE;
-				ctrl.afficherMessage( "Choisissez la pièce à prendre" );
+				//ctrl.afficherMessage( "Choisissez la pièce à prendre" );
 			}
 		}
 
