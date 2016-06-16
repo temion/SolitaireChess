@@ -203,19 +203,4 @@ public abstract class Piece implements Serializable, IPieceEchec
 
 		return alPoint;
 	}
-
-	@Override
-	public ArrayList<Point> getDeplacementPossible()
-	{
-		ArrayList<Point> alPoint = new ArrayList<>();
-
-		for( int i = 0; i < echiquier.getNbLigne(); i++ )
-			for( int j = 0; j < echiquier.getNbColonne(); j++ )
-				if( echiquier.getEchiquier()[i][j] != null && echiquier.getEchiquier()[x][y]
-						.peutSeDeplacer(
-								i, j ) && (i != x || j != y) )
-					alPoint.add( new Point( j, i ) );
-
-		return alPoint;
-	}
 }

@@ -138,7 +138,6 @@ public class Controleur implements Serializable
 	public String getImg( int i, int j )
 	{
 		String symbole = this.echiquier.getSymbole( i, j );
-
 		return "./images/theme" + String.format( "%02d",
 		                                         joueurCourant.getTheme() ) + "/" + symbole + "" +
 		       ".png";

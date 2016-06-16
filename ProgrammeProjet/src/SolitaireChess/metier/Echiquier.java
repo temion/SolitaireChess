@@ -58,24 +58,6 @@ public class Echiquier implements Serializable
 	 *
 	 * @param autre l'autre échiquier
 	 */
-	/*
-	public static Echiquier clonerEchiquier( Echiquier autre )
-	{
-		//Utilisé pour éviter de pointer sur les mêmes objets.
-		Echiquier nvEchiquier = new Echiquier( autre.getCtrl() );
-
-		nvEchiquier.defi = autre.defi;
-		nvEchiquier.niveau = autre.niveau;
-		nvEchiquier.aUnRoi = autre.aUnRoi;
-		nvEchiquier.nbPiece = autre.nbPiece;
-		nvEchiquier.echiquier = new Piece[4][4];
-
-		for ( int i = 0; i < nvEchiquier.echiquier.length; i++ )
-			for ( int j = 0; j < nvEchiquier.echiquier[i].length; j++ )
-				nvEchiquier.echiquier[i][j] = autre.echiquier[i][j];<
-
-		return nvEchiquier;
-	}*/
 	public static Piece[][] clonerEchiquier( Piece[][] autre )
 	{
 		Piece[][] tmp = new Piece[4][4];

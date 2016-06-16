@@ -10,5 +10,4 @@ import java.util.ArrayList;
 public interface IPieceEchec
 {
 	public ArrayList<Point> getDeplacementEchec();
-	public ArrayList<Point> getDeplacementPossible();
 }
