@@ -133,17 +133,17 @@ public class PanelSolitaireChess extends JPanel
 
 					sourisXClicked = - 1;
 					sourisYClicked = - 1;
-					System.out.println( "Choisissez votre pièce" );
+					ctrl.afficherMessage( "Choisissez votre pièce" );
 				} catch ( Exception exc )
 				{
-					System.out.println( "Evitez de sortir des limites" );
+					ctrl.afficherMessageErreur( "Evitez de sortir des limites" );
 				}
 			}
 			else if ( ctrl.contientPiece( e.getY() / TAILLE_IMG, e.getX() / TAILLE_IMG ) )
 			{
 				sourisXClicked = e.getY() / TAILLE_IMG;
 				sourisYClicked = e.getX() / TAILLE_IMG;
-				System.out.println( "Choisissez la pièce à prendre" );
+				ctrl.afficherMessage( "Choisissez la pièce à prendre" );
 			}
 		}
 
@@ -181,7 +181,7 @@ public class PanelSolitaireChess extends JPanel
 				repaint();
 			} catch ( Exception exe )
 			{
-				exe.printStackTrace();
+				ctrl.afficherMessageErreur( "Evitez de sortir des limites" );
 			}
 		}
 	}

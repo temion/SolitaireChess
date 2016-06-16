@@ -28,7 +28,6 @@ public class Controleur implements Serializable
 
 	public Controleur()
 	{
-		this.alJoueur = new ArrayList<>();
 		charger();
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
@@ -56,26 +55,32 @@ public class Controleur implements Serializable
 				majIHM();
 	}
 
-	public void charger() {
+
+	public void charger()
+	{
 		try
 		{
-			ObjectInputStream in = new ObjectInputStream( new FileInputStream( "./sauvegardes.data" ) );
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream( "./sauvegardes.data" ) );
 			alJoueur = (ArrayList<Joueur>)in.readObject();
 
 			in.close();
-		}
-		catch (Exception e) {e.printStackTrace();}
+		} catch ( Exception e ) {this.alJoueur = new ArrayList<>(); }
 	}
 
-	public void enregistrer() {
-		try {
-			ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "./sauvegardes.data" ) );
-			out.writeObject(alJoueur);
+
+	public void enregistrer()
+	{
+		try
+		{
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream( "./sauvegardes.data" ) );
+			out.writeObject( alJoueur );
 
 			out.close();
-		}
-		catch (Exception e) {e.printStackTrace();}
+		} catch ( Exception e ) {e.printStackTrace();}
 	}
+
 
 	public void ajouterJoueur( String nomJoueur )
 	{
@@ -127,6 +132,12 @@ public class Controleur implements Serializable
 	}
 
 
+	public void setJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	}
+
+
 	public Echiquier getEchiquier()
 	{
 		return echiquier;
@@ -154,12 +165,6 @@ public class Controleur implements Serializable
 	public int getNbColonne()
 	{
 		return echiquier.getNbColonne();
-	}
-
-
-	public void setJeu( Jeu jeu )
-	{
-		this.jeu = jeu;
 	}
 
 
@@ -202,7 +207,7 @@ public class Controleur implements Serializable
 									 new ImageIcon( "./images/iconeChoisirPseudo.png" ),
 									 themes,
 									 null
-									  );
+								   );
 	}
 
 
@@ -211,6 +216,18 @@ public class Controleur implements Serializable
 		for ( Joueur j : alJoueur )
 			if ( nomJoueur.equals( j.getNom() ) )
 				joueurCourant = j;
+	}
+
+
+	public void afficherMessage( String message )
+	{
+		JOptionPane.showMessageDialog( jeu, message, "Bon à savoir !", JOptionPane.PLAIN_MESSAGE );
+	}
+
+
+	public void afficherMessageErreur( String messageErreur )
+	{
+		JOptionPane.showMessageDialog( jeu, messageErreur, "Erreur", JOptionPane.ERROR_MESSAGE );
 	}
 
 

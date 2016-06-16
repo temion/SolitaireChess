@@ -105,7 +105,7 @@ public class Echiquier implements Serializable
 			if ( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
 			else if ( aGagne() )
 			{
-				System.out.println( "Gagné mon con" );
+				ctrl.afficherMessage( "Gagné" );
 				ctrl.enregistrer();
 				incrementerDefi();
 			}
@@ -122,7 +122,6 @@ public class Echiquier implements Serializable
 	 */
 	public void recommencer()
 	{
-		System.out.println( "Perdu gros con" );
 		initDefi();
 		ctrl.majIHM();
 	}
@@ -151,7 +150,7 @@ public class Echiquier implements Serializable
 				if ( echiquier[i][j] != null && echiquier[i][j].peutPrendreUnePiece() )
 					return false;
 
-		System.out.println( "Perdu gros con" );
+		ctrl.afficherMessage( "Perdu !" );
 		return true;
 	}
 
@@ -210,10 +209,8 @@ public class Echiquier implements Serializable
 
 	public void annuler()
 	{
-		System.out.println( mouvements.size() );
 		if ( mouvements.size() > 1 )
 		{
-			System.out.println( "annulé" );
 			mouvements.remove( mouvements.size() - 1 );
 			echiquier = Echiquier.clonerEchiquier( mouvements.get( mouvements.size() - 1 ) );
 			nbPiece++;
