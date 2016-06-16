@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BarreAction extends JPanel implements ActionListener
+public class BarreAction extends JToolBar implements ActionListener
 {
 	private Jeu jeu;
 

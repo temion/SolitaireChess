@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class Accueil extends JFrame implements ActionListener
 {
@@ -15,9 +16,12 @@ public class Accueil extends JFrame implements ActionListener
 
 	private JComboBox<String> choixProfil;
 
+	private Insets insets;
+
 	private JButton valider;
 	private JButton supprimer;
-	private JButton créer;
+	private JButton nouvellePartie;
+	private JButton infosJoueur;
 	private JButton aide;
 	private JButton quitter;
 
@@ -28,6 +32,12 @@ public class Accueil extends JFrame implements ActionListener
 
 		this.ctrl = ctrl;
 
+		insets = getInsets();
+
+		setSize( 400 + insets.left + insets.right,
+				 600 + insets.top + insets.bottom );
+
+		//getContentPane().setBackground( Color.BLACK );
 		setLayout( null );
 
 		initComposants();
@@ -41,53 +51,60 @@ public class Accueil extends JFrame implements ActionListener
 
 	private void initComposants()
 	{
-		Insets    insets = getInsets();
-		Dimension size   = new Dimension( 200, 50 );
+		Dimension size = new Dimension( 200, 50 );
 
-		add( new JLabel( "SolitaireChess", JLabel.CENTER ) );
-
-		Icon   icone  = new ImageIcon( "./images/iconeChoisirPseudo.png" );
-		JLabel lImage = new JLabel( icone );
-		lImage.setBounds( 0, 450 + insets.top, icone.getIconWidth(),
-						  icone.getIconHeight() );
+		JLabel lImage = new JLabel( new ImageIcon( "./images/cavalier.gif" ) );
 		add( lImage );
+		lImage.setBounds( 0, 150 + insets.top, size.width, size.height );
 
-		choixProfil = new JComboBox<String>();
-		choixProfil.addItem( "Sélectionnez un profil" );
+		size = new Dimension( 400, 200 );
 
-		for ( int i = 0; i < ctrl.getAlJoueur().size(); i++ )
-			choixProfil.addItem( ctrl.getAlJoueur().get( i ).getNom() );
-
-		choixProfil.addItem( "Nouveau profil..." );
-		add( choixProfil );
-
-		choixProfil.setBounds( 100 + insets.left, 300 + insets.top, size.width, size.height );
-
-
-		size = new Dimension( 95, 50 );
-
-
-		valider = new JButton( "Valider" );
-		valider.setForeground( Color.GREEN );
-		valider.addActionListener( this );
-		add( valider );
-		valider.setBounds( 100 + insets.left, 350 + insets.top, size.width, size.height );
-
-
-		supprimer = new JButton( "Supprimer" );
-		supprimer.setForeground( Color.RED );
-		supprimer.addActionListener( this );
-		add( supprimer );
-		supprimer.setBounds( 205 + insets.left, 350 + insets.top, size.width, size.height );
-
+		JLabel lImageAccueil = new JLabel( new ImageIcon( "./images/imageAccueil.png" ) );
+		add( lImageAccueil );
+		lImageAccueil.setBounds( 0, 20 + insets.top, size.width, size.height );
 
 		size = new Dimension( 200, 50 );
 
+		choixProfil = new JComboBox<String>();
 
-		aide = new JButton( "Aide" );
-		aide.addActionListener( this );
-		add( aide );
-		aide.setBounds( 100 + insets.left, 400 + insets.top, size.width, size.height );
+		if ( ctrl.getAlJoueur().size() > 0 )
+		{
+			choixProfil.addItem( "Sélectionnez un profil" );
+
+			for ( int i = ctrl.getAlJoueur().size() - 1; i > - 1; i-- )
+				choixProfil.addItem( ctrl.getAlJoueur().get( i ).getNom() );
+
+			add( choixProfil );
+			choixProfil.setBounds( 100 + insets.left, 250 + insets.top, size.width, size.height );
+
+			size = new Dimension( 95, 50 );
+
+			valider = new JButton( "Valider" );
+			valider.setForeground( new Color( 19, 177, 38 ) );
+			valider.addActionListener( this );
+			add( valider );
+			valider.setBounds( 100 + insets.left, 300 + insets.top, size.width, size.height );
+
+
+			supprimer = new JButton( "Supprimer" );
+			supprimer.setForeground( new Color( 184, 15, 16 ) );
+			supprimer.addActionListener( this );
+			add( supprimer );
+			supprimer.setBounds( 205 + insets.left, 300 + insets.top, size.width, size.height );
+
+
+			size = new Dimension( 200, 50 );
+		}
+
+		nouvellePartie = new JButton( "Nouvelle partie" );
+		nouvellePartie.addActionListener( this );
+		add( nouvellePartie );
+		nouvellePartie.setBounds( 100 + insets.left, 350 + insets.top, size.width, size.height );
+
+		infosJoueur = new JButton( "Informations" );
+		infosJoueur.addActionListener( this );
+		add( infosJoueur );
+		infosJoueur.setBounds( 100 + insets.left, 400 + insets.top, size.width, size.height );
 
 
 		quitter = new JButton( "Quitter" );
@@ -96,8 +113,30 @@ public class Accueil extends JFrame implements ActionListener
 		quitter.setBounds( 100 + insets.left, 450 + insets.top, size.width, size.height );
 
 
-		setSize( 400 + insets.left + insets.right,
-				 600 + insets.top + insets.bottom );
+		size = new Dimension( 40, 40 );
+
+
+		aide = new JButton( "?" );
+		aide.addActionListener( this );
+		add( aide );
+		aide.setBounds( 350 + insets.left, 530 + insets.top, size.width, size.height );
+	}
+
+
+	private void initChoixJoueur()
+	{
+		Insets insets = getInsets();
+
+		Dimension size = new Dimension( 200, 50 );
+
+		choixProfil = new JComboBox<String>();
+
+		choixProfil.addItem( "Sélectionnez un profil" );
+
+		for ( int i = ctrl.getAlJoueur().size() - 1; i > - 1; i-- )
+			choixProfil.addItem( ctrl.getAlJoueur().get( i ).getNom() );
+
+		choixProfil.setBounds( 100 + insets.left, 228 + insets.top, size.width, size.height );
 	}
 
 
@@ -109,22 +148,22 @@ public class Accueil extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if ( e.getSource() == valider )
+		if ( e.getSource() == valider || e.getSource() == nouvellePartie )
 		{
-			if ( choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
+			if ( e.getSource() == nouvellePartie ||
+				 choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
 			{
 				String s = (String)JOptionPane.showInputDialog(
 						this,
 						"Pseudo :",
 						"Entrez un nouveau pseudo",
 						JOptionPane.PLAIN_MESSAGE,
-						new ImageIcon( "./images/iconeChoisirPseudo.png" ), null, null
+						new ImageIcon( "./images/gandalf.png" ), null, null
 															  );
 
 				if ( s != null && s.length() > 0 )
 				{
 					ctrl.ajouterJoueur( s );
-					ctrl.enregistrer();
 					new Jeu( ctrl );
 					dispose();
 				}
@@ -139,7 +178,36 @@ public class Accueil extends JFrame implements ActionListener
 
 		if ( e.getSource() == aide )
 		{
-			System.out.println( "Aide" );
+			try
+			{
+				if ( Desktop.isDesktopSupported() )
+				{
+					Desktop.getDesktop().browse( new URL( "http://www.google.com" ).toURI() );
+				}
+			} catch ( Exception exe ) {}
+		}
+
+		if ( e.getSource() == supprimer )
+		{
+			if ( choixProfil.getSelectedItem() != null && ! choixProfil.getSelectedItem().equals(
+					"Sélectionnez un profil" ) )
+			{
+				ctrl.supprimerJoueur( (String)choixProfil.getSelectedItem() );
+				remove( choixProfil );
+				if ( ctrl.getAlJoueur().size() > 0 )
+				{
+					this.initChoixJoueur();
+					add( choixProfil );
+				}
+				else
+				{
+					remove( valider );
+					remove( supprimer );
+				}
+				invalidate();
+				revalidate();
+				repaint();
+			}
 		}
 
 		if ( e.getSource() == quitter )

@@ -88,6 +88,7 @@ public class Controleur implements Serializable
 		{
 			alJoueur.add( new Joueur( nomJoueur, this ) );
 			joueurCourant = alJoueur.get( alJoueur.size() - 1 );
+			enregistrer();
 		}
 		else
 		{
@@ -210,7 +211,7 @@ public class Controleur implements Serializable
 										  "Thème :",
 									 "Joueur",
 									 JOptionPane.PLAIN_MESSAGE,
-									 new ImageIcon( "./images/iconeChoisirPseudo.png" ),
+									 new ImageIcon( "./images/gandalf.png" ),
 									 themes,
 									 null
 								   );
@@ -221,7 +222,23 @@ public class Controleur implements Serializable
 	{
 		for ( Joueur j : alJoueur )
 			if ( nomJoueur.equals( j.getNom() ) )
+			{
 				joueurCourant = j;
+				enregistrer();
+				return;
+			}
+	}
+
+
+	public void supprimerJoueur( String nomJoueur )
+	{
+		for(Joueur j : alJoueur)
+			if ( nomJoueur.equals( j.getNom() ) )
+			{
+				alJoueur.remove( j );
+				enregistrer();
+				return;
+			}
 	}
 
 
