@@ -2,7 +2,6 @@ package SolitaireChess.ihm;
 
 
 import SolitaireChess.Controleur;
-import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +16,8 @@ public class Accueil extends JFrame implements ActionListener
 	private JComboBox<String> choixProfil;
 
 	private JButton valider;
+	private JButton supprimer;
+	private JButton créer;
 	private JButton aide;
 	private JButton quitter;
 
@@ -27,49 +28,78 @@ public class Accueil extends JFrame implements ActionListener
 
 		this.ctrl = ctrl;
 
-		setLayout( new GridLayout( 4, 1 ) );
+		setLayout( null );
 
-		add( new JLabel( "SolitaireChess", JLabel.CENTER ) );
-
-		initChoix();
-
-		aide = new JButton( "Aide" );
-		aide.addActionListener( this );
-		add( aide );
-
-		quitter = new JButton( "Quitter" );
-		quitter.addActionListener( this );
-		add( quitter );
+		initComposants();
 
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		pack();
 		setLocationRelativeTo( null );
 		setResizable( false );
 		setVisible( true );
 	}
 
 
-	private void initChoix()
+	private void initComposants()
 	{
-		JPanel pChoix = new JPanel();
+		Insets    insets = getInsets();
+		Dimension size   = new Dimension( 200, 50 );
+
+		add( new JLabel( "SolitaireChess", JLabel.CENTER ) );
+
+		Icon   icone  = new ImageIcon( "./images/iconeChoisirPseudo.png" );
+		JLabel lImage = new JLabel( icone );
+		lImage.setBounds( 0, 450 + insets.top, icone.getIconWidth(),
+						  icone.getIconHeight() );
+		add( lImage );
 
 		choixProfil = new JComboBox<String>();
 		choixProfil.addItem( "Sélectionnez un profil" );
 
-		for (int i=0; i<ctrl.getAlJoueur().size();i++)
-			choixProfil.addItem( ctrl.getAlJoueur().get(i).getNom() );
+		for ( int i = 0; i < ctrl.getAlJoueur().size(); i++ )
+			choixProfil.addItem( ctrl.getAlJoueur().get( i ).getNom() );
 
 		choixProfil.addItem( "Nouveau profil..." );
+		add( choixProfil );
 
-		pChoix.add( choixProfil );
+		choixProfil.setBounds( 100 + insets.left, 300 + insets.top, size.width, size.height );
+
+
+		size = new Dimension( 95, 50 );
+
 
 		valider = new JButton( "Valider" );
+		valider.setForeground( Color.GREEN );
 		valider.addActionListener( this );
-		pChoix.add( valider );
+		add( valider );
+		valider.setBounds( 100 + insets.left, 350 + insets.top, size.width, size.height );
 
-		pChoix.setSize( new Dimension( 400, 150 ) );
-		add( pChoix );
+
+		supprimer = new JButton( "Supprimer" );
+		supprimer.setForeground( Color.RED );
+		supprimer.addActionListener( this );
+		add( supprimer );
+		supprimer.setBounds( 205 + insets.left, 350 + insets.top, size.width, size.height );
+
+
+		size = new Dimension( 200, 50 );
+
+
+		aide = new JButton( "Aide" );
+		aide.addActionListener( this );
+		add( aide );
+		aide.setBounds( 100 + insets.left, 400 + insets.top, size.width, size.height );
+
+
+		quitter = new JButton( "Quitter" );
+		quitter.addActionListener( this );
+		add( quitter );
+		quitter.setBounds( 100 + insets.left, 450 + insets.top, size.width, size.height );
+
+
+		setSize( 400 + insets.left + insets.right,
+				 600 + insets.top + insets.bottom );
 	}
+
 
 	/**
 	 * Invoked when an action occurs.
@@ -103,7 +133,7 @@ public class Accueil extends JFrame implements ActionListener
 			{
 				ctrl.definirJoueur( (String)choixProfil.getSelectedItem() );
 				new Jeu( ctrl );
-				setVisible(false);
+				setVisible( false );
 			}
 		}
 
