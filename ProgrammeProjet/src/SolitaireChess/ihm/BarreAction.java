@@ -66,6 +66,10 @@ public class BarreAction extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
+		if (e.getSource() == indices) {
+			jeu.getCtrl().getJoueurCourant().incrementerMouvements();
+			jeu.majPanel();
+		}
 		if ( e.getSource() == menuPrincipal )
 		{
 			if ( JOptionPane.showConfirmDialog(

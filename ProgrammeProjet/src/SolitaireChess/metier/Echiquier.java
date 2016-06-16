@@ -12,10 +12,11 @@ import SolitaireChess.Controleur;
 import SolitaireChess.metier.pieces.*;
 
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Echiquier
+public class Echiquier implements Serializable
 {
 	private Piece[][]  echiquier;
 	private int        defi;
@@ -100,11 +101,13 @@ public class Echiquier
 		{
 			nbPiece--;
 			mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
+			ctrl.getJoueurCourant().incrementerMouvements();
 
 			if ( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
 			else if ( aGagne() )
 			{
-				System.out.println( "Gagné mon con" );
+				ctrl.afficherMessage( "Gagné" );
+				ctrl.enregistrer();
 				incrementerDefi();
 			}
 			else
@@ -120,7 +123,6 @@ public class Echiquier
 	 */
 	public void recommencer()
 	{
-		System.out.println( "Perdu gros con" );
 		initDefi();
 		ctrl.majIHM();
 	}
@@ -149,7 +151,7 @@ public class Echiquier
 				if ( echiquier[i][j] != null && echiquier[i][j].peutPrendreUnePiece() )
 					return false;
 
-		System.out.println( "Perdu gros con" );
+		ctrl.afficherMessage( "Perdu !" );
 		return true;
 	}
 
@@ -208,10 +210,8 @@ public class Echiquier
 
 	public void annuler()
 	{
-		System.out.println( mouvements.size() );
 		if ( mouvements.size() > 1 )
 		{
-			System.out.println( "annulé" );
 			mouvements.remove( mouvements.size() - 1 );
 			echiquier = Echiquier.clonerEchiquier( mouvements.get( mouvements.size() - 1 ) );
 			nbPiece++;

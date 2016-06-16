@@ -10,7 +10,9 @@ package SolitaireChess.metier.pieces;
 
 import SolitaireChess.metier.Echiquier;
 
-public abstract class Piece
+import java.io.Serializable;
+
+public abstract class Piece implements Serializable
 {
 	protected Echiquier echiquier;
 	protected int       x;

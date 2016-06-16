@@ -90,7 +90,7 @@ public class Jeu extends JFrame implements ActionListener
 		pUtilitaire.add( recommencer );
 
 		pUtilitaire.add(
-				mouvements = new JLabel( "Mouvements : " + ctrl.getEchiquier().getNbMouvements()
+				mouvements = new JLabel( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements()
 				) );
 
 		add( pUtilitaire, "East" );
@@ -110,11 +110,12 @@ public class Jeu extends JFrame implements ActionListener
 	/**
 	 * Met à jour l'affichage du défi, du niveau et du score.
 	 */
-	private void majPanel()
+	public void majPanel()
 	{
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
 		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
 		score.setText( "Score : " + ctrl.getJoueurCourant().getScore() );
+		mouvements.setText("Mouvements : " + ctrl.getJoueurCourant().getNbMouvements());
 	}
 
 

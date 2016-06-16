@@ -7,6 +7,7 @@ import SolitaireChess.metier.Echiquier;
 import SolitaireChess.metier.Joueur;
 
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
-public class Controleur
+public class Controleur implements Serializable
 {
 	private Accueil           accueil;
 	private Echiquier         echiquier;
@@ -27,7 +28,7 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.alJoueur = new ArrayList<>();
+		charger();
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
 		this.joueurCourant = null;
@@ -52,6 +53,32 @@ public class Controleur
 																						   x2,
 																						   y2 ) )
 				majIHM();
+	}
+
+
+	public void charger()
+	{
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream( "./sauvegardes.data" ) );
+			alJoueur = (ArrayList<Joueur>)in.readObject();
+
+			in.close();
+		} catch ( Exception e ) {this.alJoueur = new ArrayList<>(); }
+	}
+
+
+	public void enregistrer()
+	{
+		try
+		{
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream( "./sauvegardes.data" ) );
+			out.writeObject( alJoueur );
+
+			out.close();
+		} catch ( Exception e ) {e.printStackTrace();}
 	}
 
 
@@ -105,6 +132,12 @@ public class Controleur
 	}
 
 
+	public void setJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	}
+
+
 	public Echiquier getEchiquier()
 	{
 		return echiquier;
@@ -132,12 +165,6 @@ public class Controleur
 	public int getNbColonne()
 	{
 		return echiquier.getNbColonne();
-	}
-
-
-	public void setJeu( Jeu jeu )
-	{
-		this.jeu = jeu;
 	}
 
 
@@ -180,7 +207,7 @@ public class Controleur
 									 new ImageIcon( "./images/iconeChoisirPseudo.png" ),
 									 themes,
 									 null
-									  );
+								   );
 	}
 
 
@@ -189,6 +216,18 @@ public class Controleur
 		for ( Joueur j : alJoueur )
 			if ( nomJoueur.equals( j.getNom() ) )
 				joueurCourant = j;
+	}
+
+
+	public void afficherMessage( String message )
+	{
+		JOptionPane.showMessageDialog( jeu, message, "Bon à savoir !", JOptionPane.PLAIN_MESSAGE );
+	}
+
+
+	public void afficherMessageErreur( String messageErreur )
+	{
+		JOptionPane.showMessageDialog( jeu, messageErreur, "Erreur", JOptionPane.ERROR_MESSAGE );
 	}
 
 
