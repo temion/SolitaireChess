@@ -79,6 +79,12 @@ public class PanelSolitaireChess extends JPanel
 		img = getToolkit().getImage( sImg );
 		g2.drawImage( img, 0, 0, this );
 
+		/*if ( sourisXPressed > - 1 && sourisYPressed > - 1 ||
+			 sourisXClicked > - 1 && sourisYClicked > - 1 )
+			for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
+				for ( int j = 0; j < this.ctrl.getNbColonne(); j++ )
+					if(ctrl.getEchiquier().getEchiquier()[i][j] != null)*/
+
 		// On place les graphiquement les pièces sur le plateau
 		for ( int i = 0; i < this.ctrl.getNbLigne(); i++ )
 			for ( int j = 0; j < this.ctrl.getNbColonne(); j++ )

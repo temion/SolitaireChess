@@ -82,6 +82,7 @@ public class Jeu extends JFrame implements ActionListener
 				                    JLabel.CENTER ) );
 
 		annuler = new JButton( "Annuler" );
+		annuler.addActionListener( this );
 		pUtilitaire.add( annuler );
 
 		recommencer = new JButton( "Recommencer" );
@@ -133,7 +134,8 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		if( e.getSource() == annuler )
 		{
-
+			ctrl.annuler();
+			majIHM();
 		}
 
 		if( e.getSource() == recommencer )

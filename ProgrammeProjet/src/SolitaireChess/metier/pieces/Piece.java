@@ -159,4 +159,23 @@ public abstract class Piece implements Serializable
 	{
 		this.y = y;
 	}
+
+
+	public static Piece clonerPiece( Piece piece )
+	{
+		if(piece instanceof Roi)
+			return new Roi(piece.x, piece.y, piece.echiquier);
+		else if(piece instanceof Dame)
+			return new Dame(piece.x, piece.y, piece.echiquier);
+		else if(piece instanceof Fou)
+			return new Fou(piece.x, piece.y, piece.echiquier);
+		else if(piece instanceof Cavalier)
+			return new Cavalier(piece.x, piece.y, piece.echiquier);
+		else if(piece instanceof Tour)
+			return new Tour(piece.x, piece.y, piece.echiquier);
+		else if(piece instanceof Pion)
+			return new Pion(piece.x, piece.y, piece.echiquier);
+
+		return null;
+	}
 }

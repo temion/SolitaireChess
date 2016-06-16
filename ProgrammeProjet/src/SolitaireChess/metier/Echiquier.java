@@ -25,7 +25,7 @@ public class Echiquier implements Serializable
 	private boolean    aUnRoi;
 	private Controleur ctrl;
 
-	private ArrayList<Echiquier> mouvements;
+	private ArrayList<Piece[][]> mouvements;
 
 
 	/**
@@ -52,6 +52,7 @@ public class Echiquier implements Serializable
 	 *
 	 * @param autre l'autre échiquier
 	 */
+	/*
 	public static Echiquier clonerEchiquier( Echiquier autre )
 	{
 		//Utilisé pour éviter de pointer sur les mêmes objets.
@@ -65,9 +66,19 @@ public class Echiquier implements Serializable
 
 		for ( int i = 0; i < nvEchiquier.echiquier.length; i++ )
 			for ( int j = 0; j < nvEchiquier.echiquier[i].length; j++ )
-				nvEchiquier.echiquier[i][j] = autre.echiquier[i][j];
+				nvEchiquier.echiquier[i][j] = autre.echiquier[i][j];<
 
 		return nvEchiquier;
+	}*/
+	public static Piece[][] clonerEchiquier( Piece[][] autre )
+	{
+		Piece[][] tmp = new Piece[4][4];
+
+		for ( int i = 0; i < tmp.length; i++ )
+			for ( int j = 0; j < tmp[i].length; j++ )
+				tmp[i][j] = Piece.clonerPiece( autre[i][j] );
+
+		return tmp;
 	}
 
 
@@ -89,6 +100,7 @@ public class Echiquier implements Serializable
 		if ( echiquier[x1][y1].deplacer( x2, y2 ) )
 		{
 			nbPiece--;
+			mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
 
 			if ( estRoi || nbPiece > 1 && aPerdu() ) recommencer();
 			else if ( aGagne() )
@@ -97,7 +109,8 @@ public class Echiquier implements Serializable
 				ctrl.enregistrer();
 				incrementerDefi();
 			}
-			else return true;
+			else
+				return true;
 		}
 
 		return false;
@@ -188,7 +201,24 @@ public class Echiquier implements Serializable
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
 
+		mouvements.clear();
+		mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
+
 		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
+	}
+
+
+	public void annuler()
+	{
+		System.out.println( mouvements.size() );
+		if ( mouvements.size() > 1 )
+		{
+			System.out.println( "annulé" );
+			mouvements.remove( mouvements.size() - 1 );
+			echiquier = Echiquier.clonerEchiquier( mouvements.get( mouvements.size() - 1 ) );
+			nbPiece++;
+		}
+
 	}
 
 

@@ -212,4 +212,10 @@ public class Controleur implements Serializable
 			if ( nomJoueur.equals( j.getNom() ) )
 				joueurCourant = j;
 	}
+
+
+	public void annuler()
+	{
+		echiquier.annuler();
+	}
 }
