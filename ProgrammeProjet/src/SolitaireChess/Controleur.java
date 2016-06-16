@@ -118,6 +118,12 @@ public class Controleur implements Serializable
 	}
 
 
+	public String getImgCaseVert()    { return "./images/case_verte.png"; }
+
+
+	public String getImgCaseBlanche() { return "./images/case_blanche.png"; }
+
+
 	public String getImg( int i, int j )
 	{
 		String symbole = this.echiquier.getSymbole( i, j );
