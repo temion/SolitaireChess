@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 /**
  * SolitaireChess - Projet Tutoré
@@ -129,12 +130,10 @@ public class PanelSolitaireChess extends JPanel
 
 			if( p != null )
 			{
-<<<<<<< HEAD
 				ArrayList<Point> alCoordEchec = p.getDeplacementEchec();
 				//ArrayList<Point> alCoordSC = p.getDeplacementPossible();
 				//System.out.println( p.getClass().getName() );
-=======
->>>>>>> Choixdesniveaux
+
 				for( Point point : p.getDeplacementEchec() )
 				{
 					g2.setColor( negatifVide( tabThemes[0][1][0] ) );

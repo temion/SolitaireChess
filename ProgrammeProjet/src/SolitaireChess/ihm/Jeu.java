@@ -19,8 +19,6 @@ public class Jeu extends JFrame implements ActionListener
 
 	private PanelSolitaireChess plateau;
 
-	private BarreAction barreAction;
-
 	private JButton annuler;
 	private JButton recommencer;
 
@@ -44,8 +42,9 @@ public class Jeu extends JFrame implements ActionListener
 		ctrl.setFenetreJeu( this );
 		ctrl.getEchiquier().setDefi();
 
-		barreAction = new BarreAction( this );
-		add( barreAction, "North" );
+		setJMenuBar( new BarreMenu( this ) );
+
+		add( new BarreAction( this ), "North" );
 
 		initPanelUtilitaire();
 
