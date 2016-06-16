@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 /**
  * SolitaireChess - Projet Tutoré

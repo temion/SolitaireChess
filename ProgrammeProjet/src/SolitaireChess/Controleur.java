@@ -286,4 +286,6 @@ public class Controleur implements Serializable
 	{
 		echiquier.annuler();
 	}
+
+	public void recommencer() { echiquier.recommencer(); }
 }

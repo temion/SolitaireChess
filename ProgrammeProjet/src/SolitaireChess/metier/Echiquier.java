@@ -220,6 +220,7 @@ public class Echiquier implements Serializable
 			mouvements.remove( mouvements.size() - 1 );
 			echiquier = Echiquier.clonerEchiquier( mouvements.get( mouvements.size() - 1 ) );
 			nbPiece++;
+			ctrl.majIHM();
 		}
 
 	}
