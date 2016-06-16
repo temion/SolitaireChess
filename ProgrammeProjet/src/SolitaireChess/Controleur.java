@@ -78,7 +78,7 @@ public class Controleur implements Serializable
 			out.writeObject( alJoueur );
 
 			out.close();
-		} catch ( Exception e ) {e.printStackTrace();}
+		} catch ( Exception e ) {}
 	}
 
 

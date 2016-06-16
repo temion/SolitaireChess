@@ -94,7 +94,7 @@ public class Accueil extends JFrame implements ActionListener
 				if ( s != null && s.length() > 0 )
 				{
 					ctrl.ajouterJoueur( s );
-					//ctrl.enregistrer();
+					ctrl.enregistrer();
 					new Jeu( ctrl );
 					dispose();
 				}
