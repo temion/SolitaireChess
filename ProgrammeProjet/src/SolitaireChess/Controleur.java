@@ -7,6 +7,7 @@ import SolitaireChess.metier.Echiquier;
 import SolitaireChess.metier.Joueur;
 
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
  */
-public class Controleur
+public class Controleur implements Serializable
 {
 	private Accueil           accueil;
 	private Echiquier         echiquier;
@@ -28,6 +29,7 @@ public class Controleur
 	public Controleur()
 	{
 		this.alJoueur = new ArrayList<>();
+		charger();
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
 		this.joueurCourant = null;
@@ -54,6 +56,26 @@ public class Controleur
 				majIHM();
 	}
 
+	public void charger() {
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream( new FileInputStream( "./sauvegardes.data" ) );
+			alJoueur = (ArrayList<Joueur>)in.readObject();
+
+			in.close();
+		}
+		catch (Exception e) {e.printStackTrace();}
+	}
+
+	public void enregistrer() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream( "./sauvegardes.data" ) );
+			out.writeObject(alJoueur);
+
+			out.close();
+		}
+		catch (Exception e) {e.printStackTrace();}
+	}
 
 	public void ajouterJoueur( String nomJoueur )
 	{

@@ -12,10 +12,11 @@ import SolitaireChess.Controleur;
 import SolitaireChess.metier.pieces.*;
 
 import java.io.FileReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Echiquier
+public class Echiquier implements Serializable
 {
 	private Piece[][]  echiquier;
 	private int        defi;
@@ -93,6 +94,7 @@ public class Echiquier
 			else if ( aGagne() )
 			{
 				System.out.println( "Gagné mon con" );
+				ctrl.enregistrer();
 				incrementerDefi();
 			}
 			else return true;
