@@ -163,20 +163,22 @@ public class PanelSolitaireChess extends JPanel
 		for( int i = 0; i < this.ctrl.getNbLigne(); i++ )
 			for( int j = 0; j < this.ctrl.getNbColonne(); j++ )
 			{
-				if( i == sourisXPressed && j == sourisYPressed ) //Positionne la pièce sur la souris
-				{
-					sImg = this.ctrl.getImg( sourisXPressed, sourisYPressed );
-					img = getToolkit().getImage( sImg );
-					g2.drawImage( img, sourisXMoved - (TAILLE_CASE / 2),
-					              sourisYMoved - (TAILLE_CASE / 2),
-					              this );
-				} else
+				if( i != sourisXPressed || j != sourisYPressed ) //Positionne la pièce sur la souris
 				{
 					sImg = this.ctrl.getImg( i, j );
 					img = getToolkit().getImage( sImg );
 					g2.drawImage( img, j * TAILLE_CASE, i * TAILLE_CASE, this );
 				}
 			}
+
+		if( sourisXPressed > -1 && sourisYPressed > -1 ) //Positionne la pièce sur la souris
+		{
+			sImg = this.ctrl.getImg( sourisXPressed, sourisYPressed );
+			img = getToolkit().getImage( sImg );
+			g2.drawImage( img, sourisXMoved - (TAILLE_CASE / 2),
+			              sourisYMoved - (TAILLE_CASE / 2),
+			              this );
+		}
 	}
 
 
