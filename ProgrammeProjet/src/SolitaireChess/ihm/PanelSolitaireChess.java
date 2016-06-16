@@ -37,7 +37,7 @@ public class PanelSolitaireChess extends JPanel
 	private int sourisYClicked;
 
 	private static final Color[][][] tabThemes = new Color[][][]{ { { new Color( 0x34B618 ),
-	                                                                  new Color( 0x918800 ),
+	                                                                  new Color( 0xFFDF50 ),
 	                                                                  new Color( 0xBF1C02 ),
 	                                                                  new Color( 0x9C000F ) },
 	                                                                { new Color( 0xF0FFEB ) } },
@@ -99,9 +99,9 @@ public class PanelSolitaireChess extends JPanel
 			for( int j = 0; j < ctrl.getNbColonne(); j++ )
 			{
 				if( bCase )
-					c = tabThemes[1][1][0];
+					c = tabThemes[ctrl.getTheme()-1][1][0];
 				else
-					c = tabThemes[1][0][ctrl.getDernierDefi()[0] - 1];
+					c = tabThemes[ctrl.getTheme()-1][0][ctrl.getDernierDefi()[0] - 1];
 
 				int taille = TAILLE_CASE - (TAILLE_BORDURE * 2);
 
@@ -159,7 +159,7 @@ public class PanelSolitaireChess extends JPanel
 
 		String sImg;
 		Image  img;
-		// On place les graphiquement les pièces sur le plateau
+		// On place graphiquement les pièces sur le plateau
 		for( int i = 0; i < this.ctrl.getNbLigne(); i++ )
 			for( int j = 0; j < this.ctrl.getNbColonne(); j++ )
 			{
@@ -171,7 +171,8 @@ public class PanelSolitaireChess extends JPanel
 				}
 			}
 
-		if( sourisXPressed > -1 && sourisYPressed > -1 ) //Positionne la pièce sur la souris
+		//Positionne la pièce sur la souris, devant toutes les autres pièces
+		if( sourisXPressed > -1 && sourisYPressed > -1 )
 		{
 			sImg = this.ctrl.getImg( sourisXPressed, sourisYPressed );
 			img = getToolkit().getImage( sImg );
