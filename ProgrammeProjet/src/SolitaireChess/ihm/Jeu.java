@@ -22,10 +22,14 @@ public class Jeu extends JFrame implements ActionListener
 
 	private JButton annuler;
 	private JButton recommencer;
+	private JButton menuPrincipal;
 
 	private JLabel niveau;
 	private JLabel defi;
 	private JLabel mouvements;
+
+	private static final String[] TAB_NOM_NIVEAU = new String[] {"Débutant", "Intermédiaire", "Avancé",
+													"Expert"};
 
 	/**
 	 * Construit l'écran du jeu.
@@ -72,25 +76,27 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		JPanel pUtilitaire = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
 
-		pUtilitaire.setBorder( BorderFactory.createEtchedBorder() );//A LA FIN
-
 		pUtilitaire.add(
-				defi = new JLabel( "Defi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
+				defi = new JLabel( "Défi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
 
-		pUtilitaire.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
+		pUtilitaire.add( niveau = new JLabel( "Niveau : " + niveauToString(),
 		                                      JLabel.CENTER ) );
 
-		annuler = new JButton( "Annuler" );
+		pUtilitaire.add(
+				mouvements = new JLabel( "Mouvements : " + ctrl.getJoueurCourant()
+						.getNbMouvements(), JLabel.CENTER ) );
+
+		annuler = new JButton(new ImageIcon( "./images/annuler.png" ));
 		annuler.addActionListener( this );
 		pUtilitaire.add( annuler );
 
-		recommencer = new JButton( "Recommencer" );
+		recommencer = new JButton( new ImageIcon( "./images/recommencer.png" ) );
 		recommencer.addActionListener( this );
 		pUtilitaire.add( recommencer );
 
-		pUtilitaire.add(
-				mouvements = new JLabel( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements()
-				) );
+		menuPrincipal = new JButton( new ImageIcon( "./images/menuPrincipal.png" ) );
+		menuPrincipal.addActionListener( this );
+		pUtilitaire.add( menuPrincipal );
 
 		add( pUtilitaire, "East" );
 	}
@@ -111,9 +117,14 @@ public class Jeu extends JFrame implements ActionListener
 	 */
 	public void majPanel()
 	{
-		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
-		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
+		defi.setText( "Défi n° " + ctrl.getEchiquier().getDefi() );
+		niveau.setText( "Niveau " + niveauToString() );
 		mouvements.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
+	}
+
+	private String niveauToString()
+	{
+		return Jeu.TAB_NOM_NIVEAU[ctrl.getEchiquier().getNiveau() -1];
 	}
 
 
@@ -165,9 +176,23 @@ public class Jeu extends JFrame implements ActionListener
 			majIHM();
 		}
 
-		if( e.getSource() == recommencer )
+		else if( e.getSource() == recommencer )
 		{
 			ctrl.getEchiquier().recommencer();
+		}
+
+		else if ( e.getSource() == menuPrincipal )
+		{
+			if ( JOptionPane.showConfirmDialog(
+					this,
+					"Voulez-vous vraiment revenir au menu principal ?",
+					"Question",
+					JOptionPane.YES_NO_OPTION ) == 0 )
+			{
+				new Accueil( ctrl );
+				dispose();
+			}
+
 		}
 	}
 

@@ -196,13 +196,7 @@ public class Accueil extends JFrame implements ActionListener
 
 		if ( e.getSource() == aide )
 		{
-			try
-			{
-				if ( Desktop.isDesktopSupported() )
-				{
-					Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
-				}
-			} catch ( Exception exe ) {}
+			ctrl.afficherRegles();
 		}
 
 		if ( e.getSource() == supprimer )

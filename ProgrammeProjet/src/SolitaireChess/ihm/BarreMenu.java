@@ -157,14 +157,20 @@ public class BarreMenu extends JMenuBar implements ActionListener
 
 		else if ( e.getSource() == choixDefi ) {new ChoixNiveau( fenetre );}
 
-		else if ( e.getSource() == creerDefi ) {System.out.println();}
+		else if ( e.getSource() == creerDefi ) {new CreerNiveau( fenetre.getCtrl() );}
 
 		else if ( e.getSource() == aProposJoueur )
 		{
 			fenetre.getCtrl().afficherInfosJoueur();
 		}
 
-		else if ( e.getSource() == aProposJeu ) {System.out.println();}
+		else if ( e.getSource() == aProposJeu )
+		{
+			JOptionPane.showMessageDialog( fenetre, "© Boulant Florian, Di Gregorio Thomas, " +
+													"Emion Thibaut, Edouard Clémence \n Projet " +
+													"tutoré – Année universitaire 2015-2016",
+										   "A Propos du jeu", JOptionPane.PLAIN_MESSAGE );
+		}
 
 		else if ( e.getSource() == regles )
 		{

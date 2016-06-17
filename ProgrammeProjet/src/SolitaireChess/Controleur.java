@@ -420,4 +420,14 @@ public class Controleur implements Serializable
 		return nbDefisReussis;
 	}
 
+	public void afficherRegles()
+	{
+		try
+		{
+			if ( Desktop.isDesktopSupported() )
+			{
+				Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
+			}
+		} catch ( Exception exe ) {}
+	}
 }

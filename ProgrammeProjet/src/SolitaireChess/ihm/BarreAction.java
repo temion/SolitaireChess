@@ -8,12 +8,13 @@ package SolitaireChess.ihm;
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BarreAction extends JToolBar implements ActionListener
+public class BarreAction extends JPanel implements ActionListener
 {
-	private Jeu jeu;
+	private Jeu fenetre;
 
 	private JButton indices;
 	private JButton niveaux;
@@ -28,9 +29,11 @@ public class BarreAction extends JToolBar implements ActionListener
 	 *
 	 * @param jeu la fenêtre contenant tous les composants ihm
 	 */
-	public BarreAction( Jeu jeu )
+	public BarreAction( Jeu fenetre )
 	{
-		this.jeu = jeu;
+		this.fenetre = fenetre;
+
+		setLayout( new GridLayout( 1, 6 ) );
 
 		indices = new JButton( "Indices" );
 		indices.addActionListener( this );
@@ -40,21 +43,13 @@ public class BarreAction extends JToolBar implements ActionListener
 		niveaux.addActionListener( this );
 		add( niveaux );
 
-		creerNiveau = new JButton( "Creer niveau" );
+		creerNiveau = new JButton( "Créer niveau" );
 		creerNiveau.addActionListener( this );
 		add( creerNiveau );
 
-		joueur = new JButton( "Joueur" );
-		joueur.addActionListener( this );
-		add( joueur );
-
-		regles = new JButton( "Regles" );
+		regles = new JButton( "Règles" );
 		regles.addActionListener( this );
 		add( regles );
-
-		menuPrincipal = new JButton( "Menu principal" );
-		menuPrincipal.addActionListener( this );
-		add( menuPrincipal );
 	}
 
 
@@ -68,35 +63,28 @@ public class BarreAction extends JToolBar implements ActionListener
 	{
 		if ( e.getSource() == indices )
 		{
-			jeu.getCtrl().getJoueurCourant().incrementerMouvements();
-			jeu.getCtrl().getEchiquier().initIndiceDefi();
+			fenetre.getCtrl().getJoueurCourant().incrementerMouvements();
+			fenetre.getCtrl().getEchiquier().initIndiceDefi();
 		}
 
-		if ( e.getSource() == niveaux )
+		else if ( e.getSource() == niveaux )
 		{
-			new ChoixNiveau( jeu );
+			new ChoixNiveau( fenetre );
 		}
 
-		if(e.getSource() == creerNiveau)
+		else if(e.getSource() == creerNiveau)
 		{
-			new CreerNiveau( jeu.getCtrl() );
+			new CreerNiveau( fenetre.getCtrl() );
 		}
-		if ( e.getSource() == menuPrincipal )
-		{
-			if ( JOptionPane.showConfirmDialog(
-					this,
-					"Voulez-vous vraiment revenir au menu principal ?",
-					"Question",
-					JOptionPane.YES_NO_OPTION ) == 0 )
-			{
-				new Accueil( jeu.getCtrl() );
-				jeu.dispose();
-			}
 
-		}
 		else if ( e.getSource() == joueur )
 		{
-			jeu.getCtrl().afficherInfosJoueur();
+			fenetre.getCtrl().afficherInfosJoueur();
+		}
+
+		else if ( e.getSource() == regles)
+		{
+			fenetre.getCtrl().afficherRegles();
 		}
 	}
 }
