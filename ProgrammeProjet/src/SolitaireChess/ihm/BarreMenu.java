@@ -84,7 +84,7 @@ public class BarreMenu extends JMenuBar implements ActionListener
 		JMenu niveau = new JMenu( "Niveau" );
 
 		niveau.add( choixDefi = new JMenuItem( "Choisir un défi" ) );
-		niveau.add( creerDefi = new JMenuItem( "Créer votre propre défi !" ) );
+		niveau.add( creerDefi = new JMenuItem( "Créez votre propre défi !" ) );
 
 		choixDefi.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_O, KeyEvent.CTRL_MASK ) );
 		creerDefi.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_N, KeyEvent.CTRL_MASK ) );
@@ -143,12 +143,7 @@ public class BarreMenu extends JMenuBar implements ActionListener
 
 		else if ( e.getSource() == quitter )
 		{
-			if ( JOptionPane.showConfirmDialog( this, "Voulez-vous vraiment quitter ?",
-												"Quitter le jeu",
-												JOptionPane.YES_NO_OPTION ) == 0 )
-			{
-				System.exit( 0 );
-			}
+			getFenetre().getCtrl().quitter();
 		}
 
 		else if ( e.getSource() == recommencer ) { fenetre.getCtrl().recommencer(); }
