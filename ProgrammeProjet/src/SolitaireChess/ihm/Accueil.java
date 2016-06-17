@@ -41,7 +41,7 @@ public class Accueil extends JFrame implements ActionListener
 	 */
 	public Accueil( Controleur ctrl )
 	{
-		setTitle( "SolitaireChess" );                   // Taille de la fenêtre
+		setTitle( "SolitaireChess-Accueil" );
 
 		this.ctrl = ctrl;
 

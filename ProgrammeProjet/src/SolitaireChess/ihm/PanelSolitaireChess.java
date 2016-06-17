@@ -25,15 +25,20 @@ public class PanelSolitaireChess extends JPanel
 
 	private Controleur ctrl;
 
+	// Position du curseur lors d'un appui "drag"
 	private int sourisXPressed;
 	private int sourisYPressed;
 
+	// Position du curseur lors d'un mouvement "drag"
 	private int sourisXMoved;
 	private int sourisYMoved;
 
+	// Position du curseur lors d'un click
 	private int sourisXClicked;
 	private int sourisYClicked;
 
+	// Le tableau qui contient les thèmes dans l'ordre de dimensions suivant:
+	//      []<- thème []<- case blanche/colorée []<- couleur
 	private static final Color[][][] tabThemes = new Color[][][]{ { { new Color( 0x34B618 ),
 																	  new Color( 0xFFDF50 ),
 																	  new Color( 0xBF1C02 ),
@@ -68,16 +73,19 @@ public class PanelSolitaireChess extends JPanel
 		this.sourisXPressed = - 1;
 		this.sourisYPressed = - 1;
 
-		this.TAILLE_CASE = this.ctrl.getTailleImg();     // Défini la taille des images
+		this.TAILLE_CASE = this.ctrl.getTailleImg(); // Définit la taille des images
 
-		setPreferredSize( new Dimension( 400, 400 ) );  // Défini la taille du plateau
+		setPreferredSize( new Dimension( 400, 400 ) ); // Définit la taille du plateau
 
-		GererSouris    evtSouris    = new GererSouris();      // Gère les événement liés à la souris
-		GererMvtSouris evtMvtSouris = new GererMvtSouris();
+		GererSouris evtSouris = new GererSouris(); // Gère les événements liés aux boutons
+		// de souris
+		GererMvtSouris evtMvtSouris = new GererMvtSouris(); // Gère les événements liés aux
+		// mouvements de souris
 
 		addMouseMotionListener( evtMvtSouris );
-		addMouseListener( evtSouris );                  // sur le plateau
-		setFocusable( true );                           // Le plateau est focussable
+		addMouseListener( evtSouris );
+
+		setFocusable( true ); // Le plateau est focussable
 	}
 
 
@@ -92,10 +100,12 @@ public class PanelSolitaireChess extends JPanel
 
 		Graphics2D g2 = (Graphics2D)g;
 
+		// On dessine le fond du plateau
 		g2.setColor( Color.BLACK );
 		g2.fillRect( 0, 0, TAILLE_CASE * ctrl.getNbLigne(), TAILLE_CASE * ctrl.getNbColonne() );
 
-		// On défini le fond du plateau
+
+		// On dessine les cases
 		boolean bCase = true;
 		Color   c;
 
@@ -118,6 +128,7 @@ public class PanelSolitaireChess extends JPanel
 			}
 
 
+		// On colore les cases vers lesquelles on peut se déplacer 
 		if ( sourisXPressed > - 1 && sourisYPressed > - 1 ||
 			 sourisXClicked > - 1 && sourisYClicked > - 1 )
 		{

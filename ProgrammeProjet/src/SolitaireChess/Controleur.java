@@ -461,10 +461,11 @@ public class Controleur implements Serializable
 		try
 		{
 			if ( Desktop.isDesktopSupported() )
-			{
-				Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
-			}
-		} catch ( Exception exe ) {}
+				Desktop.getDesktop().browse( new File( "regles/index.html" ).toURI() );
+		} catch( Exception exe )
+		{
+			exe.printStackTrace();
+		}
 	}
 
 

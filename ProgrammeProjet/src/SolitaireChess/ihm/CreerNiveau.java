@@ -26,7 +26,6 @@ public class CreerNiveau extends JFrame implements ActionListener
 
 	private PanelCreerNiveau panelCreation;
 
-
 	/**
 	 * Construit une nouvelle fenêtre de création de niveau.
 	 *
@@ -67,13 +66,6 @@ public class CreerNiveau extends JFrame implements ActionListener
 		return ctrl;
 	}
 
-
-	public static void main( String[] arg )
-	{
-		new CreerNiveau( null );
-	}
-
-
 	@Override
 	/**
 	 * Gère les appuis sur les boutons du composant.
@@ -93,12 +85,16 @@ public class CreerNiveau extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * Ecrit le contenu de l'échiquier créé par l'utilisateur dans un fichier .data.
+	 */
 	private void ecrireFichierNiveau()
 	{
 		FileWriter fw;
 		File f;
 		int i=1;
 
+		// On cherche quel fichier écrire
 		while(true)
 		{
 			f=new File("./niveaux/niveauUtilisateur/defi"+String.format("%02d",i)+".data");
@@ -111,6 +107,7 @@ public class CreerNiveau extends JFrame implements ActionListener
 
 		try
 		{
+			// L'utilisateur ne peut faire que 15 défis
 			if(i<=15)
 			{
 				fw = new FileWriter( f );

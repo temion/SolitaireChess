@@ -39,7 +39,8 @@ public class Jeu extends JFrame implements ActionListener
 	 */
 	Jeu( Controleur ctrl )
 	{
-		setTitle( "Jeu" );                          // Titre de la fenêtre
+		setTitle( "SolitaireChess-Jeu" );
+		setLocation( 200, 200 );
 
 
 		this.ctrl = ctrl;
