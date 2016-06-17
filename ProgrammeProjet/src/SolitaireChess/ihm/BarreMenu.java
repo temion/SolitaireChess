@@ -1,5 +1,13 @@
 package SolitaireChess.ihm;
 
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM de la barre de menus de la fenêtre de jeu.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,13 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-
-/**
- * SolitaireChess - Projet Tutoré
- *
- * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
- * @date 16/06/2016
- */
 
 public class BarreMenu extends JMenuBar implements ActionListener
 {
@@ -33,6 +34,11 @@ public class BarreMenu extends JMenuBar implements ActionListener
 	private Jeu fenetre;
 
 
+	/**
+	 * Construit une nouvelle barre de menus.
+	 *
+	 * @param fenetre fenêtre sur laquelle sera placée la barre de menus
+	 */
 	public BarreMenu( Jeu fenetre )
 	{
 		this.fenetre = fenetre;
@@ -41,6 +47,9 @@ public class BarreMenu extends JMenuBar implements ActionListener
 	}
 
 
+	/**
+	 * Crée les différents menus de la barre, et leur affecte des raccourcis.
+	 */
 	private void initComposants()
 	{
 		JMenu fichier = new JMenu( "Fichier" );
@@ -100,12 +109,22 @@ public class BarreMenu extends JMenuBar implements ActionListener
 	}
 
 
+	/**
+	 * Retourne la fenêtre auquel appartient la barre de menus courante.
+	 *
+	 * @return fenêtre auquel appartient la barre de menus courante
+	 */
 	public Jeu getFenetre()
 	{
 		return fenetre;
 	}
 
 
+	/**
+	 * Redéfinis la fenêtre sur laquelle est placé la barre de menus courante.
+	 *
+	 * @param fenetre nouvelle fenêtre
+	 */
 	public void setFenetre( Jeu fenetre )
 	{
 		this.fenetre = fenetre;

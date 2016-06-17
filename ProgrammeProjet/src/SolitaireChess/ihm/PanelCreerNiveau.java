@@ -1,8 +1,12 @@
 package SolitaireChess.ihm;
 
-
-import SolitaireChess.Controleur;
-import SolitaireChess.interfaces.IPieceEchec;
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM qui représente le plateau de création de niveau.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-/**
- * SolitaireChess - Projet Tutoré
- * Classe ihm qui représente le plateau de jeu.
- *
- * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
- * @date 13/06/2016
- */
 public class PanelCreerNiveau extends JPanel
 {
 	private final int TAILLE_CASE = 100;
@@ -43,9 +40,9 @@ public class PanelCreerNiveau extends JPanel
 
 
 	/**
-	 * Construit le plateau de jeu des images.
+	 * Construit un nouveau plateau vide.
 	 *
-	 * @param creerNiveau la fenêtre de créer niveau qui invoque cette frame
+	 * @param creerNiveau la fenêtre parent
 	 */
 	public PanelCreerNiveau( CreerNiveau creerNiveau )
 	{
@@ -164,20 +161,35 @@ public class PanelCreerNiveau extends JPanel
 	}
 
 
+	/**
+	 * Retourne le négatif de la couleur passée en paramètre.
+	 *
+	 * @param c couleur à transformer
+	 * @return nouvelle couleur
+	 */
 	public Color negatifVide( Color c )
 	{
 		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 100 );
 	}
 
-
+	/**
+	 * Retourne le négatif de la couleur passée en paramètre.
+	 *
+	 * @param c couleur à transformer
+	 * @return nouvelle couleur
+	 */
 	public Color negatifPlein( Color c )
 	{
 		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 200 );
 	}
 
 
+	/**
+	 * Classe interne qui gère les déplacements de la souris.
+	 */
 	private class GererMvtSouris extends MouseMotionAdapter
 	{
+		@Override
 		public void mouseDragged( MouseEvent e )
 		{
 			sourisXMoved = e.getX();
@@ -188,7 +200,7 @@ public class PanelCreerNiveau extends JPanel
 
 
 	/**
-	 * Classe interne qui gère les événements liés à  la souris.
+	 * Classe interne qui gère les événements liés à la souris.
 	 */
 	private class GererSouris extends MouseAdapter
 	{
@@ -258,7 +270,7 @@ public class PanelCreerNiveau extends JPanel
 		return s;
 	}
 
-	public char[][] getNiveau()
+	public char[][] getDefi()
 	{
 		return tabPiecesMises;
 	}

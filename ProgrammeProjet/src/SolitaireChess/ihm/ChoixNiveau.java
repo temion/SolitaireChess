@@ -1,14 +1,19 @@
 package SolitaireChess.ihm;
 
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM de la fenêtre de sélection de niveau.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-/**
- * Created by Thibaut on 16/06/2016.
- */
+import java.io.File;
 
 public class ChoixNiveau extends JFrame
 {
@@ -20,8 +25,15 @@ public class ChoixNiveau extends JFrame
 	private JPanel niveau2;
 	private JPanel niveau3;
 	private JPanel niveau4;
+	private JPanel niveau5;
 
 
+	/**
+	 * Construit une nouvelle fenêtre de sélection de niveau.
+	 * Lui ajoute 4 onglets, correspondant aux différents niveaux de difficulté disponibles.
+	 *
+	 * @param jeu fenêtre auquelle est lié la fenêtre de choix de niveau créée
+	 */
 	public ChoixNiveau( Jeu jeu )
 	{
 		this.jeu = jeu;
@@ -36,11 +48,13 @@ public class ChoixNiveau extends JFrame
 		niveau2 = new JPanel();
 		niveau3 = new JPanel();
 		niveau4 = new JPanel();
+		niveau5 = new JPanel();
 
 		niveaux.addTab( "Débutant", niveau1 );
 		niveaux.addTab( "Intermédiaire", niveau2 );
 		niveaux.addTab( "Avancé", niveau3 );
 		niveaux.addTab( "Expert", niveau4 );
+		niveaux.addTab( "Utilisateur", niveau5);
 
 		add( niveaux );
 
@@ -57,10 +71,44 @@ public class ChoixNiveau extends JFrame
 		creerChoix( niveau3, 3 );
 		creerChoix( niveau4, 4 );
 
+		creerChoixUtilisateur( niveau5 );
+
 		setVisible( true );
 	}
 
+	private void creerChoixUtilisateur( JPanel niveau)
+	{
+		niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
 
+
+		for( int i = 1; i < 16; i++ )
+		{
+			if( new File( "./niveaux/niveauUtilisateur/defi" + String.format( "%02d",
+			                                                                  i ) + ".data" ).exists() )
+			{
+				JButton b = new JButton( "YDefi n°" + i, new ImageIcon(
+						"./images/apercus/niveauUtilisateur/defiConnu.png" ) );
+
+				b.setIconTextGap( 2 );
+				niveau.add( b );
+			} else
+			{
+				JButton b = new JButton( "NDefi n°" + i, new ImageIcon(
+						"./images/apercus/niveauUtilisateur/defiInconnu.png" ) );
+
+				b.setIconTextGap( 2 );
+				niveau.add( b );
+			}
+		}
+	}
+
+	/**
+	 * Ajoute à l'onglet correspondant au niveau passé en paramètre 15 boutons défis.
+	 * Cliquer sur un de ces boutons mets à jour le niveau courant.
+	 *
+	 * @param niveau onglet dans lequel on ajoute les boutons
+	 * @param difficulte difficulté des défis à ajouter
+	 */
 	private void creerChoix( JPanel niveau, int difficulte )
 	{
 		if ( niveaux.isEnabledAt( difficulte - 1 ) )
@@ -73,9 +121,8 @@ public class ChoixNiveau extends JFrame
 																								 1 ) )
 				{
 					JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
-																						  "./images/apercus/niveau%02d/defi%02d" +
-																						  ".png" +
-																						  "",
+					                                                                      "./images/apercus/niveau%02d/defi%02d" +
+					                                                                      ".png",
 																						  difficulte,
 																						  i ) ) );
 					b.setIconTextGap( 2 );

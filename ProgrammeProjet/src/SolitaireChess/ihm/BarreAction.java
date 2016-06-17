@@ -1,7 +1,7 @@
 package SolitaireChess.ihm;
 /**
  * SolitaireChess - Projet Tutoré
- * Classe ihm du composant se trouvant en haut de la fenêtre de jeu.
+ * Classe IHM du composant comportant les boutons se trouvant en haut de la fenêtre de jeu.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016

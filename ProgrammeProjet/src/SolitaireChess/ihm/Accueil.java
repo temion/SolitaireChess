@@ -1,5 +1,12 @@
 package SolitaireChess.ihm;
 
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM gérant la fenêtre d'accueil.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
 
 import SolitaireChess.Controleur;
 
@@ -26,6 +33,11 @@ public class Accueil extends JFrame implements ActionListener
 	private JButton quitter;
 
 
+	/**
+	 * Construit une nouvelle fenêtre d'accueil.
+	 *
+	 * @param ctrl controleur lié à la fenêtre courante
+	 */
 	public Accueil( Controleur ctrl )
 	{
 		setTitle( "SolitaireChess" );
@@ -49,6 +61,9 @@ public class Accueil extends JFrame implements ActionListener
 	}
 
 
+	/**
+	 * Crée les différents composants de la fenêtre.
+	 */
 	private void initComposants()
 	{
 		Dimension size = new Dimension( 200, 50 );
@@ -123,6 +138,9 @@ public class Accueil extends JFrame implements ActionListener
 	}
 
 
+	/**
+	 * Regroupe tous les profils dans une JComboBox, ensuite ajoutée à la fenêtre.
+	 */
 	private void initChoixJoueur()
 	{
 		Insets insets = getInsets();
@@ -141,9 +159,9 @@ public class Accueil extends JFrame implements ActionListener
 
 
 	/**
-	 * Invoked when an action occurs.
+	 * Gère les appuis sur les boutons du composant.
 	 *
-	 * @param e
+	 * @param e un événement lié à l'appui sur l'un des boutons
 	 */
 	@Override
 	public void actionPerformed( ActionEvent e )
@@ -206,12 +224,7 @@ public class Accueil extends JFrame implements ActionListener
 
 		if ( e.getSource() == quitter )
 		{
-			if ( JOptionPane.showConfirmDialog( this, "Voulez-vous vraiment quitter ?",
-												"Quitter le jeu",
-												JOptionPane.YES_NO_OPTION ) == 0 )
-			{
-				System.exit( 0 );
-			}
+			//ctrl.quitter(this);
 		}
 	}
 
