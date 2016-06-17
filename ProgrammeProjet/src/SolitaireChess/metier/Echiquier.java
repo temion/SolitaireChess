@@ -169,9 +169,9 @@ public class Echiquier implements Serializable
 	 */
 	private void initDefi()
 	{
-		echiquier = new Piece[4][4];
-
 		nbIndice = 0;
+
+		sFichier = String.format( "./niveaux/niveau%02d/defi%02d.data", niveau, defi );
 
 		parcourirFichier();
 
@@ -184,30 +184,47 @@ public class Echiquier implements Serializable
 
 	private void parcourirFichier()
 	{
-		sFichier = String.format( "./solutions/niveau%02d/defi%02d.data", niveau, defi );
+		echiquier = new Piece[4][4];
 
 		try
 		{
 			Scanner sc = new Scanner( new FileReader( sFichier ) );
 
-			for ( int i = 0; sc.hasNextLine() && i < nbIndice * 5; i++ )
-			{
-				System.out.println( sc.nextLine() );
-			}
-
-			nbPiece = 0;
+			sc.useDelimiter( "-----" );
 
 			String ligSc = "";
 
-			for ( int i = 0; i < echiquier.length && sc.hasNextLine(); i++ )
+			for ( int i = 0; sc.hasNextLine() && i < (nbIndice-1) * 5; i++ )
+			{
+				ligSc = sc.nextLine();
+				System.out.println( ligSc );
+			}
+
+			if (ligSc.matches( "FIN")) return;
+
+			nbPiece = 0;
+
+			for ( int i = 0; sc.hasNextLine() && i < echiquier.length ; i++ )
 			{
 				ligSc = sc.nextLine();
 
-				for ( int j = 0; j < echiquier[0].length && j < ligSc.length(); j++ )
+				for ( int j = 0; j < ligSc.length() && j < echiquier[0].length; j++ )
 					ajouterPiece( i, j, ligSc.charAt( j ) );
+
 			}
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
+	}
+
+	public void initIndiceDefi()
+	{
+		sFichier = String.format( "./solutions/niveau%02d/defi%02d.data", niveau, defi );
+
+		nbIndice++;
+
+		parcourirFichier();
+
+		getCtrl().majIHM();
 	}
 
 

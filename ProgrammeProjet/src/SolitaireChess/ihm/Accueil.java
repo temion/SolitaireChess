@@ -172,7 +172,7 @@ public class Accueil extends JFrame implements ActionListener
 			{
 				ctrl.definirJoueur( (String)choixProfil.getSelectedItem() );
 				new Jeu( ctrl );
-				setVisible( false );
+				dispose();
 			}
 		}
 
