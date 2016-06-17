@@ -76,10 +76,12 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		JPanel pUtilitaire = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
 
+		pUtilitaire.setPreferredSize( new Dimension( 200, 400 ) );
+
 		pUtilitaire.add(
 				defi = new JLabel( "Défi n° " + ctrl.getEchiquier().getDefi(), JLabel.CENTER ) );
 
-		pUtilitaire.add( niveau = new JLabel( "Niveau : " + niveauToString(),
+		pUtilitaire.add( niveau = new JLabel( "Niveau " + niveauToString(),
 		                                      JLabel.CENTER ) );
 
 		pUtilitaire.add(
