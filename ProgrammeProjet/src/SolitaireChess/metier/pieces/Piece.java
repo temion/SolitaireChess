@@ -27,6 +27,8 @@ public abstract class Piece implements Serializable, IPieceEchec
 	/**
 	 * Construit une pièce.
 	 *
+	 * @param x position horizontale de la pièce
+	 * @param y position verticale de la pièce
 	 * @param echiquier l'echiquier auquel appartient la pièce
 	 */
 	public Piece( int x, int y, Echiquier echiquier )
@@ -136,7 +138,7 @@ public abstract class Piece implements Serializable, IPieceEchec
 
 
 	/**
-	 * Permet définir la position horizontale de la pièce sur l'échiquier.
+	 * Permet de définir la position horizontale de la pièce sur l'échiquier.
 	 *
 	 * @param x la nouvelle position horizontale
 	 */
@@ -158,9 +160,9 @@ public abstract class Piece implements Serializable, IPieceEchec
 
 
 	/**
-	 * Permet d'obtenir la position verticale de la pièce sur l'échiquier.
+	 * Permet de définir la position verticale de la pièce sur l'échiquier.
 	 *
-	 * @return la position verticale de la pièce
+	 * @param y la nouvelle position veticale
 	 */
 	public void setY( int y )
 	{

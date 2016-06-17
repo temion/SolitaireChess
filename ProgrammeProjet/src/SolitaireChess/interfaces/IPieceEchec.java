@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Interface permettant d'indiquer toutes les cases accessibles par les pièces qui l'implémentent.
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
- * @date 13/06/2016
  */
 public interface IPieceEchec
 {

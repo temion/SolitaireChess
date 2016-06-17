@@ -34,6 +34,8 @@ public class Echiquier implements Serializable
 
 	/**
 	 * Construit un échiquier.
+	 *
+	 * @param ctrl controleur lié à l'échiquier courant
 	 */
 	public Echiquier( Controleur ctrl )
 	{
@@ -47,6 +49,7 @@ public class Echiquier implements Serializable
 	 * Construit un échiquier à partir d'un autre échiquier.
 	 *
 	 * @param autre l'autre échiquier
+	 * @return tableau de Piece représentant l'échiquier
 	 */
 	public static Piece[][] clonerEchiquier( Piece[][] autre )
 	{

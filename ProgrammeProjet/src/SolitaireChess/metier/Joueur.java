@@ -28,7 +28,7 @@ public class Joueur implements Serializable
 	/**
 	 * Construit un joueur avec le nom passé en paramètre.
 	 * Lui attribue un nombre de mouvements (par défaut 0) et un thème (par défaut 1).
-	 * Crée également des tableaux de booléens permettant de représenter l'avancement du joueur (défis accomplis &
+	 * Crée également des tableaux de booléens permettant de représenter l'avancement du joueur (défis accomplis et
 	 * défis débloqués).
 	 *
 	 * @param nom nom du joueur
