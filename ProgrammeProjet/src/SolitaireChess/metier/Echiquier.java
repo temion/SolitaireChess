@@ -99,6 +99,7 @@ public class Echiquier implements Serializable
 			else if ( aGagne() )
 			{
 				ctrl.afficherMessage( "Gagné" );
+				ctrl.getJoueurCourant().addDefiAccompli(niveau, defi);
 				ctrl.enregistrer();
 				incrementerDefi();
 			}
