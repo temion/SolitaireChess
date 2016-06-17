@@ -23,7 +23,6 @@ public class BarreAction extends JPanel implements ActionListener
 	private JButton regles;
 	private JButton menuPrincipal;
 
-
 	/**
 	 * Construit le composant se trouvant en haut de l'écran du jeu.
 	 *
