@@ -24,6 +24,7 @@ public class ChoixNiveau extends JFrame
 	private JPanel niveau2;
 	private JPanel niveau3;
 	private JPanel niveau4;
+	private JPanel niveau5;
 
 
 	/**
@@ -46,11 +47,13 @@ public class ChoixNiveau extends JFrame
 		niveau2 = new JPanel();
 		niveau3 = new JPanel();
 		niveau4 = new JPanel();
+		niveau5 = new JPanel();
 
 		niveaux.addTab( "Débutant", niveau1 );
 		niveaux.addTab( "Intermédiaire", niveau2 );
 		niveaux.addTab( "Avancé", niveau3 );
 		niveaux.addTab( "Expert", niveau4 );
+		niveaux.addTab( "Utilisateur", niveau5);
 
 		add( niveaux );
 
@@ -67,9 +70,15 @@ public class ChoixNiveau extends JFrame
 		creerChoix( niveau3, 3 );
 		creerChoix( niveau4, 4 );
 
+		creerChoixUtilisateur( niveau5 );
+
 		setVisible( true );
 	}
 
+	private void creerChoixUtilisateur( JPanel niveau)
+	{
+
+	}
 
 	/**
 	 * Ajoute à l'onglet correspondant au niveau passé en paramètre 15 boutons défis.
@@ -90,9 +99,8 @@ public class ChoixNiveau extends JFrame
 																								 1 ) )
 				{
 					JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
-																						  "./images/apercus/niveau%02d/defi%02d" +
-																						  ".png" +
-																						  "",
+					                                                                      "./images/apercus/niveau%02d/defi%02d" +
+					                                                                      ".png",
 																						  difficulte,
 																						  i ) ) );
 					b.setIconTextGap( 2 );

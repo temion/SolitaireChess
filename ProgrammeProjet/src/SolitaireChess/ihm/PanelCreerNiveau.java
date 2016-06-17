@@ -8,9 +8,6 @@ package SolitaireChess.ihm;
  * @date 13/06/2016
  */
 
-import SolitaireChess.Controleur;
-import SolitaireChess.interfaces.IPieceEchec;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -273,7 +270,7 @@ public class PanelCreerNiveau extends JPanel
 		return s;
 	}
 
-	public char[][] getNiveau()
+	public char[][] getDefi()
 	{
 		return tabPiecesMises;
 	}

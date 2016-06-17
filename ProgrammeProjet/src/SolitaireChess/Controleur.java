@@ -125,19 +125,6 @@ public class Controleur implements Serializable
 		}
 	}
 
-
-	/*
-	public boolean contientJoueur( String nomJoueur )
-	{
-		for( Joueur j : alJoueur )
-			if( nomJoueur.equals( j.getNom() ) )
-				return true;
-
-		return false;
-	}
-	*/
-
-
 	/**
 	 * Met à jour la fenêtre de jeu.
 	 *
@@ -147,39 +134,6 @@ public class Controleur implements Serializable
 	{
 		this.jeu.majIHM();
 	}
-
-
-	/**
-	 * Retourne le chemin de l'image de fond.
-	 *
-	 * @return chemin de l'image de fond
-	 */
-	public String getImgFond()
-	{
-		return "./images/fond.png";
-	}
-
-
-	/**
-	 * Retourne le chemin de l'image de case verte.
-	 *
-	 * @return chemin de l'image de case verte
-	 */
-	public String getImgCaseVert()
-	{
-		return "./images/case_verte.png";
-	}
-
-	/**
-	 * Retourne le chemin de l'image de case blanche.
-	 *
-	 * @return chemin de l'image de case blanche
-	 */
-	public String getImgCaseBlanche()
-	{
-		return "./images/case_blanche.png";
-	}
-
 
 	/**
 	 * Retourne le chemin de l'image correspondant à la pièce dont les indices sont passées en paramètre en fonction du
@@ -316,9 +270,8 @@ public class Controleur implements Serializable
 	 */
 	public boolean contientPiece( int i, int j )
 	{
-		if( i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne() )
-			return echiquier.getEchiquier()[i][j] != null;
-		return false;
+		return i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne
+				() && echiquier.getEchiquier()[i][j] != null;
 	}
 
 

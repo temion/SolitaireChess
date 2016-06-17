@@ -14,6 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 
 public class CreerNiveau extends JFrame implements ActionListener
 {
@@ -48,8 +50,8 @@ public class CreerNiveau extends JFrame implements ActionListener
 		this.valider.addActionListener( this );
 		this.abandonner.addActionListener( this );
 
-		setLocationRelativeTo( null );
 		pack();
+		setLocationRelativeTo( null );
 		setVisible( true );
 	}
 
@@ -81,10 +83,53 @@ public class CreerNiveau extends JFrame implements ActionListener
 	{
 		if ( e.getSource() == valider )
 		{
+			ecrireFichierNiveau();
 		}
 		if ( e.getSource() == abandonner )
 		{
 			dispose();
 		}
+	}
+
+	private void ecrireFichierNiveau()
+	{
+		FileWriter fw;
+		File f;
+		int i=1;
+
+		while(true)
+		{
+			f=new File("./niveaux/niveauUtilisateur/defi"+String.format("%02d",i)+".data");
+			if(! f.exists())
+				break;
+			i++;
+		}
+
+		String str="";
+
+		try
+		{
+			if(i<=15)
+			{
+				fw = new FileWriter( f );
+				char[][] tab = getDefi();
+
+				for(i=0; i<tab.length; i++)
+				{
+					for(int j=0; j<tab[i].length; j++)
+						str += tab[i][j]=='\u0000'?' ':tab[i][j];
+					str+='\n';
+				}
+
+				System.out.println(str);
+				fw.write(str);
+				fw.close();
+			}
+		}catch (Exception e){}
+	}
+
+	public char[][] getDefi()
+	{
+		return panelCreation.getDefi();
 	}
 }

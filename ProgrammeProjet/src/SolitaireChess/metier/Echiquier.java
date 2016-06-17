@@ -29,6 +29,8 @@ public class Echiquier implements Serializable
 
 	private ArrayList<Piece[][]> mouvements;
 
+	public boolean niveauUtilisateur;
+
 
 	/**
 	 * Construit un échiquier.
@@ -175,6 +177,23 @@ public class Echiquier implements Serializable
 		nbIndice = 0;
 
 		sFichier = String.format( "./niveaux/niveau%02d/defi%02d.data", niveau, defi );
+
+		parcourirFichier();
+
+		mouvements.clear();
+		mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
+
+		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
+	}
+
+	/**
+	 * Initialise le défi cours en fonction du niveau.
+	 */
+	private void initDefiUtilisateur()
+	{
+		nbIndice = 0;
+
+		sFichier = String.format( "./niveaux/niveauUtilisateur/defi%02d.data", niveau, defi );
 
 		parcourirFichier();
 
