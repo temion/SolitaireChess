@@ -24,7 +24,6 @@ public class Jeu extends JFrame implements ActionListener
 
 	private JLabel niveau;
 	private JLabel defi;
-	private JLabel score;
 	private JLabel mouvements;
 
 	/**
@@ -108,7 +107,6 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
 		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
-		score.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 		mouvements.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 	}
 
