@@ -223,7 +223,8 @@ public class Controleur implements Serializable
 		Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
 		                                             "Dernier défi : " + joueurCourant.getDernierDefi()
 				                                             [1]+ "\n" +
-		                                             "Score : " + joueurCourant.getScore() + "\n" +
+		                                             "Mouvements : " + joueurCourant.getNbMouvements() +
+													 "\n" +
 		                                             "Thème :",
 		                                        "Joueur",
 		                                        JOptionPane.PLAIN_MESSAGE,

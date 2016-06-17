@@ -117,6 +117,8 @@ public class Echiquier implements Serializable
 	public void recommencer()
 	{
 		initDefi();
+		getCtrl().getJoueurCourant().incrementerMouvements();
+		getCtrl().getJoueurCourant().incrementerMouvements();
 		ctrl.majIHM();
 	}
 

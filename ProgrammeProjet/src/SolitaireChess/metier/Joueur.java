@@ -16,7 +16,6 @@ import java.io.Serializable;
 public class Joueur implements Serializable
 {
 	private String nom;
-	private int    score;
 	private int    mouvements;
 	private int    theme;
 
@@ -30,7 +29,6 @@ public class Joueur implements Serializable
 	public Joueur( String nom, Controleur ctrl )
 	{
 		this.nom = nom;
-		this.score = 0;
 		this.mouvements = 0;
 		this.theme = 1;
 
@@ -75,17 +73,6 @@ public class Joueur implements Serializable
 	public String getNom()
 	{
 		return nom;
-	}
-
-
-	/**
-	 * Permet d'obtenir le score.
-	 *
-	 * @return le score
-	 */
-	public int getScore()
-	{
-		return score;
 	}
 
 
