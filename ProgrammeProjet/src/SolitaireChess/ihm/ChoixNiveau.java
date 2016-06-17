@@ -89,6 +89,19 @@ public class ChoixNiveau extends JFrame
 						"./images/apercus/niveauUtilisateur/defiConnu.png" ) );
 
 				b.setIconTextGap( 2 );
+				int finalI = i;
+				b.addActionListener( new ActionListener()
+				{
+					public void actionPerformed( ActionEvent e )
+					{
+						if ( e.getSource() == b )
+						{
+							jeu.getCtrl().getEchiquier().initDefiUtilisateur( finalI );
+							jeu.getCtrl().majIHM();
+							dispose();
+						}
+					}
+				} );
 				niveau.add( b );
 			} else
 			{
