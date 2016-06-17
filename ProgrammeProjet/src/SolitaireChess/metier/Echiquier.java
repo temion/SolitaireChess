@@ -30,6 +30,7 @@ public class Echiquier implements Serializable
 	private ArrayList<Piece[][]> mouvements;
 
 	public boolean niveauUtilisateur;
+	public int     defiUtilisateur;
 
 
 	/**
@@ -104,9 +105,16 @@ public class Echiquier implements Serializable
 			else if ( aGagne() )
 			{
 				ctrl.afficherMessage( "Gagné" );
-				ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
-				ctrl.enregistrer();
-				incrementerDefi();
+				if(niveauUtilisateur)
+				{
+					initDefi();
+				}
+				else
+				{
+					ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
+					ctrl.enregistrer();
+					incrementerDefi();
+				}
 			}
 			else
 				return true;
@@ -121,7 +129,11 @@ public class Echiquier implements Serializable
 	 */
 	public void recommencer()
 	{
-		initDefi();
+		if( niveauUtilisateur )
+			initDefiUtilisateur(defiUtilisateur);
+		else
+			initDefi();
+
 		getCtrl().getJoueurCourant().incrementerMouvements();
 		getCtrl().getJoueurCourant().incrementerMouvements();
 		ctrl.majIHM();
@@ -192,18 +204,17 @@ public class Echiquier implements Serializable
 	/**
 	 * Initialise le défi cours en fonction du niveau.
 	 */
-	private void initDefiUtilisateur()
+	public void initDefiUtilisateur( int defi )
 	{
-		nbIndice = 0;
+		niveauUtilisateur = true;
+		defiUtilisateur = defi;
 
-		sFichier = String.format( "./niveaux/niveauUtilisateur/defi%02d.data", niveau, defi );
+		sFichier = String.format( "./niveaux/niveauUtilisateur/defi%02d.data", defi );
 
 		parcourirFichier();
 
 		mouvements.clear();
 		mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
-
-		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
 	}
 
 
@@ -241,7 +252,7 @@ public class Echiquier implements Serializable
 
 	public void initIndiceDefi()
 	{
-		if (niveau<2)
+		if (niveau<2 && ! niveauUtilisateur)
 		{
 			sFichier = String.format( "./solutions/niveau01/defi%02d.data", defi );
 

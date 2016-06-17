@@ -85,6 +85,7 @@ public class CreerNiveau extends JFrame implements ActionListener
 		if ( e.getSource() == valider )
 		{
 			ecrireFichierNiveau();
+			dispose();
 		}
 		if ( e.getSource() == abandonner )
 		{
@@ -121,8 +122,6 @@ public class CreerNiveau extends JFrame implements ActionListener
 						str += tab[i][j]=='\u0000'?' ':tab[i][j];
 					str+='\n';
 				}
-
-				System.out.println(str);
 				fw.write(str);
 				fw.close();
 			}
