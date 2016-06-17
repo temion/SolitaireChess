@@ -22,7 +22,9 @@ public class Echiquier implements Serializable
 	private int        defi;
 	private int        niveau;
 	private int        nbPiece;
+	private int        nbIndice;
 	private boolean    aUnRoi;
+	private String     sFichier;
 	private Controleur ctrl;
 
 	private ArrayList<Piece[][]> mouvements;
@@ -36,20 +38,6 @@ public class Echiquier implements Serializable
 		this.ctrl = ctrl;
 		this.aUnRoi = false;
 		this.mouvements = new ArrayList<>();
-	}
-
-
-	public void setDefi()
-	{
-		niveau = ctrl.getJoueurCourant().getDernierDefi()[0];
-		defi = ctrl.getJoueurCourant().getDernierDefi()[1];
-		this.initDefi();
-	}
-
-	public void setEchiquier(int niveau, int defi) {
-		this.niveau = niveau;
-		this.defi = defi;
-		initDefi();
 	}
 
 
@@ -67,6 +55,22 @@ public class Echiquier implements Serializable
 				tmp[i][j] = Piece.clonerPiece( autre[i][j] );
 
 		return tmp;
+	}
+
+
+	public void setDefi()
+	{
+		niveau = ctrl.getJoueurCourant().getDernierDefi()[0];
+		defi = ctrl.getJoueurCourant().getDernierDefi()[1];
+		this.initDefi();
+	}
+
+
+	public void setEchiquier( int niveau, int defi )
+	{
+		this.niveau = niveau;
+		this.defi = defi;
+		initDefi();
 	}
 
 
@@ -165,14 +169,31 @@ public class Echiquier implements Serializable
 	 */
 	private void initDefi()
 	{
-		String sFichier =
-				String.format( "./niveaux/niveau%02d/defi%02d.data", niveau, defi );
-
 		echiquier = new Piece[4][4];
+
+		nbIndice = 0;
+
+		parcourirFichier();
+
+		mouvements.clear();
+		mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
+
+		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
+	}
+
+
+	private void parcourirFichier()
+	{
+		sFichier = String.format( "./solutions/niveau%02d/defi%02d.data", niveau, defi );
 
 		try
 		{
 			Scanner sc = new Scanner( new FileReader( sFichier ) );
+
+			for ( int i = 0; sc.hasNextLine() && i < nbIndice * 5; i++ )
+			{
+				System.out.println( sc.nextLine() );
+			}
 
 			nbPiece = 0;
 
@@ -187,11 +208,6 @@ public class Echiquier implements Serializable
 			}
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
-
-		mouvements.clear();
-		mouvements.add( Echiquier.clonerEchiquier( echiquier ) );
-
-		ctrl.getJoueurCourant().setDernierDefi( niveau, defi );
 	}
 
 
