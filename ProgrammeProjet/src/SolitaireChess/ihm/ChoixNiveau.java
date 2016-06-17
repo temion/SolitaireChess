@@ -76,24 +76,23 @@ public class ChoixNiveau extends JFrame
 		setVisible( true );
 	}
 
-	private void creerChoixUtilisateur( JPanel niveau)
+	private void creerChoixUtilisateur( JPanel niveau )
 	{
 		niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
-
 
 		for( int i = 1; i < 16; i++ )
 		{
 			if( new File( "./niveaux/niveauUtilisateur/defi" + String.format( "%02d",
 			                                                                  i ) + ".data" ).exists() )
 			{
-				JButton b = new JButton( "YDefi n°" + i, new ImageIcon(
+				JButton b = new JButton( "Defi n°" + i, new ImageIcon(
 						"./images/apercus/niveauUtilisateur/defiConnu.png" ) );
 
 				b.setIconTextGap( 2 );
 				niveau.add( b );
 			} else
 			{
-				JButton b = new JButton( "NDefi n°" + i, new ImageIcon(
+				JButton b = new JButton( "Defi n°" + i, new ImageIcon(
 						"./images/apercus/niveauUtilisateur/defiInconnu.png" ) );
 
 				b.setIconTextGap( 2 );
