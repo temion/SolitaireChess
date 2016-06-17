@@ -74,8 +74,10 @@ article {
 }
 
 .retour {
+	position:right;
 	text-decoration:underline;
-	text-align:center;
+	text-align:right;
+	padding-left:80%;
 }
 
 img {
