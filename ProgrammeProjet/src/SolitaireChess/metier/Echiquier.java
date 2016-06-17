@@ -99,7 +99,7 @@ public class Echiquier implements Serializable
 			else if ( aGagne() )
 			{
 				ctrl.afficherMessage( "Gagné" );
-				ctrl.getJoueurCourant().addDefiAccompli(niveau, defi);
+				ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
 				ctrl.enregistrer();
 				incrementerDefi();
 			}
@@ -195,17 +195,14 @@ public class Echiquier implements Serializable
 
 			String ligSc = "";
 
-			for ( int i = 0; sc.hasNextLine() && i < (nbIndice-1) * 5; i++ )
+			for ( int i = 0; sc.hasNextLine() && i < nbIndice * 5; i++ )
 			{
 				ligSc = sc.nextLine();
-				System.out.println( ligSc );
 			}
-
-			if (ligSc.matches( "FIN")) return;
 
 			nbPiece = 0;
 
-			for ( int i = 0; sc.hasNextLine() && i < echiquier.length ; i++ )
+			for ( int i = 0; sc.hasNextLine() && i < echiquier.length; i++ )
 			{
 				ligSc = sc.nextLine();
 
@@ -217,15 +214,39 @@ public class Echiquier implements Serializable
 		} catch ( Exception e ) { e.printStackTrace(); }
 	}
 
+
 	public void initIndiceDefi()
 	{
-		sFichier = String.format( "./solutions/niveau%02d/defi%02d.data", niveau, defi );
+		if (niveau<2)
+		{
+			sFichier = String.format( "./solutions/niveau01/defi%02d.data", defi );
 
-		nbIndice++;
+			parcourirFichier();
 
-		parcourirFichier();
+			nbIndice++;
 
-		getCtrl().majIHM();
+			try
+			{
+				Thread.sleep( 200 );
+			} catch ( InterruptedException exe ) {}
+
+			parcourirFichier();
+
+			try
+			{
+				Thread.sleep( 100 );
+			} catch ( InterruptedException exe ) {}
+
+			getCtrl().majIHM();
+
+			if ( aGagne() )
+			{
+				ctrl.afficherMessage( "Gagné" );
+				ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
+				ctrl.enregistrer();
+				incrementerDefi();
+			}
+		}
 	}
 
 
