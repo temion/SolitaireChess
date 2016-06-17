@@ -52,6 +52,7 @@ public class CreerNiveau extends JFrame implements ActionListener
 
 		pack();
 		setLocationRelativeTo( null );
+		setResizable( false );
 		setVisible( true );
 	}
 

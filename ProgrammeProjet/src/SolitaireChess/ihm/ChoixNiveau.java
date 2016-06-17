@@ -13,6 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class ChoixNiveau extends JFrame
 {
@@ -77,7 +78,28 @@ public class ChoixNiveau extends JFrame
 
 	private void creerChoixUtilisateur( JPanel niveau)
 	{
+		niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
 
+
+		for( int i = 1; i < 16; i++ )
+		{
+			if( new File( "./niveaux/niveauUtilisateur/defi" + String.format( "%02d",
+			                                                                  i ) + ".data" ).exists() )
+			{
+				JButton b = new JButton( "YDefi n°" + i, new ImageIcon(
+						"./images/apercus/niveauUtilisateur/defiConnu.png" ) );
+
+				b.setIconTextGap( 2 );
+				niveau.add( b );
+			} else
+			{
+				JButton b = new JButton( "NDefi n°" + i, new ImageIcon(
+						"./images/apercus/niveauUtilisateur/defiInconnu.png" ) );
+
+				b.setIconTextGap( 2 );
+				niveau.add( b );
+			}
+		}
 	}
 
 	/**
