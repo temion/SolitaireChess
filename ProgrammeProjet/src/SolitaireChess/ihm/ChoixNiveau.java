@@ -32,16 +32,9 @@ public class ChoixNiveau extends JFrame
 		niveaux = new JTabbedPane( JTabbedPane.TOP );
 
 		niveau1 = new JPanel();
-		creerChoix( niveau1, 1 );
-
 		niveau2 = new JPanel();
-		creerChoix( niveau2, 2 );
-
 		niveau3 = new JPanel();
-		creerChoix( niveau3, 3 );
-
 		niveau4 = new JPanel();
-		creerChoix( niveau4, 4 );
 
 		niveaux.addTab( "Débutant", niveau1 );
 		niveaux.addTab( "Intermédiaire", niveau2 );
@@ -58,54 +51,62 @@ public class ChoixNiveau extends JFrame
 										  "Terminez au moins 50% du niveau précédent afin d'accéder à ce niveau" );
 			}
 
+		creerChoix( niveau1, 1 );
+		creerChoix( niveau2, 2 );
+		creerChoix( niveau3, 3 );
+		creerChoix( niveau4, 4 );
+
 		setVisible( true );
 	}
 
 
 	private void creerChoix( JPanel niveau, int difficulte )
 	{
-		niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
-		for ( int i = 1; i < 16; i++ )
+		if ( niveaux.isEnabledAt( difficulte - 1 ) )
 		{
-			if ( jeu.getCtrl().getJoueurCourant().getDefiDebloque( difficulte - 1, i - 1 ) )
+			niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
+			for ( int i = 1; i < 16; i++ )
 			{
-				JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
-																					  "./images/apercus/niveau%02d/defi%02d" +
-																					  ".png" +
-																					  "",
-																					  difficulte,
-																					  i ) ) );
-				b.setIconTextGap( 2 );
-				int finalI = i;
-				b.addActionListener( new ActionListener()
+				if ( i == 1 || jeu.getCtrl().getJoueurCourant().getDefiDebloque( difficulte - 1, i
+																								- 1 ) )
 				{
-					public void actionPerformed( ActionEvent e )
+					JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
+																						  "./images/apercus/niveau%02d/defi%02d" +
+																						  ".png" +
+																						  "",
+																						  difficulte,
+																						  i ) ) );
+					b.setIconTextGap( 2 );
+					int finalI = i;
+					b.addActionListener( new ActionListener()
 					{
-						if ( e.getSource() == b )
+						public void actionPerformed( ActionEvent e )
 						{
-							int numDefi = finalI + ( difficulte - 1 ) *
-												   15; // Les .data sont numérotés de 1 à 60, d'où la
-							// formule
-							jeu.getCtrl().getEchiquier().setEchiquier( difficulte, numDefi );
-							jeu.getCtrl().majIHM();
-							dispose();
+							if ( e.getSource() == b )
+							{
+								int numDefi = finalI + ( difficulte - 1 ) *
+													   15; // Les .data sont numérotés de 1 à 60, d'où la
+								// formule
+								jeu.getCtrl().getEchiquier().setEchiquier( difficulte, numDefi );
+								jeu.getCtrl().majIHM();
+								dispose();
+							}
 						}
-					}
-				} );
-				niveau.add( b );
+					} );
+					niveau.add( b );
+				}
+				else
+				{
+					JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
+																						  "./images/apercus/niveau%02d/defi%02d" +
+																						  ".png" +
+																						  "",
+																						  difficulte,
+																						  0 ) ) );
+					b.setIconTextGap( 2 );
+					niveau.add( b );
+				}
 			}
-			else
-			{
-				JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
-																					  "./images/apercus/niveau%02d/defi%02d" +
-																					  ".png" +
-																					  "",
-																					  difficulte,
-																					  0 ) ) );
-				b.setIconTextGap( 2 );
-				niveau.add( b );
-			}
-
 		}
 	}
 }
