@@ -286,20 +286,23 @@ public class Controleur implements Serializable
 			themes[i-1] = "theme "+i;
 		}
 
-		Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
-		                                             "Dernier défi : " + joueurCourant.getDernierDefi()
-				                                             [1]+ "\n" +
-		                                             "Mouvements : " + joueurCourant.getNbMouvements() +
-													 "\n" +
-		                                             "Thème :",
-		                                        "Joueur",
-		                                        JOptionPane.PLAIN_MESSAGE,
-		                                        new ImageIcon( "./images/gandalf.png" ),
-		                                        themes,
-		                                        null
-		                                      );
+		try
+		{
+			Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
+														 "Dernier défi : " + joueurCourant.getDernierDefi()
+																 [1] + "\n" +
+														 "Mouvements : " + joueurCourant.getNbMouvements() +
+														 "\n" +
+														 "Thème :",
+													"Joueur",
+													JOptionPane.PLAIN_MESSAGE,
+													new ImageIcon( "./images/gandalf.png" ),
+													themes,
+													null
+												  );
 
-		joueurCourant.setTheme( Integer.parseInt( ((String)(o)).replaceAll( "[^0-9]", "" ) ) );
+			joueurCourant.setTheme( Integer.parseInt( ( (String)( o ) ).replaceAll( "[^0-9]", "" ) ) );
+		} catch (Exception e) {}
 		majIHM();
 	}
 
