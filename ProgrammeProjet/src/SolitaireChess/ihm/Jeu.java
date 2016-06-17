@@ -1,6 +1,8 @@
-package SolitaireChess.ihm; /**
+package SolitaireChess.ihm;
+
+/**
  * SolitaireChess - Projet Tutoré
- * Classe ihm de l'écran du jeu
+ * Classe IHM de l'écran du jeu
  *
  * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
  * @date 13/06/2016
@@ -10,8 +12,7 @@ import SolitaireChess.Controleur;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Jeu extends JFrame implements ActionListener
 {
@@ -51,7 +52,12 @@ public class Jeu extends JFrame implements ActionListener
 		this.plateau = new PanelSolitaireChess( ctrl );
 		add( plateau );
 
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		} );
+
 		pack();
 		setLocationRelativeTo( null );
 		setResizable( false );
@@ -102,23 +108,32 @@ public class Jeu extends JFrame implements ActionListener
 
 
 	/**
-	 * Met à jour l'affichage du défi, du niveau et du score.
+	 * Met à jour l'affichage du défi, du niveau et du nombre de mouvements.
 	 */
 	public void majPanel()
 	{
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
 		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
-		score.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 		mouvements.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 	}
 
 
+	/**
+	 * Affiche le message passé en paramètre dans une boîte de dialogue.
+	 *
+	 * @param message message à afficher
+	 */
 	public void afficherMessage( String message )
 	{
 		JOptionPane.showMessageDialog( this, message, "Bon à savoir !", JOptionPane.PLAIN_MESSAGE );
 	}
 
 
+	/**
+	 * Affiche le message passé en paramètre dans une boîte de dialogue indiquant une erreur.
+	 *
+	 * @param messageErreur message à afficher
+	 */
 	public void afficherMessageErreur( String messageErreur )
 	{
 		JOptionPane.showMessageDialog( this, messageErreur, "Bon à savoir !", JOptionPane
@@ -126,6 +141,11 @@ public class Jeu extends JFrame implements ActionListener
 	}
 
 
+	/**
+	 * Retourne le controleur lié à la fenêtre courante.
+	 *
+	 * @return controleur lié à la fenêtre courante
+	 */
 	public Controleur getCtrl()
 	{
 		return ctrl;
@@ -152,6 +172,12 @@ public class Jeu extends JFrame implements ActionListener
 		}
 	}
 
+
+	/**
+	 * Retourne le panel représentant le plateau.
+	 *
+	 * @return panel représentant le plateau
+	 */
 	public PanelSolitaireChess getPlateau()
 	{
 		return plateau;

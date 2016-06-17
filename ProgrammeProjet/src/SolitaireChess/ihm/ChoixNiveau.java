@@ -1,14 +1,18 @@
 package SolitaireChess.ihm;
 
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM de la fenêtre de sélection de niveau.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-/**
- * Created by Thibaut on 16/06/2016.
- */
 
 public class ChoixNiveau extends JFrame
 {
@@ -22,6 +26,12 @@ public class ChoixNiveau extends JFrame
 	private JPanel niveau4;
 
 
+	/**
+	 * Construit une nouvelle fenêtre de sélection de niveau.
+	 * Lui ajoute 4 onglets, correspondant aux différents niveaux de difficulté disponibles.
+	 *
+	 * @param jeu fenêtre auquelle est lié la fenêtre de choix de niveau créée
+	 */
 	public ChoixNiveau( Jeu jeu )
 	{
 		this.jeu = jeu;
@@ -61,6 +71,13 @@ public class ChoixNiveau extends JFrame
 	}
 
 
+	/**
+	 * Ajoute à l'onglet correspondant au niveau passé en paramètre 15 boutons défis.
+	 * Cliquer sur un de ces boutons mets à jour le niveau courant.
+	 *
+	 * @param niveau onglet dans lequel on ajoute les boutons
+	 * @param difficulte difficulté des défis à ajouter
+	 */
 	private void creerChoix( JPanel niveau, int difficulte )
 	{
 		if ( niveaux.isEnabledAt( difficulte - 1 ) )

@@ -1,5 +1,12 @@
 package SolitaireChess.ihm;
 
+/**
+ * SolitaireChess - Projet Tutoré
+ * Classe IHM gérant la fenêtre de création de niveau.
+ *
+ * @author Boulant Florian, Di Gregorio Thomas, Edouard Clemence et Emion Thibaut
+ * @date 13/06/2016
+ */
 
 import SolitaireChess.Controleur;
 
@@ -9,9 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-/**
- * Created by Florian on 17/06/2016.
- */
 public class CreerNiveau extends JFrame implements ActionListener
 {
 	private Controleur ctrl;
@@ -22,6 +26,11 @@ public class CreerNiveau extends JFrame implements ActionListener
 	private PanelCreerNiveau panelCreation;
 
 
+	/**
+	 * Construit une nouvelle fenêtre de création de niveau.
+	 *
+	 * @param ctrl constructeur lié à la fenêtre courante
+	 */
 	public CreerNiveau( Controleur ctrl )
 	{
 		this.ctrl = ctrl;
@@ -45,6 +54,11 @@ public class CreerNiveau extends JFrame implements ActionListener
 	}
 
 
+	/**
+	 * Retourne le controleur associé à la fenêtre courante.
+	 *
+	 * @return controleur associé à la fenêtre courante
+	 */
 	public Controleur getCtrl()
 	{
 		return ctrl;
@@ -58,6 +72,11 @@ public class CreerNiveau extends JFrame implements ActionListener
 
 
 	@Override
+	/**
+	 * Gère les appuis sur les boutons du composant.
+	 *
+	 * @param e un événement lié à l'appui sur l'un des boutons
+	 */
 	public void actionPerformed( ActionEvent e )
 	{
 		if ( e.getSource() == valider )
