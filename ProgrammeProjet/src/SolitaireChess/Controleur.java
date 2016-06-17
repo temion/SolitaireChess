@@ -222,7 +222,7 @@ public class Controleur implements Serializable
 		
 		Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
 		                                             "Dernier défi : " + joueurCourant.getDernierDefi()
-				                                             [1] + "\n" +
+				                                             [1]+ "\n" +
 		                                             "Score : " + joueurCourant.getScore() + "\n" +
 		                                             "Thème :",
 		                                        "Joueur",
@@ -286,5 +286,17 @@ public class Controleur implements Serializable
 		echiquier.annuler();
 	}
 
-	public void recommencer() { echiquier.recommencer(); }
+	public void recommencer()              { echiquier.recommencer(); }
+
+
+	public int getNbDefisAccomplis( int i )
+	{
+		int nbDefisReussis = 0;
+
+		for(boolean b:joueurCourant.getDefisAccomplis(i))
+			if(b)
+				nbDefisReussis++;
+
+		return nbDefisReussis;
+	}
 }
