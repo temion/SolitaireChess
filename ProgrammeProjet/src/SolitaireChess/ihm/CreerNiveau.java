@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class CreerNiveau extends JFrame implements ActionListener
 {
@@ -49,6 +48,7 @@ public class CreerNiveau extends JFrame implements ActionListener
 		this.valider.addActionListener( this );
 		this.abandonner.addActionListener( this );
 
+		setLocationRelativeTo( null );
 		pack();
 		setVisible( true );
 	}

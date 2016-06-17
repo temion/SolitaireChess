@@ -229,14 +229,14 @@ public class Echiquier implements Serializable
 
 			try
 			{
-				Thread.sleep( 200 );
+				Thread.sleep( 75 );
 			} catch ( InterruptedException exe ) {}
 
 			parcourirFichier();
 
 			try
 			{
-				Thread.sleep( 100 );
+				Thread.sleep( 25 );
 			} catch ( InterruptedException exe ) {}
 
 			getCtrl().majIHM();

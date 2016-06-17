@@ -25,7 +25,6 @@ public class Jeu extends JFrame implements ActionListener
 
 	private JLabel niveau;
 	private JLabel defi;
-	private JLabel score;
 	private JLabel mouvements;
 
 	/**
