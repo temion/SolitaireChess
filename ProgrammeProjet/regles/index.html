@@ -3,95 +3,66 @@
 <html>
     <meta charset = "UTF-8">
     <title> Règles </title>
-    <link rel="stylesheet" href="./index.css" type="text/css">
+    <link rel="stylesheet" href="./style.css" type="text/css">
 
     <header>
-         <img src="./logo.png" id="logo"/>
-         <h1>Solitaire Chess</h1>
+         <img src = "./images/imageAccueil.png" id="titre"/>
     </header>
 
-    <body>
-        <nav>
-            <li>
-                <ul><b><a href = "#but">But du jeu</a></b></ul>
-                <ul><b><a href = "#jouer">Comment jouer ?</a></b></ul>
-                <ul><b><a href = "#deplacements">Déplacement des pièces</a></b></ul>
-            </li>
-        </nav>
+	<body>
+	     <nav>
+				<ul>
+					<li><a href = "index.html"><b>Accueil</b></a>
+			      <li><a href = "regles.html"><b>Règles</b></a>
+			          <ul>
+								<li><a href = "#but">But du jeu</a></li>
+			          		<li><a href = "#jouer">Comment jouer ?</a></li>
+			          		<li><a href = "#deplacements">Déplacement des pièces</a></li>
+						</ul>
+			      </li>
+					<li><a href = "fonctionnalites.html"><b>Fonctionnalités</b></a>
+						<ul>
+							<li><a href = "#accueil">L'accueil du jeu</a></li>
+							<li><a href = "#jeu">La fenêtre de jeu</a></li>
+							<li><a href  = "#actions">Les actions</a>
+								<ul>
+									<li><a href = "#indices" style = "text-decoration:none">Les indices</a></li>
+									<li><a href = "#défis" style = "text-decoration:none">Les indices</a></li>
+									<li><a href = "#éditer" style = "text-decoration:none">La création d'un défi</a></li>
+									<li><a href = "#joueur" style = "text-decoration:none">Les informations du joueur</a></li>
+									<li><a href = "#regles" style = "text-decoration:none">L'accès aux règles</a></li>
+									<li><a href = "#menu" style = "text-decoration:none">L'accès au menu principal</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+	     </nav>
 
-        
-    <article>
-        Solitaire Chess est un jeu d’énigmes logiques en solo basé sur le jeu d'échecs.
-        
-        <h3 id = "but">But du jeu</h3>
+		<h1>Accueil</h1>
+		
+		<article>
+			Bienvenu dans l'aide du jeu Solitaire Chess, développé pas la &copy;Dream Team Forever. </br>
+			Dans cette aide, vous pourrez trouver les règles du jeu ainsi que fonctionnement de toutes les fonctionnalités du programme.
+			</br></br>
+			Que voulez-vous savoir ? </br>
+			<ul>
+				<li><a href = "regles.html" style="text-decoration:underline">Règles</a></li>
+				<li><a href = "fonctionnalites.html" style="text-decoration:underline">Fonctionnalités</a></li>
+			</ul>
+		</article>
 
-        Dans Solitaire Chess, votre objectif est de capturer toutes les pièces d'échecs présentes sur le plateau afin de n'en laisser plus qu'une seule. Si il y a un roi en jeu, il devra être le dernier survivant. Mais pour cela, chaque déplacement effectué doit forcément aboutir à une prise de pièce ! Vous devrez donc prévoir à l'avance vos coups, afin de ne pas rester bloqué, et d'être contraint de recommencer !
+		
 
-        <h3 id = "jouer">Comment jouer ?</h3>
-       
-        Solitaire Chess se compose de différents défis. Chaque défi consiste en un petit échiquier (dans notre cas, 4x4) sur lequel sont placées des pièces d'échecs. Les pièces présentes dans Solitaire Chess subissent les mêmes contraintes de déplacement que les pièces aux échecs. Si ces contraintes vous sont inconnues, cliquez <a href = "#deplacements"> ici</a>.
-        Gardes cependant à l'esprit que <b>tout déplacement doit conduire à une prise de pièce !</b>
-
-<!--
-        <h4>Votre but :</h4>
-        Capturer les pièces d’échecs jusqu’à ce qu’il n’en reste plus qu’une sur le plateau.<br /><br />
-
-
-        <h4>Etapes de jeu :</h4>
-        1 Bougez les pièces d’échecs en obéissant aux <a href="./deplacement.html">règles de déplacement</a><br />.
-        Chaque déplacement <b>doit</b> aboutir à la prise d'une pièce. Prévoyez tous vos coups à l'avance ! <br /><br />
-
-        2 S'il vous reste deux pièces ou plus sur le plateau, repartez à zéro et retentez le défi.<br /><br />
-
-        3 Quand il ne reste qu'une seule pièce sur le plateau, <b>vous avez gagné !</b> Passez au niveau suivant.<br />
-
-        <h4>Quelles différences entre Solitaire Chess et les échecs :</h4>
-
-        Solitaire Chess est un jeu de logique en solo, pas une partie d’échecs. Ceux qui aiment les petits
-        jeux mathématiques parlent de « problèmes d’échecs », des énigmes qui utilisent les règles des échecs,
-        mais avec quelques nuances.<br /><br />
-        Dans Solitaire Chess, le déplacement des pièces est conforme à celui des échecs.
-        Quand vous évaluez chaque défi et prévoyez votre stratégie, votre raisonnement est le même que lors
-        d’une partie d’échecs. Les puristes remarqueront néanmoins quelques différences.<br /><br />
-
-        <b>Les voici :</b><br />
-        <ul>
-            <li>Solitaire Chess est un jeu solo, et toutes les pièces sont de la même couleur.</li>
-            <li>Chaque déplacement effectué doit aboutir à la capture d’une pièce.</li>
-            <li>Les pions peuvent être placés n’importe où sur le plateau. Ils ne peuvent se déplacer qu’en
-                prenant d’autres pièces.</li>
-            <li>Les pions n’ont pas de promotion quand ils arrivent à la ligne du Haut.</li>
-            <li>La règle d’échec au Roi ne s’applique pas.</li>
-            <li>Nous avons conçus tous les défis utilisant un Roi pour que ce soit lui le survivant,
-                à la fin ( il ne s’agit pas là d’une règle, mais plutôt d’un indice...)</li>
-        </ul>
-
-
-        <h4>Au sujet de l’inventeur :</h4>
-        Solitaire Chess a été inventé par Vesa Timonen, programmeur vivant en Finlande.
-        Il s’intéresse aux énigmes logiques, à la magie, à la programmation et à la menuiserie.
--->
-
-        <h3 id = "deplacements">Déplacements des pièces</h3>
-
-        Tout déplacement d'une pièce prend fin lorsque celle-ci prend une autre pièce.
-
-        <ul>
-        <li>Roi : Le roi ne peut se déplacer que d'<b>une seule case</b>, et ce dans toutes les directions.</li>
-        <li>Reine : La reine peut se déplacer dans <b>toutes les directions</b>, d'un nombre illimité de case.</li>
-        <li>Fou : Le fou peut se déplacer uniquement en <b>diagonale</b>, d'un nombre illimité de case.</li>
-        <li>Cavalier : Le cavalier se déplace en <b>L</b> : Après s'être déplacé de deux cases dans une direction, il pivote de 90° avant d'avancer à nouveau d'une case.</li>
-        <li>Tour : La tour peut se déplacer uniquement en <b>ligne droite</b>, d'un nombre illimité de case.</li>
-        <li>Pion : Le pion ne peur se déplacer que d'<b>une seule case</b>, seulement vers l'avant. La prise d'une pièce par un pion ne peut se faire qu'en diagonale. Contrairement aux échecs, la promotion des pions lorsqu'ils arrivent au bout du plateau n'a pas lieu dans le Solitaire Chess.</li>
-        </ul>
-    </article>
 
     <footer>
         &copy; Dream Team Forever | Emion T - Edouard C - Di Gregorio T - Boulant F - <a href="http://www.omfgdogs.com">Mentions légales</a>
+         <img src="./images/logo.png" id="logo"/>
+
+
     </footer>
 
-    </body>
-
-
-
 </html>
+
+
+
