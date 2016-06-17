@@ -41,7 +41,7 @@ public class Accueil extends JFrame implements ActionListener
 	 */
 	public Accueil( Controleur ctrl )
 	{
-		setTitle( "SolitaireChess" );
+		setTitle( "SolitaireChess" );                   // Taille de la fenêtre
 
 		this.ctrl = ctrl;
 
@@ -50,10 +50,13 @@ public class Accueil extends JFrame implements ActionListener
 		setSize( 400 + insets.left + insets.right,
 				 600 + insets.top + insets.bottom );
 
+		// Supprime les layouts managers pour positionner les composants
+		// de façon absolue
 		setLayout( null );
 
 		initComposants();
 
+		// Evenement quand on clique sur la croix pour fermer la fenetre
 		addWindowListener( new WindowAdapter()
 		{
 			public void windowClosing( WindowEvent e )
@@ -61,9 +64,10 @@ public class Accueil extends JFrame implements ActionListener
 				ctrl.quitter();
 			}
 		} );
-		setLocationRelativeTo( null );
-		setResizable( false );
-		setVisible( true );
+
+		setLocationRelativeTo( null );                  // Fenêtre centrée
+		setResizable( false );                          // Fenêtre non redimensionnable
+		setVisible( true );                             // Fenêtre visible
 	}
 
 
@@ -88,6 +92,7 @@ public class Accueil extends JFrame implements ActionListener
 
 		choixProfil = new JComboBox<String>();
 
+		// Si des joueurs ont déjà été crée alors, on les récupère pour pouvoir jouer avec
 		if ( ctrl.getAlJoueur().size() > 0 )
 		{
 			choixProfil.addItem( "Sélectionnez un profil" );
@@ -177,6 +182,7 @@ public class Accueil extends JFrame implements ActionListener
 			if ( e.getSource() == nouvellePartie ||
 				 choixProfil.getSelectedItem().equals( "Nouveau profil..." ) )
 			{
+				// Fenêtre de saisie de pseudo de joueur
 				String s = (String)JOptionPane.showInputDialog(
 						this,
 						"Pseudo :",
@@ -188,15 +194,15 @@ public class Accueil extends JFrame implements ActionListener
 				if ( s != null && s.length() > 0 )
 				{
 					ctrl.ajouterJoueur( s );
-					new Jeu( ctrl );
-					dispose();
+					new Jeu( ctrl );             // Ouvre la fenêtre de jeu
+					dispose();                   // Ferme la fenêtre
 				}
 			}
 			else if ( ! choixProfil.getSelectedItem().equals( "Sélectionnez un profil" ) )
 			{
 				ctrl.definirJoueur( (String)choixProfil.getSelectedItem() );
-				new Jeu( ctrl );
-				dispose();
+				new Jeu( ctrl );                 // Ouvre la fenêtre de jeu
+				dispose();                       // Ferme la fenêtre
 			}
 		}
 
@@ -231,8 +237,8 @@ public class Accueil extends JFrame implements ActionListener
 					remove( valider );
 					remove( supprimer );
 				}
-				invalidate();
-				revalidate();
+				invalidate();       // Les trois instructions ci-contre permettent de redessiner
+				revalidate();       // la fenetre
 				repaint();
 			}
 		}
