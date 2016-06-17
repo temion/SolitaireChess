@@ -85,6 +85,7 @@ public class CreerNiveau extends JFrame implements ActionListener
 		if ( e.getSource() == valider )
 		{
 			ecrireFichierNiveau();
+			dispose();
 		}
 		if ( e.getSource() == abandonner )
 		{
