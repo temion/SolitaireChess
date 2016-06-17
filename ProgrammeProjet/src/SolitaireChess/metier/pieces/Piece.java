@@ -42,7 +42,7 @@ public abstract class Piece implements Serializable, IPieceEchec
 	 *
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
-	 * @return vrai si on a pu déplacer la pièce, sinon faux
+	 * @return <b>true</b> si on peut déplacer la pièce
 	 */
 	public boolean deplacer( int xCible, int yCible )
 	{
@@ -192,6 +192,11 @@ public abstract class Piece implements Serializable, IPieceEchec
 	}
 
 
+	/**
+	 * Indique toutes les cases accessibles par la pièce sélectionnée.
+	 *
+	 * @return ArrayList de points, représentants les cases accessibles par la pièce sélectionnée
+	 */
 	public ArrayList<Point> getDeplacementEchec()
 	{
 		ArrayList<Point> alPoint = new ArrayList<>();

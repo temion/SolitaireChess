@@ -30,7 +30,7 @@ public class Fou extends Piece
 	 *
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
-	 * @return
+	 * @return <b>true</b> si on peut le déplacer
 	 */
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )
@@ -46,7 +46,7 @@ public class Fou extends Piece
 	 *
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
-	 * @return vrai s'il n'y a pas de pièce, sinon faux
+	 * @return <b>true</b> s'il n'y a pas de piece
 	 */
 	private boolean personneDansLeChamp( int xCible, int yCible )
 	{
