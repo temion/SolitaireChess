@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Thibaut on 16/06/2016.
  */
+
 public class ChoixNiveau extends JFrame
 {
 	private Jeu jeu;
@@ -68,7 +69,8 @@ public class ChoixNiveau extends JFrame
 			for ( int i = 1; i < 16; i++ )
 			{
 				if ( i == 1 || jeu.getCtrl().getJoueurCourant().getDefiDebloque( difficulte - 1, i
-																								- 1 ) )
+																								 -
+																								 1 ) )
 				{
 					JButton b = new JButton( "Défi n°" + i, new ImageIcon( String.format( "" +
 																						  "./images/apercus/niveau%02d/defi%02d" +
