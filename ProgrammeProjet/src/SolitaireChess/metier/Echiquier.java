@@ -99,7 +99,7 @@ public class Echiquier implements Serializable
 			else if ( aGagne() )
 			{
 				ctrl.afficherMessage( "Gagné" );
-				ctrl.getJoueurCourant().addDefiAccompli(niveau, defi);
+				ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
 				ctrl.enregistrer();
 				incrementerDefi();
 			}
@@ -117,6 +117,8 @@ public class Echiquier implements Serializable
 	public void recommencer()
 	{
 		initDefi();
+		getCtrl().getJoueurCourant().incrementerMouvements();
+		getCtrl().getJoueurCourant().incrementerMouvements();
 		ctrl.majIHM();
 	}
 
@@ -170,9 +172,9 @@ public class Echiquier implements Serializable
 	 */
 	private void initDefi()
 	{
-		echiquier = new Piece[4][4];
-
 		nbIndice = 0;
+
+		sFichier = String.format( "./niveaux/niveau%02d/defi%02d.data", niveau, defi );
 
 		parcourirFichier();
 
@@ -185,30 +187,68 @@ public class Echiquier implements Serializable
 
 	private void parcourirFichier()
 	{
-		sFichier = String.format( "./solutions/niveau%02d/defi%02d.data", niveau, defi );
+		echiquier = new Piece[4][4];
 
 		try
 		{
 			Scanner sc = new Scanner( new FileReader( sFichier ) );
 
+			sc.useDelimiter( "-----" );
+
+			String ligSc = "";
+
 			for ( int i = 0; sc.hasNextLine() && i < nbIndice * 5; i++ )
 			{
-				System.out.println( sc.nextLine() );
+				ligSc = sc.nextLine();
 			}
 
 			nbPiece = 0;
 
-			String ligSc = "";
-
-			for ( int i = 0; i < echiquier.length && sc.hasNextLine(); i++ )
+			for ( int i = 0; sc.hasNextLine() && i < echiquier.length; i++ )
 			{
 				ligSc = sc.nextLine();
 
-				for ( int j = 0; j < echiquier[0].length && j < ligSc.length(); j++ )
+				for ( int j = 0; j < ligSc.length() && j < echiquier[0].length; j++ )
 					ajouterPiece( i, j, ligSc.charAt( j ) );
+
 			}
 			sc.close();
 		} catch ( Exception e ) { e.printStackTrace(); }
+	}
+
+
+	public void initIndiceDefi()
+	{
+		if (niveau<2)
+		{
+			sFichier = String.format( "./solutions/niveau01/defi%02d.data", defi );
+
+			parcourirFichier();
+
+			nbIndice++;
+
+			try
+			{
+				Thread.sleep( 200 );
+			} catch ( InterruptedException exe ) {}
+
+			parcourirFichier();
+
+			try
+			{
+				Thread.sleep( 100 );
+			} catch ( InterruptedException exe ) {}
+
+			getCtrl().majIHM();
+
+			if ( aGagne() )
+			{
+				ctrl.afficherMessage( "Gagné" );
+				ctrl.getJoueurCourant().addDefiAccompli( niveau, defi );
+				ctrl.enregistrer();
+				incrementerDefi();
+			}
+		}
 	}
 
 

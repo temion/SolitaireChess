@@ -66,13 +66,15 @@ public class BarreAction extends JToolBar implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
-		if (e.getSource() == indices) {
+		if ( e.getSource() == indices )
+		{
 			jeu.getCtrl().getJoueurCourant().incrementerMouvements();
-			jeu.majPanel();
+			jeu.getCtrl().getEchiquier().initIndiceDefi();
 		}
 
-		if (e.getSource() == niveaux) {
-			new ChoixNiveau(jeu);
+		if ( e.getSource() == niveaux )
+		{
+			new ChoixNiveau( jeu );
 		}
 
 		if ( e.getSource() == menuPrincipal )

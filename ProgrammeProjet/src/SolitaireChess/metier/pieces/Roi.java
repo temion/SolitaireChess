@@ -30,7 +30,7 @@ public class Roi extends Piece
 	 *
 	 * @param xCible la position horizontale vers laquelle déplacer
 	 * @param yCible la position verticale vers laquelle déplacer
-	 * @return vrai on si peut le déplacer, sinon faux
+	 * @return <b>true</b> si on peut le déplacer
 	 */
 	@Override
 	public boolean peutSeDeplacer( int xCible, int yCible )

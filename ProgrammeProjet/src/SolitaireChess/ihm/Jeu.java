@@ -75,10 +75,6 @@ public class Jeu extends JFrame implements ActionListener
 		pUtilitaire.add( niveau = new JLabel( "Niveau : " + ctrl.getEchiquier().getNiveau(),
 		                                      JLabel.CENTER ) );
 
-		pUtilitaire.add(
-				score = new JLabel( "Score : " + ctrl.getJoueurCourant().getScore(),
-				                    JLabel.CENTER ) );
-
 		annuler = new JButton( "Annuler" );
 		annuler.addActionListener( this );
 		pUtilitaire.add( annuler );
@@ -112,7 +108,7 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		defi.setText( "Defi n° " + ctrl.getEchiquier().getDefi() );
 		niveau.setText( "Niveau : " + ctrl.getEchiquier().getNiveau() );
-		score.setText( "Score : " + ctrl.getJoueurCourant().getScore() );
+		score.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 		mouvements.setText( "Mouvements : " + ctrl.getJoueurCourant().getNbMouvements() );
 	}
 
