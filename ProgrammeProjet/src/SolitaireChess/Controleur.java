@@ -41,9 +41,50 @@ public class Controleur implements Serializable
 	}
 
 
-	public static void main( String[] arg )
+	/**
+	 * Écrase la sauvegarde existante des profils.
+	 */
+	public void enregistrer()
 	{
-		new Controleur();
+		try
+		{
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream( "./sauvegardes.data" ) );
+			out.writeObject( alJoueur );
+
+			out.close();
+		} catch( Exception e )
+		{
+		}
+	}
+
+
+	/**
+	 * Charge tous les profils existants.
+	 */
+	public void charger()
+	{
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream( "./sauvegardes.data" ) );
+			alJoueur = (ArrayList<Joueur>) in.readObject();
+
+			in.close();
+		} catch( Exception e )
+		{
+			this.alJoueur = new ArrayList<>();
+		}
+	}
+
+	/**
+	 * Met à jour la fenêtre de jeu.
+	 *
+	 * @see SolitaireChess.ihm.Jeu#majIHM()
+	 */
+	public void majIHM()
+	{
+		this.jeu.majIHM();
 	}
 
 
@@ -68,42 +109,19 @@ public class Controleur implements Serializable
 				majIHM();
 	}
 
-	/**
-	 * Charge tous les profils existants.
-	 */
-	public void charger()
-	{
-		try
-		{
-			ObjectInputStream in = new ObjectInputStream(
-					new FileInputStream( "./sauvegardes.data" ) );
-			alJoueur = (ArrayList<Joueur>) in.readObject();
-
-			in.close();
-		} catch( Exception e )
-		{
-			this.alJoueur = new ArrayList<>();
-		}
-	}
-
 
 	/**
-	 * Écrase la sauvegarde existante des profils.
+	 * Indique si la case d'échiquier dont les indices sont passés en paramètre contient une pièce.
+	 *
+	 * @param i premier indice de la case dans l'échiquier
+	 * @param j deuxième indice de la case dans l'échiquier
+	 * @return état de la case (<b>true</b> indique que la case contient une pièce)
 	 */
-	public void enregistrer()
+	public boolean contientPiece( int i, int j )
 	{
-		try
-		{
-			ObjectOutputStream out = new ObjectOutputStream(
-					new FileOutputStream( "./sauvegardes.data" ) );
-			out.writeObject( alJoueur );
-
-			out.close();
-		} catch( Exception e )
-		{
-		}
+		return i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne
+				() && echiquier.getEchiquier()[i][j] != null;
 	}
-
 
 	/**
 	 * Crée et ajoute à la liste de profils existants un nouveau profil avec le nom entré par l'utilisateur.
@@ -125,153 +143,37 @@ public class Controleur implements Serializable
 		}
 	}
 
+
 	/**
-	 * Met à jour la fenêtre de jeu.
+	 * Définis le joueur courant à partir du nom passé en paramètre.
 	 *
-	 * @see SolitaireChess.ihm.Jeu#majIHM()
+	 * @param nomJoueur nom du joueur
 	 */
-	public void majIHM()
+	public void definirJoueur( String nomJoueur )
 	{
-		this.jeu.majIHM();
+		for( Joueur j : alJoueur )
+			if( nomJoueur.equals( j.getNom() ) )
+			{
+				joueurCourant = j;
+				enregistrer();
+				return;
+			}
 	}
 
 	/**
-	 * Retourne le chemin de l'image correspondant à la pièce dont les indices sont passées en paramètre en fonction du
-	 * thème actuel.
+	 * Supprime le joueur dont le nom est passé en paramètre.
 	 *
-	 * @param i premier indice de la pièce dans l'échiquier
-	 * @param j deuxième indice de la pièce dans l'échiquier
-	 * @return chemin de l'image correspondant à la pièce
+	 * @param nomJoueur nom du joueur à supprimer
 	 */
-	public String getImg( int i, int j )
+	public void supprimerJoueur( String nomJoueur )
 	{
-		String symbole = this.echiquier.getSymbole( i, j );
-		return "./images/theme" + String.format( "%02d",
-		                                         joueurCourant.getTheme() ) + "/" + symbole + "" +
-		       ".png";
-	}
-
-
-	/**
-	 * Retourne le jeu associé à ce controleur.
-	 *
-	 * @return jeu associée à ce controleur
-	 */
-	public Jeu getJeu()
-	{
-		return jeu;
-	}
-
-
-	/**
-	 * Redéfinis le jeu associé à ce controleur.
-	 *
-	 * @param jeu nouveau jeu à associer au controleur
-	 */
-	public void setJeu( Jeu jeu )
-	{
-		this.jeu = jeu;
-	}
-
-
-	/**
-	 * Retourne l'échiquier associé à ce controleur.
-	 *
-	 * @return échiquier associé à ce controleur
-	 */
-	public Echiquier getEchiquier()
-	{
-		return echiquier;
-	}
-
-
-	/**
-	 * Retourne la taille des images composants l'échiquier.
-	 *
-	 * @return taille des images
-	 */
-	public int getTailleImg()
-	{
-		return 100;
-	}
-
-
-	/**
-	 * Retourne la liste des profils existants.
-	 *
-	 * @return liste des profils existants
-	 */
-	public ArrayList<Joueur> getAlJoueur()
-	{
-		return alJoueur;
-	}
-
-
-	/**
-	 * Retourne le nombre de lignes de l'échiquier associé à ce controleur.
-	 *
-	 * @return nombre de lignes de l'échiquier
-	 */
-	public int getNbLigne()
-	{
-		return echiquier.getNbLigne();
-	}
-
-	/**
-	 * Retourne le nombre de colonnes de l'échiquier associé à ce controleur.
-	 *
-	 * @return nombre de colonnes de l'échiquier
-	 */
-	public int getNbColonne()
-	{
-		return echiquier.getNbColonne();
-	}
-
-
-	/**
-	 * Retourne le joueur courant.
-	 *
-	 * @return joueur courant
-	 */
-	public Joueur getJoueurCourant()
-	{
-		return joueurCourant;
-	}
-
-
-	/**
-	 * Redéfinis le joueur courant.
-	 *
-	 * @param joueur nouveau joueur courant
-	 */
-	public void setJoueurCourant( Joueur joueur )
-	{
-		this.joueurCourant = joueur;
-	}
-
-
-	/**
-	 * Redéfinis la fenêtre de jeu.
-	 *
-	 * @param jeu nouvelle fenêtre de jeu
-	 */
-	public void setFenetreJeu( Jeu jeu )
-	{
-		this.jeu = jeu;
-	}
-
-
-	/**
-	 * Indique si la case d'échiquier dont les indices sont passés en paramètre contient une pièce.
-	 *
-	 * @param i premier indice de la case dans l'échiquier
-	 * @param j deuxième indice de la case dans l'échiquier
-	 * @return état de la case (<b>true</b> indique que la case contient une pièce)
-	 */
-	public boolean contientPiece( int i, int j )
-	{
-		return i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne
-				() && echiquier.getEchiquier()[i][j] != null;
+		for( Joueur j : alJoueur )
+			if( nomJoueur.equals( j.getNom() ) )
+			{
+				alJoueur.remove( j );
+				enregistrer();
+				return;
+			}
 	}
 
 
@@ -308,62 +210,6 @@ public class Controleur implements Serializable
 
 
 	/**
-	 * Retourne le dernier défi que le joueur courant a atteint.
-	 *
-	 * @return dernier défi atteint par le joueur courant
-	 */
-	public int[] getDernierDefi()
-	{
-		return joueurCourant.getDernierDefi();
-	}
-
-
-	/**
-	 * Définis le joueur courant à partir du nom passé en paramètre.
-	 *
-	 * @param nomJoueur nom du joueur
-	 */
-	public void definirJoueur( String nomJoueur )
-	{
-		for( Joueur j : alJoueur )
-			if( nomJoueur.equals( j.getNom() ) )
-			{
-				joueurCourant = j;
-				enregistrer();
-				return;
-			}
-	}
-
-
-	/**
-	 * Retourne le thème choisi par le joueur.
-	 *
-	 * @return thème choisi par le joueur
-	 */
-	public int getTheme()
-	{
-		return joueurCourant.getTheme();
-	}
-
-
-	/**
-	 * Supprime le joueur dont le nom est passé en paramètre.
-	 *
-	 * @param nomJoueur nom du joueur à supprimer
-	 */
-	public void supprimerJoueur( String nomJoueur )
-	{
-		for( Joueur j : alJoueur )
-			if( nomJoueur.equals( j.getNom() ) )
-			{
-				alJoueur.remove( j );
-				enregistrer();
-				return;
-			}
-	}
-
-
-	/**
 	 * Affiche le message passé en paramètre dans une boîte d'informations.
 	 *
 	 * @param message message à afficher
@@ -386,7 +232,6 @@ public class Controleur implements Serializable
 		jeu.afficherMessageErreur( messageErreur );
 	}
 
-
 	/**
 	 * Annule le dernier coup effectué.
 	 *
@@ -407,6 +252,153 @@ public class Controleur implements Serializable
 
 
 	/**
+	 * Ouvre une page HTML expliquant les règles du jeu ainsi que le fonctionnement du programme.
+	 */
+	public void afficherRegles()
+	{
+		try
+		{
+			if ( Desktop.isDesktopSupported() )
+			{
+				Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
+			}
+		} catch ( Exception exe ) {}
+	}
+
+
+	/**
+	 * Redéfinis l'accueil avec l'accueil passé en paramètre.
+	 *
+	 * @param accueil nouvel accueil
+	 */
+	public void setAccueil(Accueil accueil) {
+		this.accueil = accueil;
+	}
+
+	/**
+	 * Redéfinis l'échiquier avec l'échiquier passé en paramètre.
+	 *
+	 * @param echiquier nouvel échiquier
+	 */
+	public void setEchiquier(Echiquier echiquier) {
+		this.echiquier = echiquier;
+	}
+
+	/**
+	 * Redéfinis l'ArrayList de joueurs avec l'ArrayList passée en paramètre.
+	 *
+	 * @param alJoueur nouvelle ArrayList de joueurs
+	 */
+	public void setAlJoueur(ArrayList<Joueur> alJoueur) {
+		this.alJoueur = alJoueur;
+	}
+
+	/**
+	 * Redéfinis le joueur courant.
+	 *
+	 * @param joueur nouveau joueur courant
+	 */
+	public void setJoueurCourant( Joueur joueur )
+	{
+		this.joueurCourant = joueur;
+	}
+
+
+	/**
+	 * Redéfinis le jeu associé à ce controleur.
+	 *
+	 * @param jeu nouveau jeu à associer au controleur
+	 */
+	public void setJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	}
+
+
+	/**
+	 * Redéfinis la fenêtre de jeu.
+	 *
+	 * @param jeu nouvelle fenêtre de jeu
+	 */
+	public void setFenetreJeu( Jeu jeu )
+	{
+		this.jeu = jeu;
+	} // A DEGAGER (cf. méthode au dessus)
+
+
+	/**
+	 * Retourne le nombre de lignes de l'échiquier associé à ce controleur.
+	 *
+	 * @return nombre de lignes de l'échiquier
+	 */
+	public int getNbLigne()
+	{
+		return echiquier.getNbLigne();
+	}
+
+
+	/**
+	 * Retourne le nombre de colonnes de l'échiquier associé à ce controleur.
+	 *
+	 * @return nombre de colonnes de l'échiquier
+	 */
+	public int getNbColonne()
+	{
+		return echiquier.getNbColonne();
+	}
+
+
+	/**
+	 * Retourne le chemin de l'image correspondant à la pièce dont les indices sont passées en paramètre en fonction du
+	 * thème actuel.
+	 *
+	 * @param i premier indice de la pièce dans l'échiquier
+	 * @param j deuxième indice de la pièce dans l'échiquier
+	 * @return chemin de l'image correspondant à la pièce
+	 */
+	public String getImg( int i, int j )
+	{
+		String symbole = this.echiquier.getSymbole( i, j );
+		return "./images/theme" + String.format( "%02d",
+												 joueurCourant.getTheme() ) + "/" + symbole + "" +
+			   ".png";
+	}
+
+
+	/**
+	 * Retourne la taille des images composants l'échiquier.
+	 *
+	 * @return taille des images
+	 */
+	public int getTailleImg()
+	{
+		return 100;
+	}
+
+
+	/**
+	 * Retourne le thème choisi par le joueur.
+	 *
+	 * @return thème choisi par le joueur
+	 */
+	public int getTheme()
+	{
+		return joueurCourant.getTheme();
+	}
+
+
+	/**
+	 * Retourne le dernier défi que le joueur courant a atteint.
+	 *
+	 * @return dernier défi atteint par le joueur courant
+	 */
+	public int[] getDernierDefi()
+	{
+		return joueurCourant.getDernierDefi();
+	}
+
+
+	/**
 	 * Retourne le nombre de défis accomplis par le joueur courant dans la difficulté rentrée en paramètre.
 	 *
 	 * @param i difficulté (niveau)
@@ -423,14 +415,59 @@ public class Controleur implements Serializable
 		return nbDefisReussis;
 	}
 
-	public void afficherRegles()
+
+	/**
+	 * Retourne l'accueil associé à ce controleur.
+	 *
+	 * @return accueil associé à ce controleur
+	 */
+	public Accueil getAccueil() { return accueil; }
+
+	/**
+	 * Retourne l'échiquier associé à ce controleur.
+	 *
+	 * @return échiquier associé à ce controleur
+	 */
+	public Echiquier getEchiquier()
 	{
-		try
-		{
-			if ( Desktop.isDesktopSupported() )
-			{
-				Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
-			}
-		} catch ( Exception exe ) {}
+		return echiquier;
+	}
+
+
+	/**
+	 * Retourne la liste des profils existants.
+	 *
+	 * @return liste des profils existants
+	 */
+	public ArrayList<Joueur> getAlJoueur()
+	{
+		return alJoueur;
+	}
+
+
+	/**
+	 * Retourne le joueur courant.
+	 *
+	 * @return joueur courant
+	 */
+	public Joueur getJoueurCourant()
+	{
+		return joueurCourant;
+	}
+
+
+	/**
+	 * Retourne le jeu associé à ce controleur.
+	 *
+	 * @return jeu associée à ce controleur
+	 */
+	public Jeu getJeu()
+	{
+		return jeu;
+	}
+
+	public static void main( String[] arg )
+	{
+		new Controleur();
 	}
 }
