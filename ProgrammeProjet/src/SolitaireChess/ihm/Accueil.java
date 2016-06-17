@@ -14,7 +14,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Accueil extends JFrame implements ActionListener
 {
@@ -49,12 +50,17 @@ public class Accueil extends JFrame implements ActionListener
 		setSize( 400 + insets.left + insets.right,
 				 600 + insets.top + insets.bottom );
 
-		//getContentPane().setBackground( Color.BLACK );
 		setLayout( null );
 
 		initComposants();
 
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		addWindowListener( new WindowAdapter()
+		{
+			public void windowClosing( WindowEvent e )
+			{
+				ctrl.quitter();
+			}
+		} );
 		setLocationRelativeTo( null );
 		setResizable( false );
 		setVisible( true );
@@ -194,12 +200,21 @@ public class Accueil extends JFrame implements ActionListener
 			}
 		}
 
-		if ( e.getSource() == aide )
+		else if ( e.getSource() == aide )
 		{
 			ctrl.afficherRegles();
 		}
 
-		if ( e.getSource() == supprimer )
+		else if ( e.getSource() == infosJoueur )
+		{
+			String nomJoueur = (String)choixProfil.getSelectedItem();
+			if ( choixProfil.getSelectedItem() != null && ! choixProfil.getSelectedItem().equals(
+					"Sélectionnez un profil" ) )
+				ctrl.afficherInfosJoueur(nomJoueur);
+		}
+
+
+		else if ( e.getSource() == supprimer )
 		{
 			if ( choixProfil.getSelectedItem() != null && ! choixProfil.getSelectedItem().equals(
 					"Sélectionnez un profil" ) )
@@ -222,9 +237,9 @@ public class Accueil extends JFrame implements ActionListener
 			}
 		}
 
-		if ( e.getSource() == quitter )
+		else if ( e.getSource() == quitter )
 		{
-			//ctrl.quitter(this);
+			ctrl.quitter();
 		}
 	}
 

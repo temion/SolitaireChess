@@ -24,8 +24,8 @@ public class Controleur implements Serializable
 	private Echiquier         echiquier;
 	private ArrayList<Joueur> alJoueur;
 	private Joueur            joueurCourant;
-
-	private Jeu jeu;
+	private boolean           darkMode;
+	private Jeu               jeu;
 
 
 	/**
@@ -36,6 +36,7 @@ public class Controleur implements Serializable
 		charger();
 		this.echiquier = new Echiquier( this );
 		this.accueil = new Accueil( this );
+		this.darkMode = false;
 		this.joueurCourant = null;
 		this.jeu = null;
 	}
@@ -57,16 +58,17 @@ public class Controleur implements Serializable
 	 */
 	public void deplacer( int x1, int y1, int x2, int y2 )
 	{
-		if( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 &&
-		    y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
+		if ( x2 >= 0 && x2 < getNbLigne() && y2 >= 0 &&
+			 y2 < getNbColonne() )// On ne teste pas x1 ni y1 car ils
 			// seront toujours
 			// dans les limites
 			// du panel
-			if( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
-			                                                                              x2,
-			                                                                              y2 ) )
+			if ( this.echiquier.getEchiquier()[x2][y2] != null && this.echiquier.deplacer( x1, y1,
+																						   x2,
+																						   y2 ) )
 				majIHM();
 	}
+
 
 	/**
 	 * Charge tous les profils existants.
@@ -77,10 +79,10 @@ public class Controleur implements Serializable
 		{
 			ObjectInputStream in = new ObjectInputStream(
 					new FileInputStream( "./sauvegardes.data" ) );
-			alJoueur = (ArrayList<Joueur>) in.readObject();
+			alJoueur = (ArrayList<Joueur>)in.readObject();
 
 			in.close();
-		} catch( Exception e )
+		} catch ( Exception e )
 		{
 			this.alJoueur = new ArrayList<>();
 		}
@@ -99,7 +101,7 @@ public class Controleur implements Serializable
 			out.writeObject( alJoueur );
 
 			out.close();
-		} catch( Exception e )
+		} catch ( Exception e )
 		{
 		}
 	}
@@ -114,16 +116,18 @@ public class Controleur implements Serializable
 	 */
 	public void ajouterJoueur( String nomJoueur )
 	{
-		if( !alJoueur.contains( nomJoueur ) )
+		if ( ! alJoueur.contains( nomJoueur ) )
 		{
 			alJoueur.add( new Joueur( nomJoueur, this ) );
 			joueurCourant = alJoueur.get( alJoueur.size() - 1 );
 			enregistrer();
-		} else
+		}
+		else
 		{
 			definirJoueur( nomJoueur );
 		}
 	}
+
 
 	/**
 	 * Met à jour la fenêtre de jeu.
@@ -134,6 +138,7 @@ public class Controleur implements Serializable
 	{
 		this.jeu.majIHM();
 	}
+
 
 	/**
 	 * Retourne le chemin de l'image correspondant à la pièce dont les indices sont passées en paramètre en fonction du
@@ -147,8 +152,8 @@ public class Controleur implements Serializable
 	{
 		String symbole = this.echiquier.getSymbole( i, j );
 		return "./images/theme" + String.format( "%02d",
-		                                         joueurCourant.getTheme() ) + "/" + symbole + "" +
-		       ".png";
+												 joueurCourant.getTheme() ) + "/" + symbole + "" +
+			   ".png";
 	}
 
 
@@ -217,6 +222,7 @@ public class Controleur implements Serializable
 		return echiquier.getNbLigne();
 	}
 
+
 	/**
 	 * Retourne le nombre de colonnes de l'échiquier associé à ce controleur.
 	 *
@@ -270,7 +276,7 @@ public class Controleur implements Serializable
 	 */
 	public boolean contientPiece( int i, int j )
 	{
-		return i > -1 && i < echiquier.getNbLigne() && j > -1 && j < echiquier.getNbColonne
+		return i > - 1 && i < echiquier.getNbLigne() && j > - 1 && j < echiquier.getNbColonne
 				() && echiquier.getEchiquier()[i][j] != null;
 	}
 
@@ -281,26 +287,53 @@ public class Controleur implements Serializable
 	public void afficherInfosJoueur()
 	{
 		Object[] themes = new Object[jeu.getPlateau().getNbThemes()];
-		for(int i=1; i<=themes.length; i++)
+		for ( int i = 1; i <= themes.length; i++ )
 		{
-			themes[i-1] = "theme "+i;
+			themes[i - 1] = "theme " + i;
 		}
 
 		Object o = JOptionPane.showInputDialog( jeu, "Joueur : " + joueurCourant.getNom() + "\n" +
-		                                             "Dernier défi : " + joueurCourant.getDernierDefi()
-				                                             [1]+ "\n" +
-		                                             "Mouvements : " + joueurCourant.getNbMouvements() +
+													 "Dernier défi : " +
+													 joueurCourant.getDernierDefi()
+															 [1] + "\n" +
+													 "Mouvements : " +
+													 joueurCourant.getNbMouvements() +
 													 "\n" +
-		                                             "Thème :",
-		                                        "Joueur",
-		                                        JOptionPane.PLAIN_MESSAGE,
-		                                        new ImageIcon( "./images/gandalf.png" ),
-		                                        themes,
-		                                        null
-		                                      );
+													 "Thème :",
+												"Joueur",
+												JOptionPane.PLAIN_MESSAGE,
+												new ImageIcon( "./images/gandalf.png" ),
+												themes,
+												null
+											  );
 
-		joueurCourant.setTheme( Integer.parseInt( ((String)(o)).replaceAll( "[^0-9]", "" ) ) );
+		joueurCourant.setTheme( Integer.parseInt( ( (String)( o ) ).replaceAll( "[^0-9]", "" ) ) );
 		majIHM();
+	}
+
+
+	/**
+	 * Affiche une boîte de dialogue fournissant différentes informations concernant le joueur courant.
+	 */
+	public void afficherInfosJoueur( String nomJoueur )
+	{
+		Joueur joueur = null;
+
+		for ( Joueur j : alJoueur )
+			if ( nomJoueur.equals( j.getNom() ) )
+				joueur = j;
+
+		JOptionPane.showMessageDialog( jeu, "Joueur : " + joueur.getNom() + "\n" +
+											"Dernier défi : " +
+											joueur.getDernierDefi()
+													[1] + "\n" +
+											"Mouvements : " +
+											joueur.getNbMouvements() +
+											"\n",
+									   "Joueur",
+									   JOptionPane.PLAIN_MESSAGE,
+									   new ImageIcon( "./images/gandalf.png" )
+									 );
 	}
 
 
@@ -322,8 +355,8 @@ public class Controleur implements Serializable
 	 */
 	public void definirJoueur( String nomJoueur )
 	{
-		for( Joueur j : alJoueur )
-			if( nomJoueur.equals( j.getNom() ) )
+		for ( Joueur j : alJoueur )
+			if ( nomJoueur.equals( j.getNom() ) )
 			{
 				joueurCourant = j;
 				enregistrer();
@@ -350,8 +383,8 @@ public class Controleur implements Serializable
 	 */
 	public void supprimerJoueur( String nomJoueur )
 	{
-		for( Joueur j : alJoueur )
-			if( nomJoueur.equals( j.getNom() ) )
+		for ( Joueur j : alJoueur )
+			if ( nomJoueur.equals( j.getNom() ) )
 			{
 				alJoueur.remove( j );
 				enregistrer();
@@ -400,7 +433,7 @@ public class Controleur implements Serializable
 	 *
 	 * @see SolitaireChess.metier.Echiquier#recommencer()
 	 */
-	public void recommencer()              { echiquier.recommencer(); }
+	public void recommencer() { echiquier.recommencer(); }
 
 
 	/**
@@ -413,13 +446,18 @@ public class Controleur implements Serializable
 	{
 		int nbDefisReussis = 0;
 
-		for(boolean b:joueurCourant.getDefisAccomplis(i))
-			if(b)
+		for ( boolean b : joueurCourant.getDefisAccomplis( i ) )
+			if ( b )
 				nbDefisReussis++;
 
 		return nbDefisReussis;
 	}
 
+
+	/**
+	 * Ouvre le navigateur web pour afficher les règles du jeu
+	 * sur une page html.
+	 */
 	public void afficherRegles()
 	{
 		try
@@ -429,5 +467,21 @@ public class Controleur implements Serializable
 				Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
 			}
 		} catch ( Exception exe ) {}
+	}
+
+
+	/**
+	 * Ouvre une boite de dialogue qui demande confirmation à l'utilisateur avant de quitter
+	 * la fenêtre.
+	 */
+	public void quitter()
+	{
+		if ( JOptionPane.showConfirmDialog( accueil.isActive() ? accueil : jeu, "Voulez-vous " +
+																				"vraiment quitter ?",
+											"Quitter le jeu",
+											JOptionPane.YES_NO_OPTION ) == 0 )
+		{
+			System.exit( 0 );
+		}
 	}
 }

@@ -23,11 +23,10 @@ public class BarreAction extends JPanel implements ActionListener
 	private JButton regles;
 	private JButton menuPrincipal;
 
-
 	/**
 	 * Construit le composant se trouvant en haut de l'écran du jeu.
 	 *
-	 * @param jeu la fenêtre contenant tous les composants ihm
+	 * @param fenetre la fenêtre contenant tous les composants ihm
 	 */
 	public BarreAction( Jeu fenetre )
 	{

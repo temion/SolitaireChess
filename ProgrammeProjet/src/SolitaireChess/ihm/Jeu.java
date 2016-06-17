@@ -52,12 +52,13 @@ public class Jeu extends JFrame implements ActionListener
 
 		initPanelUtilitaire();
 
+
 		this.plateau = new PanelSolitaireChess( ctrl );
 		add( plateau );
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				getCtrl().quitter();
 			}
 		} );
 
@@ -89,14 +90,17 @@ public class Jeu extends JFrame implements ActionListener
 						.getNbMouvements(), JLabel.CENTER ) );
 
 		annuler = new JButton(new ImageIcon( "./images/annuler.png" ));
+		annuler.setToolTipText( "Annulez votre dernier coup" );
 		annuler.addActionListener( this );
 		pUtilitaire.add( annuler );
 
 		recommencer = new JButton( new ImageIcon( "./images/recommencer.png" ) );
+		recommencer.setToolTipText( "Recommencer ?" );
 		recommencer.addActionListener( this );
 		pUtilitaire.add( recommencer );
 
 		menuPrincipal = new JButton( new ImageIcon( "./images/menuPrincipal.png" ) );
+		menuPrincipal.setToolTipText( "Retournez au menu principal" );
 		menuPrincipal.addActionListener( this );
 		pUtilitaire.add( menuPrincipal );
 
