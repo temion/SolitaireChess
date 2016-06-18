@@ -28,6 +28,7 @@ public class Jeu extends JFrame implements ActionListener
 	private JLabel defi;
 	private JLabel mouvements;
 
+	// Tableau faisait le lien entre le numéro d'un niveau et son nom
 	private static final String[] TAB_NOM_NIVEAU = new String[] {"Débutant", "Intermédiaire", "Avancé",
 													"Expert"};
 
@@ -38,34 +39,36 @@ public class Jeu extends JFrame implements ActionListener
 	 */
 	Jeu( Controleur ctrl )
 	{
-		setTitle( "Jeu" );
+		setTitle( "SolitaireChess-Jeu" );
 		setLocation( 200, 200 );
+
 
 		this.ctrl = ctrl;
 
 		ctrl.setFenetreJeu( this );
 		ctrl.getEchiquier().setDefi();
 
-		setJMenuBar( new BarreMenu( this ) );
+		setJMenuBar( new BarreMenu( this ) );       // Barre de menus de la fenêtre
 
 		add( new BarreAction( this ), "North" );
 
 		initPanelUtilitaire();
 
-
 		this.plateau = new PanelSolitaireChess( ctrl );
 		add( plateau );
 
+
+		// Evenement quand on clique sur la croix pour fermer la fenetre
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				getCtrl().quitter();
 			}
 		} );
 
-		pack();
-		setLocationRelativeTo( null );
-		setResizable( false );
-		setVisible( true );
+		pack();                                     // Taille de la fenêtre dynamique
+		setLocationRelativeTo( null );              // Fenêtre centrée
+		setResizable( false );                      // Fenêtre non redimensionnable
+		setVisible( true );                         // Fenêtre visible
 
 	}
 
@@ -77,6 +80,7 @@ public class Jeu extends JFrame implements ActionListener
 	{
 		JPanel pUtilitaire = new JPanel( new GridLayout( 6, 1, 0, 2 ) );
 
+		// Taille du panel
 		pUtilitaire.setPreferredSize( new Dimension( 200, 400 ) );
 
 		pUtilitaire.add(
@@ -90,8 +94,8 @@ public class Jeu extends JFrame implements ActionListener
 						.getNbMouvements(), JLabel.CENTER ) );
 
 		annuler = new JButton(new ImageIcon( "./images/annuler.png" ));
-		annuler.setToolTipText( "Annulez votre dernier coup" );
-		annuler.addActionListener( this );
+		annuler.setToolTipText( "Annulez votre dernier coup" );           // Texte au survol du
+		annuler.addActionListener( this );                                // bouton
 		pUtilitaire.add( annuler );
 
 		recommencer = new JButton( new ImageIcon( "./images/recommencer.png" ) );
@@ -113,6 +117,7 @@ public class Jeu extends JFrame implements ActionListener
 	 */
 	public void majIHM()
 	{
+		// Redessine le plateau
 		plateau.repaint();
 		majPanel();
 	}

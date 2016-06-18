@@ -24,19 +24,24 @@ public class PanelCreerNiveau extends JPanel
 
 	private CreerNiveau creerNiveau;
 
+	// Position du curseur lors d'un appui "drag"
 	private int sourisXPressed;
 	private int sourisYPressed;
 
+	// Position du curseur lors d'un mouvement "drag"
 	private int sourisXMoved;
 	private int sourisYMoved;
 
+	// Le thème utilisé pour l'éditeur
 	private static final Color[] tabThemes = new Color[]{ new Color( 0x3D79FF ),
-														  new Color( 0x0D0418 ) };
+	                                                      new Color( 0x0D0418 ) };
 
+	// Tableau représentant l'échiquier que le joueur veut créer
 	private char[][] tabPiecesMises;
 
+	// On ne peut mettre que ces pièces-ci, pas plus
 	private char[][] tabPiecesAMettre = { { 'R', 'D', 'F', 'F', 'T' },
-										  { 'T', 'C', 'C', 'P', 'P' } };
+	                                      { 'T', 'C', 'C', 'P', 'P' } };
 
 
 	/**
@@ -77,13 +82,15 @@ public class PanelCreerNiveau extends JPanel
 
 		Graphics2D g2 = (Graphics2D)g;
 
+		// On dessine le fond du plateau
 		g2.setColor( Color.WHITE );
 		g2.fillRect( 0, 0, 400, 400 );
 
-		// On défini le fond du plateau
+
 		boolean bCase = true;
 		Color   c;
 
+		// On dessine les cases
 		for ( int i = 0; i < 4; i++ )
 			for ( int j = 0; j < 4; j++ )
 			{
@@ -103,6 +110,7 @@ public class PanelCreerNiveau extends JPanel
 			}
 
 
+		// On dessine les pièces immobiles de l'échiquier
 		String sImg;
 		Image  img;
 		for ( int i = 0; i < tabPiecesMises.length; i++ )
@@ -117,6 +125,7 @@ public class PanelCreerNiveau extends JPanel
 				}
 			}
 
+		// On dessine les pièces immobiles du tas de pièces à mettre
 		for ( int i = 0; i < tabPiecesAMettre.length; i++ )
 		{
 			for ( int j = 0; j < tabPiecesAMettre[i].length; j++ )
@@ -131,6 +140,7 @@ public class PanelCreerNiveau extends JPanel
 			}
 		}
 
+		// On dessine la pièce mobile choisie par l'utilisateur
 		if ( sourisXPressed != - 1 && sourisYPressed != - 1 )
 		{
 			if ( sourisYPressed > 400 )
@@ -160,35 +170,16 @@ public class PanelCreerNiveau extends JPanel
 		}
 	}
 
-
-	/**
-	 * Retourne le négatif de la couleur passée en paramètre.
-	 *
-	 * @param c couleur à transformer
-	 * @return nouvelle couleur
-	 */
-	public Color negatifVide( Color c )
-	{
-		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 100 );
-	}
-
-	/**
-	 * Retourne le négatif de la couleur passée en paramètre.
-	 *
-	 * @param c couleur à transformer
-	 * @return nouvelle couleur
-	 */
-	public Color negatifPlein( Color c )
-	{
-		return new Color( 255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue(), 200 );
-	}
-
-
 	/**
 	 * Classe interne qui gère les déplacements de la souris.
 	 */
 	private class GererMvtSouris extends MouseMotionAdapter
 	{
+		/**
+		 * Capture la position de la souris quand l'utilisateur fait un "drag".
+		 *
+		 * @param e événement lié au "drag"
+		 */
 		@Override
 		public void mouseDragged( MouseEvent e )
 		{
@@ -204,6 +195,11 @@ public class PanelCreerNiveau extends JPanel
 	 */
 	private class GererSouris extends MouseAdapter
 	{
+		/**
+		 * Capture la position de la souris quand l'utilisateur a fait le clic de "drag".
+		 *
+		 * @param e événement lié au clic de "drag".
+		 */
 		@Override
 		public void mousePressed( MouseEvent e )
 		{
@@ -212,9 +208,15 @@ public class PanelCreerNiveau extends JPanel
 		}
 
 
+		/**
+		 * Place la case de l'échiquier au tas de pièces, ou place la pièce du tas dans l'échiquier
+		 *
+		 * @param e l'événement relié au "drop" du clic
+		 */
 		@Override
 		public void mouseReleased( MouseEvent e )
 		{
+			// Si l'utilisateur souhaite mettre une pièce du tas dans l'échiquier
 			if ( sourisYPressed > 400 && e.getX() <= 400 && e.getY() <= 400 &&
 				 tabPiecesMises[e.getY() / TAILLE_CASE][e.getX() / TAILLE_CASE] == '\u0000' )
 			{
@@ -224,8 +226,8 @@ public class PanelCreerNiveau extends JPanel
 																   / TAILLE_CASE] = '\u0000';
 
 				tabPiecesMises[e.getY() / TAILLE_CASE][e.getX() / TAILLE_CASE] = piecePrise;
-				System.out.println( piecePrise );
 			}
+			// S'il veut remettre une pièce de l'échiquier dans le tas
 			else if ( peutReplacer( e ) )
 			{
 				char pieceARemettre = tabPiecesMises[sourisYPressed /
@@ -239,15 +241,21 @@ public class PanelCreerNiveau extends JPanel
 						pieceARemettre;
 			}
 
-
+			// On réinitialise la valeur des boutons liés au clic "drag"
 			sourisXPressed = - 1;
 			sourisYPressed = - 1;
 			repaint();
 		}
 
-
+		/**
+		 * Vérifie si on peut remettre la piece dans le tas de pièces.
+		 *
+		 * @param e l'événement lié au "drag" de la souris
+		 * @return si la pièce peut se replacer dans le tas
+		 */
 		public boolean peutReplacer( MouseEvent e )
 		{
+			//Vérifir si on peut remettre la piece dans le tas de pièces
 			return sourisXPressed <= 400 && sourisYPressed <= 400 && e.getY() > 400 &&
 				   tabPiecesMises[sourisYPressed / TAILLE_CASE][sourisXPressed / TAILLE_CASE] !=
 				   '\u0000' &&
@@ -259,6 +267,12 @@ public class PanelCreerNiveau extends JPanel
 	}
 
 
+	/**
+	 * Retourne une chaine représentant le nom d'une image en fonction d'un caractère
+	 *
+	 * @param c le caractère donné
+	 * @return la chaine correspondant
+	 */
 	public String getSymbole( char c )
 	{
 		String s="";
@@ -270,6 +284,11 @@ public class PanelCreerNiveau extends JPanel
 		return s;
 	}
 
+	/**
+	 * Renvoie l'échiquier créé par l'utilisateur
+	 *
+	 * @return le tableau de caractères correspondant à l'échiquier créé par l'utilisateur
+	 */
 	public char[][] getDefi()
 	{
 		return tabPiecesMises;

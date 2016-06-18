@@ -19,9 +19,7 @@ public class BarreAction extends JPanel implements ActionListener
 	private JButton indices;
 	private JButton niveaux;
 	private JButton creerNiveau;
-	private JButton joueur;
 	private JButton regles;
-	private JButton menuPrincipal;
 
 	/**
 	 * Construit le composant se trouvant en haut de l'écran du jeu.
@@ -60,27 +58,26 @@ public class BarreAction extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed( ActionEvent e )
 	{
+		// On appelle la méthode qui montre un indice au joueur
 		if ( e.getSource() == indices )
 		{
 			fenetre.getCtrl().getJoueurCourant().incrementerMouvements();
 			fenetre.getCtrl().getEchiquier().initIndiceDefi();
 		}
 
+		// On affiche la frame destinée au choix de niveaux
 		else if ( e.getSource() == niveaux )
 		{
 			new ChoixNiveau( fenetre );
 		}
 
+		// On affiche la frame destinée à la création de niveaux
 		else if(e.getSource() == creerNiveau)
 		{
 			new CreerNiveau( fenetre.getCtrl() );
 		}
 
-		else if ( e.getSource() == joueur )
-		{
-			fenetre.getCtrl().afficherInfosJoueur();
-		}
-
+		// On ouvre la page web des règles
 		else if ( e.getSource() == regles)
 		{
 			fenetre.getCtrl().afficherRegles();

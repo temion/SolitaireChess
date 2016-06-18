@@ -19,6 +19,7 @@ public class ChoixNiveau extends JFrame
 {
 	private Jeu jeu;
 
+	// Un composant permettant de répertorier des panels par onglets
 	private JTabbedPane niveaux;
 
 	private JPanel niveau1;
@@ -39,7 +40,7 @@ public class ChoixNiveau extends JFrame
 		this.jeu = jeu;
 
 		setTitle( "Choix d'un défi" );
-		setSize( 800, 350 );
+		setSize( 800, 400 );
 		setLocationRelativeTo( null );
 
 		niveaux = new JTabbedPane( JTabbedPane.TOP );
@@ -50,6 +51,7 @@ public class ChoixNiveau extends JFrame
 		niveau4 = new JPanel();
 		niveau5 = new JPanel();
 
+		// Ajout des onglets
 		niveaux.addTab( "Débutant", niveau1 );
 		niveaux.addTab( "Intermédiaire", niveau2 );
 		niveaux.addTab( "Avancé", niveau3 );
@@ -58,6 +60,7 @@ public class ChoixNiveau extends JFrame
 
 		add( niveaux );
 
+		// Bloque l'accès à un niveau s'il n'est pas encore débloqué
 		for ( int i = 1; i < jeu.getCtrl().getNbLigne(); i++ )
 			if ( jeu.getCtrl().getNbDefisAccomplis( i - 1 ) < 7 )
 			{
@@ -76,12 +79,19 @@ public class ChoixNiveau extends JFrame
 		setVisible( true );
 	}
 
+	/**
+	 * Ajoute à l'onglet correspondant au niveau utilisateur 15 boutons défis.
+	 * Cliquer sur un de ces boutons met à jour le niveau courant.
+	 *
+	 * @param niveau le Panel sur lequel on doit ajouter les JButton
+	 */
 	private void creerChoixUtilisateur( JPanel niveau )
 	{
 		niveau.setLayout( new GridLayout( 5, 3, 0, 2 ) );
 
 		for( int i = 1; i < 16; i++ )
 		{
+			// On vérifie que le niveau existe et on définit les images des boutons en fonction
 			if( new File( "./niveaux/niveauUtilisateur/defi" + String.format( "%02d",
 			                                                                  i ) + ".data" ).exists() )
 			{
@@ -90,6 +100,7 @@ public class ChoixNiveau extends JFrame
 
 				b.setIconTextGap( 2 );
 				int finalI = i;
+				// On joue le niveau si l'utilisateur clique sur le bouton
 				b.addActionListener( new ActionListener()
 				{
 					public void actionPerformed( ActionEvent e )

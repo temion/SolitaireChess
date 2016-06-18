@@ -10,11 +10,9 @@ package SolitaireChess.ihm;
 
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.File;
 
 public class BarreMenu extends JMenuBar implements ActionListener
 {
@@ -58,6 +56,9 @@ public class BarreMenu extends JMenuBar implements ActionListener
 		fichier.addSeparator();
 		fichier.add( quitter = new JMenuItem( "Quitter" ) );
 
+		// Raccourcis clavier
+		// Ici par exemple, KeyEvent.VK_S est la touche controle S & KeyEvent.CTRL_MASK est la
+		// touche controle
 		enregistrer.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_S, KeyEvent.CTRL_MASK ) );
 		quitter.setAccelerator( KeyStroke.getKeyStroke( KeyEvent.VK_Q, KeyEvent.CTRL_MASK ) );
 
@@ -161,6 +162,7 @@ public class BarreMenu extends JMenuBar implements ActionListener
 
 		else if ( e.getSource() == aProposJeu )
 		{
+			// Boite d'information avec les auteurs, droits et contexte du programme
 			JOptionPane.showMessageDialog( fenetre, "© Boulant Florian, Di Gregorio Thomas, " +
 													"Emion Thibaut, Edouard Clémence \n Projet " +
 													"tutoré – Année universitaire 2015-2016",
@@ -169,13 +171,7 @@ public class BarreMenu extends JMenuBar implements ActionListener
 
 		else if ( e.getSource() == regles )
 		{
-			try
-			{
-				if ( Desktop.isDesktopSupported() )
-				{
-					Desktop.getDesktop().browse( new File( "./regles/index.html" ).toURI() );
-				}
-			} catch ( Exception exe ) {}
+			fenetre.getCtrl().afficherRegles();
 		}
 	}
 }
